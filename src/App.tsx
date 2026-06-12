@@ -1,0 +1,67 @@
+import { AnimatePresence, motion } from "framer-motion";
+import { RouterProvider, matchRoute, useRouter } from "./lib/router";
+import { StoreProvider } from "./lib/store";
+import { ToastProvider } from "./components/ui/Toast";
+import { Header } from "./components/layout/Header";
+import { Footer } from "./components/layout/Footer";
+import { Home } from "./pages/Home";
+import { ProblemDetail } from "./pages/ProblemDetail";
+import { Room } from "./pages/Room";
+import { Submit } from "./pages/Submit";
+import { Button } from "./components/ui/Button";
+
+function NotFound() {
+  const { navigate } = useRouter();
+  return (
+    <div className="mx-auto max-w-xl px-5 py-28 text-center">
+      <h1 className="text-3xl font-semibold tracking-tight">Page not found</h1>
+      <p className="mt-3 text-ink-soft">
+        That page doesn't exist. Let's get you back to real problems.
+      </p>
+      <Button className="mt-6" onClick={() => navigate("/")}>
+        Back to problems
+      </Button>
+    </div>
+  );
+}
+
+function Routes() {
+  const { path } = useRouter();
+  const route = matchRoute(path);
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={path}
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -6 }}
+        transition={{ duration: 0.22, ease: "easeOut" }}
+      >
+        {route.name === "home" && <Home />}
+        {route.name === "submit" && <Submit />}
+        {route.name === "problem" && <ProblemDetail id={route.params.id} />}
+        {route.name === "room" && <Room id={route.params.id} />}
+        {route.name === "notfound" && <NotFound />}
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
+export default function App() {
+  return (
+    <RouterProvider>
+      <StoreProvider>
+        <ToastProvider>
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1">
+              <Routes />
+            </main>
+            <Footer />
+          </div>
+        </ToastProvider>
+      </StoreProvider>
+    </RouterProvider>
+  );
+}
