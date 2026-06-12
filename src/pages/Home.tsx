@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Heart, Hammer, Compass, ShieldCheck } from "lucide-react";
-import { problems, todaysProblems } from "../data/problems";
-import { ProblemCard } from "../components/cards/ProblemCard";
 import { Button } from "../components/ui/button";
+import { ProblemBoard } from "../components/board/ProblemBoard";
 import { CommitmentModal } from "../components/modals/CommitmentModal";
 import { PipelineExplainer } from "../components/PipelineExplainer";
 import { PipelineQueue } from "../components/PipelineQueue";
@@ -85,54 +84,8 @@ export function Home() {
         </motion.div>
       </section>
 
-      {/* Today's 3 problems */}
-      <section id="today" className="mx-auto max-w-6xl px-5 pt-16 sm:px-8 sm:pt-24">
-        <div className="flex items-end justify-between">
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight sm:text-[28px]">
-              Today's 3 problems
-            </h2>
-            <p className="mt-1.5 text-[15px] text-ink-soft">
-              The three highest-signal problems from this week's pipeline. Open
-              one, review the proof, pick your action.
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {todaysProblems.map((problem, i) => (
-            <ProblemCard
-              key={problem.id}
-              problem={problem}
-              index={i}
-              onCommit={(type) => setActive({ problem, type })}
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* The rest of the board */}
-      <section className="mx-auto max-w-6xl px-5 pt-16 sm:px-8 sm:pt-20">
-        <div>
-          <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">
-            More problems on the board
-          </h2>
-          <p className="mt-1.5 text-[15px] text-ink-soft">
-            Published earlier from the same pipeline. Signals keep accruing
-            until someone builds.
-          </p>
-        </div>
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {problems.slice(3).map((problem, i) => (
-            <ProblemCard
-              key={problem.id}
-              problem={problem}
-              index={i % 3}
-              onCommit={(type) => setActive({ problem, type })}
-            />
-          ))}
-        </div>
-      </section>
+      {/* Problem board: today's three + the rest, with search and filters */}
+      <ProblemBoard onCommit={(problem, type) => setActive({ problem, type })} />
 
       {/* Three roles */}
       <section className="mx-auto mt-20 max-w-6xl px-5 sm:px-8">

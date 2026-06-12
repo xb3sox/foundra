@@ -9,9 +9,10 @@ import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
 
 // Foundra chip skin layered over the shadcn Toggle defaults. The off/on
 // states mirror the original hand-rolled chips (pill, line border, ink fill).
-const chipBase =
+export const chipBase =
   "h-auto min-w-0 cursor-pointer rounded-full border px-3.5 py-2 text-[13px] font-medium transition-all hover:bg-surface aria-pressed:bg-surface";
-const chipOff = "border-line bg-surface text-ink-soft hover:border-ink/30 hover:text-ink";
+export const chipOff =
+  "border-line bg-surface text-ink-soft hover:border-ink/30 hover:text-ink";
 
 export function FieldLabel({
   index,
