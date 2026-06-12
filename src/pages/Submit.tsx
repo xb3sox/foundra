@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowLeft,
@@ -31,32 +31,15 @@ import {
 } from "../components/forms/Fields";
 import { SignalBadge } from "../components/ui/SignalBadge";
 import { cn } from "../utils/cn";
-
-interface FormState {
-  problem: string;
-  industry: string;
-  who: string;
-  today: string;
-  useNow: string[];
-  painful: string;
-  proofType: string[];
-  proof: string;
-  link: string;
-  role: string;
-}
-
-const empty: FormState = {
-  problem: "",
-  industry: "",
-  who: "",
-  today: "",
-  useNow: [],
-  painful: "",
-  proofType: [],
-  proof: "",
-  link: "",
-  role: "",
-};
+import {
+  EMPTY_FORM,
+  clearDraft,
+  loadDraft,
+  saveDraft,
+  validateStep,
+  type FormState,
+  type StepId,
+} from "../lib/submit-validation";
 
 const INDUSTRIES = [
   "Interior Design",
@@ -93,8 +76,6 @@ const ROLES = [
   { value: "I can build this", icon: Hammer },
 ];
 
-type StepId = 0 | 1 | 2;
-
 const STEPS = [
   { id: 0, title: "The problem", icon: FileText },
   { id: 1, title: "The proof", icon: Radar },
@@ -103,35 +84,22 @@ const STEPS = [
 
 export function Submit() {
   const { navigate } = useRouter();
-  const [form, setForm] = useState<FormState>(empty);
-  const [step, setStep] = useState<StepId>(0);
+  const [form, setForm] = useState<FormState>(
+    () => loadDraft()?.form ?? EMPTY_FORM
+  );
+  const [step, setStep] = useState<StepId>(() => loadDraft()?.step ?? 0);
   const [submitted, setSubmitted] = useState(false);
   const [showErrors, setShowErrors] = useState(false);
+
+  // Persist in-progress submissions so navigating away doesn't lose work.
+  useEffect(() => {
+    if (!submitted) saveDraft({ form, step });
+  }, [form, step, submitted]);
 
   const set = <K extends keyof FormState>(k: K, v: FormState[K]) =>
     setForm((f) => ({ ...f, [k]: v }));
 
-  // Per-step required fields
-  const stepErrors = useMemo(() => {
-    const e: Record<string, string> = {};
-    if (step === 0) {
-      if (form.problem.trim().length < 12)
-        e.problem = "Describe the problem in a full sentence (12+ characters).";
-      if (!form.industry) e.industry = "Pick an industry.";
-      if (!form.who.trim()) e.who = "Who exactly has this problem?";
-      if (!form.painful.trim()) e.painful = "Tell us why it hurts.";
-    }
-    if (step === 1) {
-      if (form.proofType.length === 0)
-        e.proofType = "Pick at least one source of proof.";
-      if (form.proof.trim().length < 10)
-        e.proof = "A sentence on how you know it's real keeps Foundra honest.";
-    }
-    if (step === 2) {
-      if (!form.role) e.role = "Tell us how you relate to this problem.";
-    }
-    return e;
-  }, [form, step]);
+  const stepErrors = useMemo(() => validateStep(form, step), [form, step]);
 
   const stepValid = Object.keys(stepErrors).length === 0;
 
@@ -143,6 +111,7 @@ export function Submit() {
     setShowErrors(false);
     if (step < 2) setStep((s) => (s + 1) as StepId);
     else {
+      clearDraft();
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -199,7 +168,7 @@ export function Submit() {
           <Button
             variant="secondary"
             onClick={() => {
-              setForm(empty);
+              setForm(EMPTY_FORM);
               setStep(0);
               setSubmitted(false);
             }}

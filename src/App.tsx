@@ -4,6 +4,7 @@ import { RouterProvider, matchRoute, useRouter } from "./lib/router";
 import { getProblem } from "./data/problems";
 import { StoreProvider } from "./lib/store";
 import { Toaster } from "./components/ui/sonner";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import { Header } from "./components/layout/Header";
 import { Footer } from "./components/layout/Footer";
 import { Home } from "./pages/Home";
@@ -76,7 +77,9 @@ export default function App() {
         <div className="flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">
-            <Routes />
+            <ErrorBoundary>
+              <Routes />
+            </ErrorBoundary>
           </main>
           <Footer />
         </div>
