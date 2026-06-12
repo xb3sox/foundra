@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Heart, Hammer, Compass, ShieldCheck } from "lucide-react";
 import { todaysProblems } from "../data/problems";
 import { ProblemCard } from "../components/cards/ProblemCard";
-import { Button } from "../components/ui/Button";
+import { Button } from "../components/ui/button";
 import { useRouter } from "../lib/router";
 import { CommitmentModal } from "../components/modals/CommitmentModal";
 import { PipelineExplainer } from "../components/PipelineExplainer";

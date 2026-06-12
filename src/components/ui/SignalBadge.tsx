@@ -1,26 +1,23 @@
 import type { SignalLabel } from "../../types";
 import { cn } from "../../utils/cn";
+import { Badge } from "./badge";
 
-const styles: Record<SignalLabel, { dot: string; text: string; bg: string }> = {
+const styles: Record<SignalLabel, { dot: string; chip: string }> = {
   "Strong signal": {
     dot: "bg-accent",
-    text: "text-accent-ink",
-    bg: "bg-accent-soft",
+    chip: "bg-accent-soft text-accent-ink",
   },
   Promising: {
     dot: "bg-[#2f6df0]",
-    text: "text-[#1b4fc2]",
-    bg: "bg-[#eaf0ff]",
+    chip: "bg-[#eaf0ff] text-[#1b4fc2]",
   },
   "Needs more proof": {
     dot: "bg-[#c98a00]",
-    text: "text-[#8a5e00]",
-    bg: "bg-[#fbf2dd]",
+    chip: "bg-[#fbf2dd] text-[#8a5e00]",
   },
   "Weak signal": {
     dot: "bg-ink-muted",
-    text: "text-ink-soft",
-    bg: "bg-black/[0.05]",
+    chip: "bg-black/[0.05] text-ink-soft",
   },
 };
 
@@ -35,11 +32,11 @@ export function SignalBadge({
 }) {
   const s = styles[signal];
   return (
-    <span
+    <Badge
+      variant="secondary"
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[12px] font-medium",
-        s.bg,
-        s.text,
+        "h-auto gap-1.5 rounded-full px-2.5 py-1 text-[12px] font-medium",
+        s.chip,
         className
       )}
     >
@@ -48,6 +45,6 @@ export function SignalBadge({
       {score != null && (
         <span className="font-semibold tabular-nums">· {score}/100</span>
       )}
-    </span>
+    </Badge>
   );
 }

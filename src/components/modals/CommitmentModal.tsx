@@ -14,8 +14,13 @@ import {
   AppWindow,
   Ban,
 } from "lucide-react";
-import { Modal } from "../ui/Modal";
-import { Button } from "../ui/Button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "../ui/dialog";
+import { Button } from "../ui/button";
 import {
   ChipGroup,
   MultiChipGroup,
@@ -39,7 +44,7 @@ const TOOL_OPTIONS: MultiChipOption[] = [
   { label: "Nothing yet", icon: Ban },
 ];
 import { useStore } from "../../lib/store";
-import { useToast } from "../ui/Toast";
+import { toast } from "sonner";
 
 interface Config {
   title: string;
@@ -159,7 +164,6 @@ export function CommitmentModal({
   onClose: () => void;
 }) {
   const { addCommitment, setEmail, addActivity } = useStore();
-  const { toast } = useToast();
   const [answers, setAnswers] = useState<Record<number, string | string[]>>({});
   const [step, setStep] = useState<"questions" | "email">("questions");
   const [email, setEmailValue] = useState("");
@@ -188,31 +192,34 @@ export function CommitmentModal({
         ? "joined as a builder"
         : "added market context";
     addActivity(problem.id, `You ${verb}`);
-    toast(config.success.title, config.success.body);
+    toast(config.success.title, { description: config.success.body });
     setStep("email");
   };
 
   const onSubmitEmail = () => {
     if (email.trim()) setEmail(email.trim());
-    toast("You're in the room.", "We'll keep your signal saved.");
+    toast("You're in the room.", {
+      description: "We'll keep your signal saved.",
+    });
     close();
   };
 
   return (
-    <Modal open={open} onClose={close}>
-      {step === "questions" ? (
+    <Dialog open={open} onOpenChange={(isOpen) => !isOpen && close()}>
+      <DialogContent className="bottom-0 top-auto block max-h-[92vh] w-full max-w-full translate-y-0 overflow-y-auto rounded-b-none rounded-t-3xl border border-line bg-surface p-6 text-base shadow-lift ring-0 sm:bottom-auto sm:top-1/2 sm:max-w-md sm:-translate-y-1/2 sm:rounded-3xl sm:p-7">
+        {step === "questions" ? (
         <div>
           <div className="mb-5 flex items-start gap-3">
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent-ink">
               <Icon className="h-5 w-5" />
             </span>
             <div>
-              <h2 className="text-[19px] font-semibold tracking-tight">
+              <DialogTitle className="text-[19px] font-semibold leading-snug tracking-tight text-ink">
                 {config.title}
-              </h2>
-              <p className="mt-0.5 text-[13px] text-ink-muted">
+              </DialogTitle>
+              <DialogDescription className="mt-0.5 text-[13px] text-ink-muted">
                 {problem.title}
-              </p>
+              </DialogDescription>
             </div>
           </div>
 
@@ -271,13 +278,13 @@ export function CommitmentModal({
           <div className="mb-1 flex h-10 w-10 items-center justify-center rounded-xl bg-accent-soft text-accent-ink">
             <Icon className="h-5 w-5" />
           </div>
-          <h2 className="mt-3 text-[19px] font-semibold tracking-tight">
+          <DialogTitle className="mt-3 text-[19px] font-semibold leading-snug tracking-tight text-ink">
             Save your signal and join the room.
-          </h2>
-          <p className="mt-1.5 text-sm text-ink-soft">
+          </DialogTitle>
+          <DialogDescription className="mt-1.5 text-sm text-ink-soft">
             Add your email so we can keep your signal and let you into the
             Problem Room. Optional — you can skip.
-          </p>
+          </DialogDescription>
           <div className="mt-5">
             <FieldLabel>Email</FieldLabel>
             <TextInput
@@ -298,7 +305,8 @@ export function CommitmentModal({
             Skip for now
           </button>
         </motion.div>
-      )}
-    </Modal>
+        )}
+      </DialogContent>
+    </Dialog>
   );
 }

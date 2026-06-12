@@ -1,6 +1,6 @@
 import { Heart, Hammer, Compass, DoorOpen } from "lucide-react";
 import type { CommitmentType, Problem } from "../types";
-import { Button } from "./ui/Button";
+import { Button } from "./ui/button";
 import { useStore } from "../lib/store";
 import { useRouter } from "../lib/router";
 

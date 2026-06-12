@@ -1,14 +1,14 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { RouterProvider, matchRoute, useRouter } from "./lib/router";
 import { StoreProvider } from "./lib/store";
-import { ToastProvider } from "./components/ui/Toast";
+import { Toaster } from "./components/ui/sonner";
 import { Header } from "./components/layout/Header";
 import { Footer } from "./components/layout/Footer";
 import { Home } from "./pages/Home";
 import { ProblemDetail } from "./pages/ProblemDetail";
 import { Room } from "./pages/Room";
 import { Submit } from "./pages/Submit";
-import { Button } from "./components/ui/Button";
+import { Button } from "./components/ui/button";
 
 function NotFound() {
   const { navigate } = useRouter();
@@ -52,15 +52,14 @@ export default function App() {
   return (
     <RouterProvider>
       <StoreProvider>
-        <ToastProvider>
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1">
-              <Routes />
-            </main>
-            <Footer />
-          </div>
-        </ToastProvider>
+        <div className="flex min-h-screen flex-col">
+          <Header />
+          <main className="flex-1">
+            <Routes />
+          </main>
+          <Footer />
+        </div>
+        <Toaster />
       </StoreProvider>
     </RouterProvider>
   );

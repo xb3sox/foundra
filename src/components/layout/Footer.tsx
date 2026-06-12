@@ -1,9 +1,8 @@
+import { toast } from "sonner";
 import { useRouter } from "../../lib/router";
-import { useToast } from "../ui/Toast";
 
 export function Footer() {
   const { navigate } = useRouter();
-  const { toast } = useToast();
 
   return (
     <footer className="mt-24 border-t border-line/70">
@@ -29,13 +28,21 @@ export function Footer() {
             Submit
           </button>
           <button
-            onClick={() => toast("Privacy", "We keep your signals to ourselves.")}
+            onClick={() =>
+              toast("Privacy", {
+                description: "We keep your signals to ourselves.",
+              })
+            }
             className="cursor-pointer text-ink-soft transition-colors hover:text-ink"
           >
             Privacy
           </button>
           <button
-            onClick={() => toast("Contact", "Reach the team at hello@foundra.app")}
+            onClick={() =>
+              toast("Contact", {
+                description: "Reach the team at hello@foundra.app",
+              })
+            }
             className="cursor-pointer text-ink-soft transition-colors hover:text-ink"
           >
             Contact

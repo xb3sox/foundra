@@ -21,7 +21,7 @@ import {
   Compass,
 } from "lucide-react";
 import { useRouter } from "../lib/router";
-import { Button } from "../components/ui/Button";
+import { Button } from "../components/ui/button";
 import {
   ChipGroup,
   MultiChipGroup,

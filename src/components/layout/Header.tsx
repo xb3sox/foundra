@@ -1,5 +1,5 @@
 import { useRouter } from "../../lib/router";
-import { Button } from "../ui/Button";
+import { Button } from "../ui/button";
 
 function Logo() {
   return (

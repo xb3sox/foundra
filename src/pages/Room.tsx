@@ -17,13 +17,13 @@ import {
   CalendarClock,
   Target,
 } from "lucide-react";
+import { toast } from "sonner";
 import { getProblem } from "../data/problems";
 import { useRouter } from "../lib/router";
 import { useStore } from "../lib/store";
-import { useToast } from "../components/ui/Toast";
 import { SignalBadge } from "../components/ui/SignalBadge";
 import { SignalEvidence } from "../components/SignalEvidence";
-import { Button } from "../components/ui/Button";
+import { Button } from "../components/ui/button";
 import type { RoomStatus } from "../types";
 
 const statusStyle: Record<RoomStatus, string> = {
@@ -57,7 +57,6 @@ export function Room({ id }: { id: string }) {
     markConnected,
     getRoom,
   } = useStore();
-  const { toast } = useToast();
   const [answers, setAnswers] = useState<Record<number, string>>({});
 
   if (!problem) {
@@ -99,25 +98,33 @@ export function Room({ id }: { id: string }) {
   const handleCreateBrief = () => {
     setBriefCreated(problem.id);
     addActivity(problem.id, "First Brief generated");
-    toast("Brief created.", "A First Brief is ready in the room.");
+    toast("Brief created.", {
+      description: "A First Brief is ready in the room.",
+    });
   };
 
   const handleRequestIntro = (name: string) => {
     markConnected(problem.id, name);
     addActivity(problem.id, `You requested an intro to ${name}`);
-    toast("Intro requested.", `We'll connect you with ${name}.`);
+    toast("Intro requested.", {
+      description: `We'll connect you with ${name}.`,
+    });
   };
 
   const handleScheduleCall = (name: string) => {
     markConnected(problem.id, name);
     addActivity(problem.id, `You proposed a call with ${name}`);
-    toast("Call proposed.", `We'll help you find a time with ${name}.`);
+    toast("Call proposed.", {
+      description: `We'll help you find a time with ${name}.`,
+    });
   };
 
   const handlePromptSave = (i: number) => {
     if (!answers[i]?.trim()) return;
     addActivity(problem.id, "You answered a shaping prompt");
-    toast("Answer saved.", "Thanks — this shapes the first solution.");
+    toast("Answer saved.", {
+      description: "Thanks — this shapes the first solution.",
+    });
     setAnswers((a) => ({ ...a, [i]: "" }));
   };
 
