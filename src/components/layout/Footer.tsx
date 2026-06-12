@@ -1,9 +1,6 @@
 import { toast } from "sonner";
-import { useRouter } from "../../lib/router";
 
 export function Footer() {
-  const { navigate } = useRouter();
-
   return (
     <footer className="mt-24 border-t border-line/70">
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-12 sm:flex-row sm:items-end sm:justify-between sm:px-8">
@@ -21,12 +18,6 @@ export function Footer() {
           </p>
         </div>
         <div className="flex items-center gap-6 text-sm">
-          <button
-            onClick={() => navigate("/submit")}
-            className="cursor-pointer text-ink-soft transition-colors hover:text-ink"
-          >
-            Submit
-          </button>
           <button
             onClick={() =>
               toast("Privacy", {

@@ -73,7 +73,6 @@ export function matchRoute(
   path: string
 ): { name: string; params: Record<string, string> } {
   if (path === "/" || path === "") return { name: "home", params: {} };
-  if (path === "/submit") return { name: "submit", params: {} };
   const problemMatch = path.match(/^\/problems\/([^/]+)$/);
   if (problemMatch) return { name: "problem", params: { id: problemMatch[1] } };
   const roomMatch = path.match(/^\/rooms\/([^/]+)$/);

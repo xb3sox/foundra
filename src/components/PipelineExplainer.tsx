@@ -43,7 +43,7 @@ const steps = [
 
 export function PipelineExplainer() {
   return (
-    <section className="mx-auto mt-20 max-w-6xl px-5 sm:px-8">
+    <section id="how-it-works" className="mx-auto mt-20 max-w-6xl px-5 sm:px-8">
       <div className="max-w-2xl">
         <span className="text-[12.5px] font-semibold uppercase tracking-wide text-accent-ink">
           How Foundra works

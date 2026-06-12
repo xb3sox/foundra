@@ -5,7 +5,6 @@ describe("matchRoute", () => {
   test.each([
     ["/", "home", {}],
     ["", "home", {}],
-    ["/submit", "submit", {}],
     ["/problems/client-feedback", "problem", { id: "client-feedback" }],
     ["/rooms/gym-churn", "room", { id: "gym-churn" }],
   ] as const)("matches %s to %s", (path, name, params) => {
@@ -18,6 +17,7 @@ describe("matchRoute", () => {
     "/problems/a/b",
     "/rooms",
     "/garbage",
+    "/submit",
     "/submit/extra",
   ])("returns notfound for %s", (path) => {
     expect(matchRoute(path).name).toBe("notfound");

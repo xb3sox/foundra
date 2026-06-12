@@ -33,9 +33,6 @@ export function Header() {
           >
             Problems
           </button>
-          <Button size="sm" variant="ghost" onClick={() => navigate("/submit")}>
-            Submit
-          </Button>
           <Button size="sm" onClick={() => navigate("/")}>
             Explore problems
           </Button>

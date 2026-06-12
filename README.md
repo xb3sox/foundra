@@ -15,7 +15,6 @@ Foundra is a problem-discovery marketplace for founders who want evidence, not A
 - Problem feed with signal badges, proof cards, and score breakdowns
 - Three commitment roles: feel the pain, can build it, know the market
 - Pipeline explainer: signals → clustering → scoring → collaboration rooms
-- Submit flow for new problems with evidence attachments
 - Rich seed dataset for a deep demo without a backend
 
 ## Live

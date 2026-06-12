@@ -4,7 +4,6 @@ import { ArrowRight, Heart, Hammer, Compass, ShieldCheck } from "lucide-react";
 import { problems, todaysProblems } from "../data/problems";
 import { ProblemCard } from "../components/cards/ProblemCard";
 import { Button } from "../components/ui/button";
-import { useRouter } from "../lib/router";
 import { CommitmentModal } from "../components/modals/CommitmentModal";
 import { PipelineExplainer } from "../components/PipelineExplainer";
 import { PipelineQueue } from "../components/PipelineQueue";
@@ -29,7 +28,6 @@ const roles = [
 ];
 
 export function Home() {
-  const { navigate } = useRouter();
   const [active, setActive] = useState<{
     problem: Problem;
     type: CommitmentType;
@@ -72,8 +70,16 @@ export function Home() {
               Explore problems
               <ArrowRight className="h-4 w-4" />
             </Button>
-            <Button size="lg" variant="secondary" onClick={() => navigate("/submit")}>
-              Submit problem
+            <Button
+              size="lg"
+              variant="secondary"
+              onClick={() =>
+                document
+                  .getElementById("how-it-works")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              How it works
             </Button>
           </div>
         </motion.div>

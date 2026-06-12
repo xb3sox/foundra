@@ -10,7 +10,6 @@ import { Footer } from "./components/layout/Footer";
 import { Home } from "./pages/Home";
 import { ProblemDetail } from "./pages/ProblemDetail";
 import { Room } from "./pages/Room";
-import { Submit } from "./pages/Submit";
 import { Button } from "./components/ui/button";
 
 function NotFound() {
@@ -31,7 +30,6 @@ function NotFound() {
 const DEFAULT_TITLE = "Foundra — Real problems worth building.";
 
 function routeTitle(route: ReturnType<typeof matchRoute>): string {
-  if (route.name === "submit") return "Submit a problem — Foundra";
   if (route.name === "problem" || route.name === "room") {
     const problem = getProblem(route.params.id);
     if (!problem) return "Not found — Foundra";
@@ -61,7 +59,6 @@ function Routes() {
         transition={{ duration: 0.22, ease: "easeOut" }}
       >
         {route.name === "home" && <Home />}
-        {route.name === "submit" && <Submit />}
         {route.name === "problem" && <ProblemDetail id={route.params.id} />}
         {route.name === "room" && <Room id={route.params.id} />}
         {route.name === "notfound" && <NotFound />}
