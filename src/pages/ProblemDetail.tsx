@@ -1,23 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import {
-  ArrowLeft,
-  Heart,
-  Hammer,
-  Compass,
-  Lightbulb,
-  Users,
-  XOctagon,
-  Megaphone,
-  Tag,
-} from "lucide-react";
+import { ArrowLeft, Users } from "lucide-react";
 import { getProblem } from "../data/problems";
 import { useRouter } from "../lib/router";
 import { useLiveCounts } from "../lib/store";
-import { getRoleIcon } from "../lib/role-icons";
 import { SignalBadge } from "../components/ui/SignalBadge";
-import { ProofCard } from "../components/cards/ProofCard";
-import { ScoreBreakdown } from "../components/cards/ScoreBreakdown";
+import { ProofSection } from "../components/problem/ProofSection";
+import { FirstVersionSection } from "../components/problem/FirstVersionSection";
+import { PeopleSection } from "../components/problem/PeopleSection";
 import { CommitmentActions } from "../components/CommitmentActions";
 import { SignalEvidence } from "../components/SignalEvidence";
 import { CommitmentModal } from "../components/modals/CommitmentModal";
@@ -140,38 +130,7 @@ export function ProblemDetail({ id }: { id: string }) {
 
         {/* 3 Proof */}
         <Section n={3} title="Proof">
-          <p className="mb-4 text-[13px] text-ink-muted">
-            Real snippets pulled from public sources. Each shows where it came
-            from and how strong it is. No invented data.
-          </p>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {problem.proof.map((p, i) => (
-              <ProofCard key={i} proof={p} index={i} />
-            ))}
-          </div>
-
-          {/* Signal */}
-          <div className="mt-5 rounded-2xl border border-line bg-surface p-6 shadow-card">
-            <div className="flex flex-wrap items-baseline justify-between gap-3">
-              <div className="flex items-center gap-2">
-                <span className="text-[12px] font-medium uppercase tracking-wide text-ink-muted">
-                  Signal
-                </span>
-                <SignalBadge signal={problem.signal} score={problem.score} />
-              </div>
-              <div className="flex flex-wrap gap-x-4 gap-y-1 text-[12.5px] text-ink-muted">
-                {problem.scoreReasons.map((r) => (
-                  <span key={r} className="inline-flex items-center gap-1.5">
-                    <span className="h-1 w-1 rounded-full bg-accent" />
-                    {r}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div className="mt-6">
-              <ScoreBreakdown dimensions={problem.scoreBreakdown} />
-            </div>
-          </div>
+          <ProofSection problem={problem} />
         </Section>
 
         {/* 4 Today's workaround */}
@@ -190,46 +149,12 @@ export function ProblemDetail({ id }: { id: string }) {
 
         {/* 6 First solution */}
         <Section n={6} title="First solution">
-          <div className="grid gap-3 sm:grid-cols-2">
-            <FvCard icon={Lightbulb} label="First feature" value={fv.firstFeature} wide />
-            <FvCard icon={Users} label="Who it is for" value={fv.forWho} />
-            <FvCard icon={XOctagon} label="What to avoid" value={fv.avoid} />
-            <FvCard icon={Megaphone} label="How to find first users" value={fv.findUsers} />
-            <FvCard icon={Tag} label="Pricing guess" value={fv.pricing} />
-          </div>
+          <FirstVersionSection fv={fv} />
         </Section>
 
         {/* 7 People interested */}
         <Section n={7} title="People interested">
-          <div className="grid gap-3 sm:grid-cols-3">
-            <PeopleStat icon={Heart} count={counts.feel} label="Have this problem" />
-            <PeopleStat icon={Hammer} count={counts.build} label="Can build this" />
-            <PeopleStat icon={Compass} count={counts.know} label="Market Experts" />
-          </div>
-          <div className="mt-3 grid gap-3 sm:grid-cols-3">
-            {problem.people.map((person) => {
-              const Icon = getRoleIcon(person.role);
-              return (
-                <div
-                  key={person.name}
-                  className="rounded-2xl border border-line bg-surface p-4 shadow-card"
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent-soft text-accent-ink">
-                      <Icon className="h-3.5 w-3.5" />
-                    </span>
-                    <span className="text-[14px] font-semibold">
-                      {person.name}
-                    </span>
-                  </div>
-                  <p className="mt-2 text-[12px] font-medium text-ink-muted">
-                    {person.role}
-                  </p>
-                  <p className="text-[13px] text-ink-soft">{person.detail}</p>
-                </div>
-              );
-            })}
-          </div>
+          <PeopleSection problem={problem} counts={counts} />
         </Section>
 
         {/* 8 Next step */}
@@ -258,50 +183,6 @@ export function ProblemDetail({ id }: { id: string }) {
         open={!!active}
         onClose={() => setActive(null)}
       />
-    </div>
-  );
-}
-
-function FvCard({
-  icon: Icon,
-  label,
-  value,
-  wide,
-}: {
-  icon: typeof Lightbulb;
-  label: string;
-  value: string;
-  wide?: boolean;
-}) {
-  return (
-    <div
-      className={`rounded-2xl border border-line bg-surface p-5 shadow-card ${
-        wide ? "sm:col-span-2" : ""
-      }`}
-    >
-      <div className="flex items-center gap-2 text-[12.5px] font-medium text-ink-muted">
-        <Icon className="h-4 w-4" />
-        {label}
-      </div>
-      <p className="mt-2 text-[14px] leading-relaxed text-ink">{value}</p>
-    </div>
-  );
-}
-
-function PeopleStat({
-  icon: Icon,
-  count,
-  label,
-}: {
-  icon: typeof Heart;
-  count: number;
-  label: string;
-}) {
-  return (
-    <div className="rounded-2xl border border-line bg-surface p-4 text-center shadow-card">
-      <Icon className="mx-auto h-4 w-4 text-accent" />
-      <p className="mt-2 text-2xl font-semibold tabular-nums">{count}</p>
-      <p className="text-[12.5px] text-ink-soft">{label}</p>
     </div>
   );
 }
