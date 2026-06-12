@@ -49,7 +49,7 @@ export function ProblemCard({
       {/* TITLE + PAIN — kept spacious; the primary read. */}
       <button
         onClick={() => navigate(`/problems/${problem.id}`)}
-        className="mt-4 cursor-pointer text-left"
+        className="mt-4 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 text-left"
       >
         <h3 className="text-[18px] font-semibold leading-snug tracking-tight text-ink text-balance sm:text-[19px]">
           {problem.title}
@@ -81,7 +81,7 @@ export function ProblemCard({
         <button
           onClick={() => navigate(`/problems/${problem.id}`)}
           aria-label="View problem"
-          className="inline-flex cursor-pointer items-center justify-center gap-1 whitespace-nowrap rounded-[10px] bg-ink px-3.5 py-2 text-[12.5px] font-medium text-white transition-colors hover:bg-black"
+          className="inline-flex cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 items-center justify-center gap-1 whitespace-nowrap rounded-[10px] bg-ink px-3.5 py-2 text-[12.5px] font-medium text-white transition-colors hover:bg-black"
         >
           View
           <ArrowRight className="h-3.5 w-3.5" />
@@ -127,7 +127,7 @@ function CommitChip({
       aria-label={label}
       title={label}
       className={
-        "group inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-[10px] border px-2.5 py-2 text-[12.5px] font-medium transition-colors " +
+        "group inline-flex cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 items-center justify-center gap-1.5 rounded-[10px] border px-2.5 py-2 text-[12.5px] font-medium transition-colors " +
         (active
           ? "border-accent/40 bg-accent-soft text-accent-ink"
           : "border-line text-ink-soft hover:border-ink/30 hover:text-ink")

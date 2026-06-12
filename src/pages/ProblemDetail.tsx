@@ -47,7 +47,7 @@ export function ProblemDetail({ id }: { id: string }) {
         <h1 className="text-2xl font-semibold">Problem not found</h1>
         <button
           onClick={() => navigate("/")}
-          className="mt-4 cursor-pointer font-medium text-accent-ink"
+          className="mt-4 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 font-medium text-accent-ink"
         >
           Back to problems
         </button>
@@ -61,7 +61,7 @@ export function ProblemDetail({ id }: { id: string }) {
     <div className="mx-auto max-w-3xl px-5 py-10 sm:px-8">
       <button
         onClick={() => navigate("/")}
-        className="inline-flex cursor-pointer items-center gap-1.5 text-[13px] font-medium text-ink-muted transition-colors hover:text-ink"
+        className="inline-flex cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 items-center gap-1.5 text-[13px] font-medium text-ink-muted transition-colors hover:text-ink"
       >
         <ArrowLeft className="h-4 w-4" />
         Today's problems

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import { RouterProvider, matchRoute, useRouter } from "./lib/router";
 import { getProblem } from "./data/problems";
 import { StoreProvider } from "./lib/store";
@@ -69,19 +69,21 @@ function Routes() {
 
 export default function App() {
   return (
-    <RouterProvider>
-      <StoreProvider>
-        <div className="flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-1">
-            <ErrorBoundary>
-              <Routes />
-            </ErrorBoundary>
-          </main>
-          <Footer />
-        </div>
-        <Toaster />
-      </StoreProvider>
-    </RouterProvider>
+    <MotionConfig reducedMotion="user">
+      <RouterProvider>
+        <StoreProvider>
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1">
+              <ErrorBoundary>
+                <Routes />
+              </ErrorBoundary>
+            </main>
+            <Footer />
+          </div>
+          <Toaster />
+        </StoreProvider>
+      </RouterProvider>
+    </MotionConfig>
   );
 }

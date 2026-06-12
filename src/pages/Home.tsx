@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Heart, Hammer, Compass, ShieldCheck } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { ProblemBoard } from "../components/board/ProblemBoard";
+import { scrollToSection } from "../lib/scroll";
 import { CommitmentModal } from "../components/modals/CommitmentModal";
 import { PipelineExplainer } from "../components/PipelineExplainer";
 import { PipelineQueue } from "../components/PipelineQueue";
@@ -58,25 +59,14 @@ export function Home() {
             them up.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Button
-              size="lg"
-              onClick={() =>
-                document
-                  .getElementById("today")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
-            >
+            <Button size="lg" onClick={() => scrollToSection("today")}>
               Explore problems
               <ArrowRight className="h-4 w-4" />
             </Button>
             <Button
               size="lg"
               variant="secondary"
-              onClick={() =>
-                document
-                  .getElementById("how-it-works")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
+              onClick={() => scrollToSection("how-it-works")}
             >
               How it works
             </Button>

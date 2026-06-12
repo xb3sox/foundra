@@ -40,7 +40,7 @@ export function RoomChecklist({ problem }: { problem: Problem }) {
               onClick={() =>
                 toggleChecklist(problem.id, c.id, baseChecklistMap)
               }
-              className="flex w-full cursor-pointer items-center gap-3 rounded-xl px-2 py-2.5 text-left transition-colors hover:bg-black/[0.025]"
+              className="flex w-full cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 items-center gap-3 rounded-xl px-2 py-2.5 text-left transition-colors hover:bg-black/[0.025]"
             >
               <motion.span
                 animate={{

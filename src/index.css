@@ -9,7 +9,8 @@
   --color-surface: #ffffff;
   --color-ink: #16181d;
   --color-ink-soft: #4a4f59;
-  --color-ink-muted: #868d99;
+  /* ≥4.5:1 on both --color-bg and white surfaces (WCAG AA small text). */
+  --color-ink-muted: #687180;
   --color-line: #e7e3da;
   --color-accent: #0a8f5b;
   --color-accent-soft: #e6f4ed;
@@ -121,7 +122,7 @@
   --secondary: #ffffff;
   --secondary-foreground: #16181d;
   --muted: #efece3;
-  --muted-foreground: #868d99;
+  --muted-foreground: #687180;
   --accent: #0a8f5b;
   --accent-foreground: #ffffff;
   --destructive: oklch(0.577 0.245 27.325);

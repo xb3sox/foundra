@@ -168,7 +168,7 @@ export function CommitmentModal({
           </Button>
           <button
             onClick={close}
-            className="mt-3 w-full cursor-pointer text-center text-[13px] font-medium text-ink-muted transition-colors hover:text-ink"
+            className="mt-3 w-full cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 text-center text-[13px] font-medium text-ink-muted transition-colors hover:text-ink"
           >
             Skip for now
           </button>

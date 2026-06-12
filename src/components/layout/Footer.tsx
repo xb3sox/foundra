@@ -24,7 +24,7 @@ export function Footer() {
                 description: "We keep your signals to ourselves.",
               })
             }
-            className="cursor-pointer text-ink-soft transition-colors hover:text-ink"
+            className="cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 text-ink-soft transition-colors hover:text-ink"
           >
             Privacy
           </button>
@@ -34,7 +34,7 @@ export function Footer() {
                 description: "Reach the team at hello@foundra.app",
               })
             }
-            className="cursor-pointer text-ink-soft transition-colors hover:text-ink"
+            className="cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 text-ink-soft transition-colors hover:text-ink"
           >
             Contact
           </button>
