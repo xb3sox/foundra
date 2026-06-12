@@ -13,7 +13,8 @@ import {
 } from "lucide-react";
 import { getProblem } from "../data/problems";
 import { useRouter } from "../lib/router";
-import { useStore } from "../lib/store";
+import { useLiveCounts } from "../lib/store";
+import { getRoleIcon } from "../lib/role-icons";
 import { SignalBadge } from "../components/ui/SignalBadge";
 import { ProofCard } from "../components/cards/ProofCard";
 import { ScoreBreakdown } from "../components/cards/ScoreBreakdown";
@@ -44,16 +45,10 @@ function Section({
   );
 }
 
-const roleIcon = {
-  "Has this": Heart,
-  Builder: Hammer,
-  "Market Expert": Compass,
-} as Record<string, typeof Heart>;
-
 export function ProblemDetail({ id }: { id: string }) {
   const problem = getProblem(id);
   const { navigate } = useRouter();
-  const { state } = useStore();
+  const counts = useLiveCounts(problem);
   const [active, setActive] = useState<CommitmentType | null>(null);
 
   if (!problem) {
@@ -70,12 +65,6 @@ export function ProblemDetail({ id }: { id: string }) {
     );
   }
 
-  const extra = state.extraCounts[problem.id] ?? { feel: 0, build: 0, know: 0 };
-  const counts = {
-    feel: problem.counts.feel + extra.feel,
-    build: problem.counts.build + extra.build,
-    know: problem.counts.know + extra.know,
-  };
   const fv = problem.firstVersion;
 
   return (
@@ -219,7 +208,7 @@ export function ProblemDetail({ id }: { id: string }) {
           </div>
           <div className="mt-3 grid gap-3 sm:grid-cols-3">
             {problem.people.map((person) => {
-              const Icon = roleIcon[person.role] ?? Heart;
+              const Icon = getRoleIcon(person.role);
               return (
                 <div
                   key={person.name}

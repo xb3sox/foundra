@@ -1055,10 +1055,3 @@ export const pipelineCandidates: PipelineCandidate[] = [
   { title: "Auto shops quote repairs from memory", industry: "Automotive", clusters: 1, signalCount: 3, status: "Clustering" },
 ];
 
-export const platformSummary = [
-  { platform: "Reddit", label: "Reddit complaints" },
-  { platform: "Product reviews", label: "1–3★ product reviews" },
-  { platform: "Upwork", label: "Upwork & Fiverr job posts" },
-  { platform: "Forum", label: "Niche forums" },
-  { platform: "Social", label: "Social posts" },
-];

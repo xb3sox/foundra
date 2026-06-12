@@ -205,3 +205,25 @@ export function useStore() {
   if (!ctx) throw new Error("useStore must be used within StoreProvider");
   return ctx;
 }
+
+interface Counts {
+  feel: number;
+  build: number;
+  know: number;
+}
+
+/** Seed counts plus any signals the current user added locally.
+    Accepts undefined so pages can call it before their not-found guard
+    (hooks must run unconditionally). */
+export function useLiveCounts(
+  problem: { id: string; counts: Counts } | undefined
+): Counts {
+  const { state } = useStore();
+  if (!problem) return { feel: 0, build: 0, know: 0 };
+  const extra = state.extraCounts[problem.id] ?? { feel: 0, build: 0, know: 0 };
+  return {
+    feel: problem.counts.feel + extra.feel,
+    build: problem.counts.build + extra.build,
+    know: problem.counts.know + extra.know,
+  };
+}

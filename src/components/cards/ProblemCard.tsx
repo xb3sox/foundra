@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import type { CommitmentType, Problem } from "../../types";
 import { useRouter } from "../../lib/router";
-import { useStore } from "../../lib/store";
+import { useLiveCounts, useStore } from "../../lib/store";
 import { SignalBadge } from "../ui/SignalBadge";
 
 export function ProblemCard({
@@ -22,12 +22,7 @@ export function ProblemCard({
 }) {
   const { navigate } = useRouter();
   const { state } = useStore();
-  const extra = state.extraCounts[problem.id] ?? { feel: 0, build: 0, know: 0 };
-  const counts = {
-    feel: problem.counts.feel + extra.feel,
-    build: problem.counts.build + extra.build,
-    know: problem.counts.know + extra.know,
-  };
+  const counts = useLiveCounts(problem);
   const taken = state.commitments[problem.id] ?? [];
 
   return (

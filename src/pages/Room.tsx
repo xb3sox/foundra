@@ -5,9 +5,6 @@ import {
   Check,
   FileText,
   UserPlus,
-  Heart,
-  Hammer,
-  Compass,
   Sparkles,
   Lightbulb,
   Users,
@@ -20,7 +17,8 @@ import {
 import { toast } from "sonner";
 import { getProblem } from "../data/problems";
 import { useRouter } from "../lib/router";
-import { useStore } from "../lib/store";
+import { useLiveCounts, useStore } from "../lib/store";
+import { getRoleIcon } from "../lib/role-icons";
 import { SignalBadge } from "../components/ui/SignalBadge";
 import { SignalEvidence } from "../components/SignalEvidence";
 import { Button } from "../components/ui/button";
@@ -40,23 +38,17 @@ const prompts = [
   "What should builders avoid?",
 ];
 
-const roleIcon = {
-  "Has this": Heart,
-  Builder: Hammer,
-  "Market Expert": Compass,
-} as Record<string, typeof Heart>;
-
 export function Room({ id }: { id: string }) {
   const problem = getProblem(id);
   const { navigate } = useRouter();
   const {
-    state,
     toggleChecklist,
     addActivity,
     setBriefCreated,
     markConnected,
     getRoom,
   } = useStore();
+  const counts = useLiveCounts(problem);
   const [answers, setAnswers] = useState<Record<number, string>>({});
 
   if (!problem) {
@@ -82,13 +74,6 @@ export function Room({ id }: { id: string }) {
     done: room?.checklist[c.id] ?? c.done,
   }));
   const doneCount = checklist.filter((c) => c.done).length;
-
-  const extra = state.extraCounts[problem.id] ?? { feel: 0, build: 0, know: 0 };
-  const counts = {
-    feel: problem.counts.feel + extra.feel,
-    build: problem.counts.build + extra.build,
-    know: problem.counts.know + extra.know,
-  };
 
   const activity = [...(room?.activity ?? []), ...problem.activity];
   const briefCreated = room?.briefCreated ?? false;
@@ -395,7 +380,7 @@ export function Room({ id }: { id: string }) {
             <h2 className="text-[15px] font-semibold tracking-tight">People</h2>
             <div className="mt-4 space-y-3">
               {problem.people.map((person) => {
-                const Icon = roleIcon[person.role] ?? Heart;
+                const Icon = getRoleIcon(person.role);
                 const isConnected = connected.includes(person.name);
                 return (
                   <div
