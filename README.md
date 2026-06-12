@@ -12,7 +12,8 @@ Foundra is a problem-discovery marketplace for founders who want evidence, not A
 
 ## What's inside
 
-- Problem feed with signal badges, proof cards, and score breakdowns
+- Problem board with search, industry and signal-strength filters
+- Signal badges, proof cards, and score breakdowns on every listing
 - Three commitment roles: feel the pain, can build it, know the market
 - Pipeline explainer: signals → clustering → scoring → collaboration rooms
 - Rich seed dataset for a deep demo without a backend
@@ -38,6 +39,7 @@ React 19, TypeScript, Vite 7, Tailwind CSS 4, shadcn/ui (Radix), Framer Motion, 
 
 ## Status
 
-Shipped frontend with seeded problem data (11 published problems). Submissions,
-commitments, and drafts persist locally (localStorage) — no live scraping or
-user accounts yet. Deployed on Vercel as a static SPA with clean URLs.
+Shipped frontend with seeded problem data (11 published problems). Commitments
+and room activity persist locally (localStorage) — no live scraping, user
+accounts, or problem submissions yet (submission flow removed until a real
+backend lands). Deployed on Vercel as a static SPA with clean URLs.
