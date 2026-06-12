@@ -718,6 +718,319 @@ export const problems: Problem[] = [
       lastUpdated: "4 days ago",
     },
   },
+  {
+    id: "accountant-docs",
+    industry: "Accounting",
+    title: "Accountants drown in client document requests.",
+    pain: "Every tax season means chasing the same PDFs over email, one client at a time.",
+    summary:
+      "Small accounting firms send dozens of document requests per client and track what's missing in spreadsheets and memory.",
+    signal: "Strong signal",
+    score: 80,
+    scoreReasons: [
+      "Painful every single cycle",
+      "Clear paying buyer",
+      "Spreadsheet workaround everywhere",
+      "Narrow first solution",
+    ],
+    counts: { feel: 14, build: 5, know: 3 },
+    whoFeels: "Solo CPAs and accounting firms with 2–10 staff.",
+    problemDetail:
+      "To close a client's books or file a return, an accountant needs bank statements, receipts, payroll reports, and a dozen other documents. Requests go out by email, clients reply with half of them, and the firm tracks what's still missing in a spreadsheet. Staff spend hours per client re-asking for the same files, and deadlines slip when one PDF arrives late.",
+    proof: [
+      {
+        source: "Forum complaint",
+        platform: "Reddit",
+        origin: "r/Accounting",
+        date: "2 days ago",
+        text: "I sent the same 'still missing your bank statements' email 11 times this week. It's 80% of my job in March.",
+        strength: "Strong",
+      },
+      {
+        source: "Review",
+        platform: "Product reviews",
+        origin: "G2 · 2★ portal software",
+        date: "1 week ago",
+        text: "Clients can't figure out the portal login, so they email the files anyway. Now I track two places instead of one.",
+        strength: "Strong",
+      },
+      {
+        source: "Job post",
+        platform: "Upwork",
+        origin: "Upwork job post",
+        date: "4 days ago",
+        text: "CPA firm hiring a VA to 'follow up with clients on outstanding documents and update our tracking sheet daily'.",
+        strength: "Medium",
+      },
+      {
+        source: "Forum complaint",
+        platform: "Forum",
+        origin: "Bookkeepers community",
+        date: "1 week ago",
+        text: "What does everyone use to track missing client docs? My checklist spreadsheet has 40 tabs.",
+        strength: "Medium",
+      },
+    ],
+    whatTheyDoToday:
+      "Email threads per client, a shared spreadsheet of missing documents, and manual reminder emails written from scratch each time.",
+    whyToolsFail:
+      "Client portals require logins that clients refuse to use. Practice management suites bury document requests inside heavy workflows. Nothing chases the client automatically.",
+    firstVersion: {
+      firstFeature:
+        "A per-client document request list with a no-login upload link and automatic polite reminders until everything is in.",
+      forWho: "Solo CPAs and small firms handling 30–200 clients per season.",
+      avoid:
+        "Avoid building bookkeeping, e-signatures, or a full practice suite. Stay on collecting documents.",
+      findUsers:
+        "Accounting subreddits, bookkeeper Facebook groups, and state CPA society newsletters.",
+      pricing: "$39–129/month per firm.",
+    },
+    scoreBreakdown: [
+      { name: "Repetition", value: 86 },
+      { name: "Clarity of user", value: 84 },
+      { name: "Workaround exists", value: 82 },
+      { name: "Signs of payment", value: 78 },
+      { name: "Urgency", value: 76 },
+      { name: "Build simplicity", value: 74 },
+    ],
+    people: [
+      { name: "Mona G.", role: "Has this", detail: "Solo CPA, 90 tax clients", commitment: "I have this problem" },
+      { name: "Idris V.", role: "Builder", detail: "Full-stack, doc workflows", commitment: "I can build this" },
+      { name: "Salma J.", role: "Market Expert", detail: "Ex-partner at a 12-person firm", commitment: "I know this market" },
+    ],
+    roomStatus: "Building",
+    checklist: [
+      { id: "c1", label: "5 people confirmed the pain", done: true },
+      { id: "c2", label: "3 explained their workaround", done: true },
+      { id: "c3", label: "2 said they would pay", done: true },
+      { id: "c4", label: "First Brief drafted", done: true },
+      { id: "c5", label: "First interview scheduled", done: false },
+    ],
+    activity: [
+      { id: "a1", text: "Mona shared her 40-tab tracking spreadsheet", time: "1h ago" },
+      { id: "a2", text: "Idris joined as builder", time: "4h ago" },
+      { id: "a3", text: "Salma added firm-size pricing context", time: "Yesterday" },
+      { id: "a4", text: "First Brief generated", time: "2 days ago" },
+    ],
+    pipeline: {
+      signalCount: 41,
+      clusters: 5,
+      confidence: "Strong",
+      sources: [
+        { platform: "Reddit", count: 18 },
+        { platform: "Product reviews", count: 10 },
+        { platform: "Upwork", count: 8 },
+        { platform: "Forum", count: 5 },
+      ],
+      lastUpdated: "Today",
+    },
+  },
+  {
+    id: "gym-churn",
+    industry: "Fitness",
+    title: "Gyms lose members who silently churn.",
+    pain: "Members stop showing up weeks before they cancel, and nobody notices.",
+    summary:
+      "Independent gym owners only learn a member is gone when the cancellation email arrives, long after attendance dropped off.",
+    signal: "Promising",
+    score: 68,
+    scoreReasons: [
+      "Revenue leaks monthly",
+      "Attendance data already exists",
+      "Owners are busy, not technical",
+      "Retention is hard to attribute",
+    ],
+    counts: { feel: 8, build: 3, know: 2 },
+    whoFeels: "Independent gym and boutique studio owners with 100–800 members.",
+    problemDetail:
+      "A member who cancels in June usually stopped scanning in around April. The check-in data shows the fade, but it sits unused inside the access system. Owners find out at cancellation, when a win-back is awkward and usually too late. A timely 'we miss you' nudge at week two of absence is the obvious move, and almost nobody does it.",
+    proof: [
+      {
+        source: "Forum complaint",
+        platform: "Reddit",
+        origin: "r/gymowners",
+        date: "5 days ago",
+        text: "Pulled my cancellations report: almost every one had zero visits for 6+ weeks first. I never saw it coming.",
+        strength: "Strong",
+      },
+      {
+        source: "Review",
+        platform: "Product reviews",
+        origin: "Capterra · 2★ gym software",
+        date: "2 weeks ago",
+        text: "Has an 'at-risk members' report buried four menus deep. No alerts, so I check it never.",
+        strength: "Medium",
+      },
+      {
+        source: "Forum complaint",
+        platform: "Forum",
+        origin: "Fitness business forum",
+        date: "1 week ago",
+        text: "How do you reach out to members who've gone quiet without it feeling like spam?",
+        strength: "Medium",
+      },
+      {
+        source: "Expert note",
+        platform: "Social",
+        origin: "LinkedIn · gym consultant",
+        date: "3 weeks ago",
+        text: "Most independents could cut churn meaningfully just by acting on attendance gaps. Few have the time.",
+        strength: "Weak",
+      },
+    ],
+    whatTheyDoToday:
+      "An occasional manual look at check-in reports, gut feel about regulars, and a generic newsletter that goes to everyone.",
+    whyToolsFail:
+      "Gym management platforms hold the data but bury at-risk reports and send nothing proactively. Marketing tools don't connect to check-in systems.",
+    firstVersion: {
+      firstFeature:
+        "An attendance-drop alert that flags fading members and sends an owner-approved win-back text at the right moment.",
+      forWho: "Single-location gyms and studios with digital check-in.",
+      avoid:
+        "Avoid building booking, billing, or a member app. Stay on spotting the fade and nudging.",
+      findUsers:
+        "Gym owner subreddits, boutique studio groups, and fitness equipment reseller networks.",
+      pricing: "$49–99/month per location.",
+    },
+    scoreBreakdown: [
+      { name: "Repetition", value: 72 },
+      { name: "Clarity of user", value: 70 },
+      { name: "Workaround exists", value: 64 },
+      { name: "Signs of payment", value: 62 },
+      { name: "Urgency", value: 66 },
+      { name: "Build simplicity", value: 74 },
+    ],
+    people: [
+      { name: "Adel S.", role: "Has this", detail: "Owns a 400-member gym", commitment: "I have this problem" },
+      { name: "Farah B.", role: "Builder", detail: "Data + integrations", commitment: "I can build this" },
+      { name: "Joud K.", role: "Market Expert", detail: "Sold software to 60 gyms", commitment: "I know this market" },
+    ],
+    roomStatus: "Proving",
+    checklist: [
+      { id: "c1", label: "5 people confirmed the pain", done: true },
+      { id: "c2", label: "3 explained their workaround", done: true },
+      { id: "c3", label: "2 said they would pay", done: false },
+      { id: "c4", label: "First Brief drafted", done: false },
+      { id: "c5", label: "First interview scheduled", done: false },
+    ],
+    activity: [
+      { id: "a1", text: "Adel shared 12 months of cancellation data", time: "3h ago" },
+      { id: "a2", text: "Farah joined as builder", time: "Yesterday" },
+      { id: "a3", text: "Joud listed check-in systems to integrate", time: "Yesterday" },
+      { id: "a4", text: "Problem signal cluster merged", time: "3 days ago" },
+    ],
+    pipeline: {
+      signalCount: 29,
+      clusters: 4,
+      confidence: "Medium",
+      sources: [
+        { platform: "Reddit", count: 13 },
+        { platform: "Product reviews", count: 9 },
+        { platform: "Forum", count: 4 },
+        { platform: "Social", count: 3 },
+      ],
+      lastUpdated: "Yesterday",
+    },
+  },
+  {
+    id: "photo-selects",
+    industry: "Photography",
+    title: "Photographers chase clients for final selects.",
+    pain: "Galleries sit untouched for weeks while the photographer can't close the job.",
+    summary:
+      "Wedding and portrait photographers deliver proof galleries, then spend weeks nudging clients to pick their final images.",
+    signal: "Needs more proof",
+    score: 54,
+    scoreReasons: [
+      "Annoying but survivable",
+      "Gallery tools partly cover it",
+      "Unclear willingness to pay",
+      "Pain is seasonal",
+    ],
+    counts: { feel: 4, build: 2, know: 1 },
+    whoFeels: "Wedding and portrait photographers shooting 15–60 sessions a year.",
+    problemDetail:
+      "After a shoot, the photographer sends a proof gallery and asks the client to pick 30 selects for editing. Then silence. The album can't be designed, the job can't be invoiced, and the photographer sends increasingly awkward reminders. Some jobs stall for months over a choice the client could make in an evening.",
+    proof: [
+      {
+        source: "Forum complaint",
+        platform: "Reddit",
+        origin: "r/WeddingPhotography",
+        date: "1 week ago",
+        text: "Couple got their gallery in March. It's July. Still no album selects. I've reminded them four times.",
+        strength: "Medium",
+      },
+      {
+        source: "Forum complaint",
+        platform: "Forum",
+        origin: "Photo business forum",
+        date: "2 weeks ago",
+        text: "Do you charge a fee if clients take more than 60 days to choose? Feels harsh but I can't archive the job.",
+        strength: "Medium",
+      },
+      {
+        source: "Job post",
+        platform: "Upwork",
+        origin: "Upwork job post",
+        date: "3 weeks ago",
+        text: "Photographer looking for help 'following up with past clients about photo selections and album approvals'.",
+        strength: "Weak",
+      },
+    ],
+    whatTheyDoToday:
+      "Gallery links with a favorites feature, manual reminder emails, and sometimes a deadline clause in the contract that's never enforced.",
+    whyToolsFail:
+      "Gallery platforms have favorites but no deadlines, no escalating reminders, and no link between selects and getting paid. Reminders stay manual.",
+    firstVersion: {
+      firstFeature:
+        "A selects deadline layered on existing galleries: scheduled reminders, progress shown to the client, and a nudge when the date nears.",
+      forWho: "Wedding photographers who deliver albums and prints.",
+      avoid:
+        "Avoid building another gallery platform or photo storage. Ride on top of what they already use.",
+      findUsers:
+        "Wedding photography subreddits, photographer Facebook groups, and album lab partners.",
+      pricing: "$10–25/month.",
+    },
+    scoreBreakdown: [
+      { name: "Repetition", value: 58 },
+      { name: "Clarity of user", value: 62 },
+      { name: "Workaround exists", value: 56 },
+      { name: "Signs of payment", value: 42 },
+      { name: "Urgency", value: 48 },
+      { name: "Build simplicity", value: 58 },
+    ],
+    people: [
+      { name: "Yara H.", role: "Has this", detail: "Wedding photographer, 30 weddings/yr", commitment: "I have this problem" },
+      { name: "Marwan T.", role: "Builder", detail: "Frontend + email automation", commitment: "I can build this" },
+      { name: "Dina F.", role: "Market Expert", detail: "Runs a photo album lab", commitment: "I know this market" },
+    ],
+    roomStatus: "Paused",
+    checklist: [
+      { id: "c1", label: "5 people confirmed the pain", done: false },
+      { id: "c2", label: "3 explained their workaround", done: true },
+      { id: "c3", label: "2 said they would pay", done: false },
+      { id: "c4", label: "First Brief drafted", done: false },
+      { id: "c5", label: "First interview scheduled", done: false },
+    ],
+    activity: [
+      { id: "a1", text: "Room paused pending more payment signals", time: "2 days ago" },
+      { id: "a2", text: "Yara described her reminder routine", time: "4 days ago" },
+      { id: "a3", text: "Marwan joined as builder", time: "1 week ago" },
+      { id: "a4", text: "Problem signal cluster merged", time: "2 weeks ago" },
+    ],
+    pipeline: {
+      signalCount: 22,
+      clusters: 3,
+      confidence: "Weak",
+      sources: [
+        { platform: "Reddit", count: 10 },
+        { platform: "Upwork", count: 6 },
+        { platform: "Forum", count: 4 },
+        { platform: "Social", count: 2 },
+      ],
+      lastUpdated: "2 days ago",
+    },
+  },
 ];
 
 export const todaysProblems = problems.slice(0, 3);
@@ -736,10 +1049,10 @@ export interface PipelineCandidate {
 }
 
 export const pipelineCandidates: PipelineCandidate[] = [
-  { title: "Photographers chase clients for final selects", industry: "Photography", clusters: 2, signalCount: 4, status: "Clustering" },
-  { title: "Gyms lose members who silently churn", industry: "Fitness", clusters: 3, signalCount: 9, status: "Scoring" },
-  { title: "Accountants drown in client document requests", industry: "Accounting", clusters: 4, signalCount: 11, status: "Needs review" },
-  { title: "Event planners track vendors across spreadsheets", industry: "Events", clusters: 1, signalCount: 2, status: "Clustering" },
+  { title: "Wedding vendors lose deposits in chat threads", industry: "Weddings", clusters: 4, signalCount: 12, status: "Needs review" },
+  { title: "Dental labs track cases on whiteboards", industry: "Dental", clusters: 3, signalCount: 8, status: "Scoring" },
+  { title: "Daycares update parents through paper slips", industry: "Childcare", clusters: 2, signalCount: 5, status: "Clustering" },
+  { title: "Auto shops quote repairs from memory", industry: "Automotive", clusters: 1, signalCount: 3, status: "Clustering" },
 ];
 
 export const platformSummary = [

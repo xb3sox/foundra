@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Heart, Hammer, Compass, ShieldCheck } from "lucide-react";
-import { todaysProblems } from "../data/problems";
+import { problems, todaysProblems } from "../data/problems";
 import { ProblemCard } from "../components/cards/ProblemCard";
 import { Button } from "../components/ui/button";
 import { useRouter } from "../lib/router";
@@ -99,6 +99,29 @@ export function Home() {
               key={problem.id}
               problem={problem}
               index={i}
+              onCommit={(type) => setActive({ problem, type })}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* The rest of the board */}
+      <section className="mx-auto max-w-6xl px-5 pt-16 sm:px-8 sm:pt-20">
+        <div>
+          <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">
+            More problems on the board
+          </h2>
+          <p className="mt-1.5 text-[15px] text-ink-soft">
+            Published earlier from the same pipeline. Signals keep accruing
+            until someone builds.
+          </p>
+        </div>
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
+          {problems.slice(3).map((problem, i) => (
+            <ProblemCard
+              key={problem.id}
+              problem={problem}
+              index={i % 3}
               onCommit={(type) => setActive({ problem, type })}
             />
           ))}
