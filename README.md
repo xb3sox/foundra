@@ -18,17 +18,27 @@ Foundra is a problem-discovery marketplace for founders who want evidence, not A
 - Submit flow for new problems with evidence attachments
 - Rich seed dataset for a deep demo without a backend
 
+## Live
+
+https://foundra-vert.vercel.app
+
 ## Quick start
 
 ```bash
 npm install
-npm run dev
+npm run dev        # local dev server
+npm run typecheck  # strict TypeScript gate
+npm test           # vitest suite
+npm run build      # chunked production build (deployed to Vercel)
+npm run build:single  # single-file HTML artifact for sharing
 ```
 
 ## Stack
 
-React 19, TypeScript, Vite 7, Tailwind CSS 4, Framer Motion, custom lightweight router
+React 19, TypeScript, Vite 7, Tailwind CSS 4, shadcn/ui (Radix), Framer Motion, sonner, custom history-API router
 
 ## Status
 
-Frontend prototype with mock problem data. No live scraping or user accounts.
+Shipped frontend with seeded problem data (11 published problems). Submissions,
+commitments, and drafts persist locally (localStorage) — no live scraping or
+user accounts yet. Deployed on Vercel as a static SPA with clean URLs.
