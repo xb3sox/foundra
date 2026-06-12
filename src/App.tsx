@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { RouterProvider, matchRoute, useRouter } from "./lib/router";
+import { getProblem } from "./data/problems";
 import { StoreProvider } from "./lib/store";
 import { Toaster } from "./components/ui/sonner";
 import { Header } from "./components/layout/Header";
@@ -25,9 +27,28 @@ function NotFound() {
   );
 }
 
+const DEFAULT_TITLE = "Foundra — Real problems worth building.";
+
+function routeTitle(route: ReturnType<typeof matchRoute>): string {
+  if (route.name === "submit") return "Submit a problem — Foundra";
+  if (route.name === "problem" || route.name === "room") {
+    const problem = getProblem(route.params.id);
+    if (!problem) return "Not found — Foundra";
+    return route.name === "room"
+      ? `Room: ${problem.title} — Foundra`
+      : `${problem.title} — Foundra`;
+  }
+  if (route.name === "notfound") return "Not found — Foundra";
+  return DEFAULT_TITLE;
+}
+
 function Routes() {
   const { path } = useRouter();
   const route = matchRoute(path);
+
+  useEffect(() => {
+    document.title = routeTitle(route);
+  }, [path]);
 
   return (
     <AnimatePresence mode="wait">

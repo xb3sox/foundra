@@ -14,24 +14,39 @@ interface RouterContextValue {
 const RouterContext = createContext<RouterContextValue | null>(null);
 
 function currentPath() {
-  const hash = window.location.hash.replace(/^#/, "");
-  return hash || "/";
+  return window.location.pathname || "/";
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
 }
 
 export function RouterProvider({ children }: { children: ReactNode }) {
   const [path, setPath] = useState(currentPath);
 
   useEffect(() => {
-    const onHash = () => {
+    // Legacy shim: the app used hash routing (#/problems/x) before launch,
+    // so previously shared links still resolve to clean URLs.
+    const hash = window.location.hash;
+    if (hash.startsWith("#/")) {
+      const clean = hash.slice(1);
+      window.history.replaceState({}, "", clean);
+      setPath(clean);
+    }
+
+    const onPopState = () => {
       setPath(currentPath());
-      window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+      scrollToTop();
     };
-    window.addEventListener("hashchange", onHash);
-    return () => window.removeEventListener("hashchange", onHash);
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
   }, []);
 
   const navigate = (to: string) => {
-    window.location.hash = to;
+    if (to === window.location.pathname) return;
+    window.history.pushState({}, "", to);
+    setPath(to);
+    scrollToTop();
   };
 
   return (
