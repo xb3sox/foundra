@@ -26,20 +26,27 @@ export function RouterProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // Legacy shim: the app used hash routing (#/problems/x) before launch,
-    // so previously shared links still resolve to clean URLs.
-    const hash = window.location.hash;
-    if (hash.startsWith("#/")) {
+    // so previously shared links still resolve to clean URLs — both on
+    // first load and when a hash link is followed within the open app.
+    const applyHashShim = () => {
+      const hash = window.location.hash;
+      if (!hash.startsWith("#/")) return;
       const clean = hash.slice(1);
       window.history.replaceState({}, "", clean);
       setPath(clean);
-    }
+    };
+    applyHashShim();
 
     const onPopState = () => {
       setPath(currentPath());
       scrollToTop();
     };
     window.addEventListener("popstate", onPopState);
-    return () => window.removeEventListener("popstate", onPopState);
+    window.addEventListener("hashchange", applyHashShim);
+    return () => {
+      window.removeEventListener("popstate", onPopState);
+      window.removeEventListener("hashchange", applyHashShim);
+    };
   }, []);
 
   const navigate = (to: string) => {

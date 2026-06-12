@@ -1,0 +1,439 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - button "Foundra home" [ref=e6] [cursor=pointer]:
+          - generic [ref=e10]: Foundra
+        - navigation [ref=e11]:
+          - button "Problems" [ref=e12] [cursor=pointer]
+          - button "Submit" [ref=e13] [cursor=pointer]
+          - button "Explore problems" [ref=e14] [cursor=pointer]
+    - main [ref=e15]:
+      - generic [ref=e17]:
+        - generic [ref=e19]:
+          - generic [ref=e20]:
+            - img [ref=e21]
+            - text: Discovered from real signals. Never invented.
+          - heading "Find problems worth building." [level=1] [ref=e24]
+          - paragraph [ref=e25]: Real problems. Clear proof. People ready to help.
+          - paragraph [ref=e26]: Foundra reads real complaints, reviews, and job posts — then clusters and scores the pain. AI reveals patterns. It never makes them up.
+          - generic [ref=e27]:
+            - button "Explore problems" [ref=e28] [cursor=pointer]:
+              - text: Explore problems
+              - img
+            - button "Submit problem" [ref=e29] [cursor=pointer]
+        - generic [ref=e30]:
+          - generic [ref=e32]:
+            - heading "Today's 3 problems" [level=2] [ref=e33]
+            - paragraph [ref=e34]: The three highest-signal problems from this week's pipeline. Open one, review the proof, pick your action.
+          - generic [ref=e35]:
+            - article [ref=e36]:
+              - generic [ref=e37]:
+                - generic [ref=e38]: Interior Design
+                - generic [ref=e39]: Strong signal
+                - generic [ref=e41]:
+                  - img [ref=e42]
+                  - text: 47 signals
+              - button "Designers lose hours chasing client feedback." [ref=e49] [cursor=pointer]:
+                - heading "Designers lose hours chasing client feedback." [level=3] [ref=e50]
+              - paragraph [ref=e51]: Client notes are scattered across WhatsApp, PDFs, and screenshots.
+              - generic [ref=e52]:
+                - generic [ref=e53]: "12"
+                - text: have this problem
+                - generic [ref=e54]: ·
+                - generic [ref=e55]: "4"
+                - text: can build this
+              - generic [ref=e56]:
+                - button "View problem" [ref=e57] [cursor=pointer]:
+                  - text: View
+                  - img [ref=e58]
+                - generic [ref=e60]:
+                  - button "I have this problem" [ref=e61] [cursor=pointer]:
+                    - img [ref=e62]
+                    - generic [ref=e64]: Have it
+                  - button "I can build this" [ref=e65] [cursor=pointer]:
+                    - img [ref=e66]
+                    - generic [ref=e70]: Can build
+            - article [ref=e71]:
+              - generic [ref=e72]:
+                - generic [ref=e73]: Healthcare
+                - generic [ref=e74]: Strong signal
+                - generic [ref=e76]:
+                  - img [ref=e77]
+                  - text: 38 signals
+              - button "Small clinics bleed revenue from no-shows." [ref=e84] [cursor=pointer]:
+                - heading "Small clinics bleed revenue from no-shows." [level=3] [ref=e85]
+              - paragraph [ref=e86]: Reminders are sent by hand and patients still forget appointments.
+              - generic [ref=e87]:
+                - generic [ref=e88]: "9"
+                - text: have this problem
+                - generic [ref=e89]: ·
+                - generic [ref=e90]: "3"
+                - text: can build this
+              - generic [ref=e91]:
+                - button "View problem" [ref=e92] [cursor=pointer]:
+                  - text: View
+                  - img [ref=e93]
+                - generic [ref=e95]:
+                  - button "I have this problem" [ref=e96] [cursor=pointer]:
+                    - img [ref=e97]
+                    - generic [ref=e99]: Have it
+                  - button "I can build this" [ref=e100] [cursor=pointer]:
+                    - img [ref=e101]
+                    - generic [ref=e105]: Can build
+            - article [ref=e106]:
+              - generic [ref=e107]:
+                - generic [ref=e108]: Freelancing
+                - generic [ref=e109]: Promising
+                - generic [ref=e111]:
+                  - img [ref=e112]
+                  - text: 31 signals
+              - button "Freelancers waste days reconciling unpaid invoices." [ref=e119] [cursor=pointer]:
+                - heading "Freelancers waste days reconciling unpaid invoices." [level=3] [ref=e120]
+              - paragraph [ref=e121]: Late payments are tracked in a spreadsheet and chased by awkward emails.
+              - generic [ref=e122]:
+                - generic [ref=e123]: "8"
+                - text: have this problem
+                - generic [ref=e124]: ·
+                - generic [ref=e125]: "2"
+                - text: can build this
+              - generic [ref=e126]:
+                - button "View problem" [ref=e127] [cursor=pointer]:
+                  - text: View
+                  - img [ref=e128]
+                - generic [ref=e130]:
+                  - button "I have this problem" [ref=e131] [cursor=pointer]:
+                    - img [ref=e132]
+                    - generic [ref=e134]: Have it
+                  - button "I can build this" [ref=e135] [cursor=pointer]:
+                    - img [ref=e136]
+                    - generic [ref=e140]: Can build
+        - generic [ref=e141]:
+          - generic [ref=e142]:
+            - heading "More problems on the board" [level=2] [ref=e143]
+            - paragraph [ref=e144]: Published earlier from the same pipeline. Signals keep accruing until someone builds.
+          - generic [ref=e145]:
+            - article [ref=e146]:
+              - generic [ref=e147]:
+                - generic [ref=e148]: Logistics
+                - generic [ref=e149]: Promising
+                - generic [ref=e151]:
+                  - img [ref=e152]
+                  - text: 24 signals
+              - button "Small warehouses lose stock to paper counts." [ref=e159] [cursor=pointer]:
+                - heading "Small warehouses lose stock to paper counts." [level=3] [ref=e160]
+              - paragraph [ref=e161]: Inventory lives in clipboards and a manager's memory, not a system.
+              - generic [ref=e162]:
+                - generic [ref=e163]: "6"
+                - text: have this problem
+                - generic [ref=e164]: ·
+                - generic [ref=e165]: "3"
+                - text: can build this
+              - generic [ref=e166]:
+                - button "View problem" [ref=e167] [cursor=pointer]:
+                  - text: View
+                  - img [ref=e168]
+                - generic [ref=e170]:
+                  - button "I have this problem" [ref=e171] [cursor=pointer]:
+                    - img [ref=e172]
+                    - generic [ref=e174]: Have it
+                  - button "I can build this" [ref=e175] [cursor=pointer]:
+                    - img [ref=e176]
+                    - generic [ref=e180]: Can build
+            - article [ref=e181]:
+              - generic [ref=e182]:
+                - generic [ref=e183]: Education
+                - generic [ref=e184]: Promising
+                - generic [ref=e186]:
+                  - img [ref=e187]
+                  - text: 22 signals
+              - button "Private tutors juggle scheduling chaos every week." [ref=e194] [cursor=pointer]:
+                - heading "Private tutors juggle scheduling chaos every week." [level=3] [ref=e195]
+              - paragraph [ref=e196]: Lessons, reschedules, and payments are tracked across chat and memory.
+              - generic [ref=e197]:
+                - generic [ref=e198]: "7"
+                - text: have this problem
+                - generic [ref=e199]: ·
+                - generic [ref=e200]: "2"
+                - text: can build this
+              - generic [ref=e201]:
+                - button "View problem" [ref=e202] [cursor=pointer]:
+                  - text: View
+                  - img [ref=e203]
+                - generic [ref=e205]:
+                  - button "I have this problem" [ref=e206] [cursor=pointer]:
+                    - img [ref=e207]
+                    - generic [ref=e209]: Have it
+                  - button "I can build this" [ref=e210] [cursor=pointer]:
+                    - img [ref=e211]
+                    - generic [ref=e215]: Can build
+            - article [ref=e216]:
+              - generic [ref=e217]:
+                - generic [ref=e218]: Food & Beverage
+                - generic [ref=e219]: Needs more proof
+                - generic [ref=e221]:
+                  - img [ref=e222]
+                  - text: 13 signals
+              - button "Restaurants reorder supplies by guesswork and texts." [ref=e229] [cursor=pointer]:
+                - heading "Restaurants reorder supplies by guesswork and texts." [level=3] [ref=e230]
+              - paragraph [ref=e231]: Chefs message suppliers individually and forget what was ordered.
+              - generic [ref=e232]:
+                - generic [ref=e233]: "5"
+                - text: have this problem
+                - generic [ref=e234]: ·
+                - generic [ref=e235]: "2"
+                - text: can build this
+              - generic [ref=e236]:
+                - button "View problem" [ref=e237] [cursor=pointer]:
+                  - text: View
+                  - img [ref=e238]
+                - generic [ref=e240]:
+                  - button "I have this problem" [ref=e241] [cursor=pointer]:
+                    - img [ref=e242]
+                    - generic [ref=e244]: Have it
+                  - button "I can build this" [ref=e245] [cursor=pointer]:
+                    - img [ref=e246]
+                    - generic [ref=e250]: Can build
+            - article [ref=e251]:
+              - generic [ref=e252]:
+                - generic [ref=e253]: Real Estate
+                - generic [ref=e254]: Promising
+                - generic [ref=e256]:
+                  - img [ref=e257]
+                  - text: 27 signals
+              - button "Small landlords lose track of maintenance requests." [ref=e264] [cursor=pointer]:
+                - heading "Small landlords lose track of maintenance requests." [level=3] [ref=e265]
+              - paragraph [ref=e266]: Tenant issues come in by call and text and slip through the cracks.
+              - generic [ref=e267]:
+                - generic [ref=e268]: "7"
+                - text: have this problem
+                - generic [ref=e269]: ·
+                - generic [ref=e270]: "3"
+                - text: can build this
+              - generic [ref=e271]:
+                - button "View problem" [ref=e272] [cursor=pointer]:
+                  - text: View
+                  - img [ref=e273]
+                - generic [ref=e275]:
+                  - button "I have this problem" [ref=e276] [cursor=pointer]:
+                    - img [ref=e277]
+                    - generic [ref=e279]: Have it
+                  - button "I can build this" [ref=e280] [cursor=pointer]:
+                    - img [ref=e281]
+                    - generic [ref=e285]: Can build
+            - article [ref=e286]:
+              - generic [ref=e287]:
+                - generic [ref=e288]: Beauty & Wellness
+                - generic [ref=e289]: Needs more proof
+                - generic [ref=e291]:
+                  - img [ref=e292]
+                  - text: 14 signals
+              - button "Salons lose repeat clients who forget to rebook." [ref=e299] [cursor=pointer]:
+                - heading "Salons lose repeat clients who forget to rebook." [level=3] [ref=e300]
+              - paragraph [ref=e301]: Rebooking depends on the client remembering, not on any system.
+              - generic [ref=e302]:
+                - generic [ref=e303]: "6"
+                - text: have this problem
+                - generic [ref=e304]: ·
+                - generic [ref=e305]: "2"
+                - text: can build this
+              - generic [ref=e306]:
+                - button "View problem" [ref=e307] [cursor=pointer]:
+                  - text: View
+                  - img [ref=e308]
+                - generic [ref=e310]:
+                  - button "I have this problem" [ref=e311] [cursor=pointer]:
+                    - img [ref=e312]
+                    - generic [ref=e314]: Have it
+                  - button "I can build this" [ref=e315] [cursor=pointer]:
+                    - img [ref=e316]
+                    - generic [ref=e320]: Can build
+            - article [ref=e321]:
+              - generic [ref=e322]:
+                - generic [ref=e323]: Accounting
+                - generic [ref=e324]: Strong signal
+                - generic [ref=e326]:
+                  - img [ref=e327]
+                  - text: 41 signals
+              - button "Accountants drown in client document requests." [ref=e334] [cursor=pointer]:
+                - heading "Accountants drown in client document requests." [level=3] [ref=e335]
+              - paragraph [ref=e336]: Every tax season means chasing the same PDFs over email, one client at a time.
+              - generic [ref=e337]:
+                - generic [ref=e338]: "14"
+                - text: have this problem
+                - generic [ref=e339]: ·
+                - generic [ref=e340]: "5"
+                - text: can build this
+              - generic [ref=e341]:
+                - button "View problem" [ref=e342] [cursor=pointer]:
+                  - text: View
+                  - img [ref=e343]
+                - generic [ref=e345]:
+                  - button "I have this problem" [ref=e346] [cursor=pointer]:
+                    - img [ref=e347]
+                    - generic [ref=e349]: Have it
+                  - button "I can build this" [ref=e350] [cursor=pointer]:
+                    - img [ref=e351]
+                    - generic [ref=e355]: Can build
+            - article [ref=e356]:
+              - generic [ref=e357]:
+                - generic [ref=e358]: Fitness
+                - generic [ref=e359]: Promising
+                - generic [ref=e361]:
+                  - img [ref=e362]
+                  - text: 29 signals
+              - button "Gyms lose members who silently churn." [ref=e369] [cursor=pointer]:
+                - heading "Gyms lose members who silently churn." [level=3] [ref=e370]
+              - paragraph [ref=e371]: Members stop showing up weeks before they cancel, and nobody notices.
+              - generic [ref=e372]:
+                - generic [ref=e373]: "8"
+                - text: have this problem
+                - generic [ref=e374]: ·
+                - generic [ref=e375]: "3"
+                - text: can build this
+              - generic [ref=e376]:
+                - button "View problem" [ref=e377] [cursor=pointer]:
+                  - text: View
+                  - img [ref=e378]
+                - generic [ref=e380]:
+                  - button "I have this problem" [ref=e381] [cursor=pointer]:
+                    - img [ref=e382]
+                    - generic [ref=e384]: Have it
+                  - button "I can build this" [ref=e385] [cursor=pointer]:
+                    - img [ref=e386]
+                    - generic [ref=e390]: Can build
+            - article [ref=e391]:
+              - generic [ref=e392]:
+                - generic [ref=e393]: Photography
+                - generic [ref=e394]: Needs more proof
+                - generic [ref=e396]:
+                  - img [ref=e397]
+                  - text: 22 signals
+              - button "Photographers chase clients for final selects." [ref=e404] [cursor=pointer]:
+                - heading "Photographers chase clients for final selects." [level=3] [ref=e405]
+              - paragraph [ref=e406]: Galleries sit untouched for weeks while the photographer can't close the job.
+              - generic [ref=e407]:
+                - generic [ref=e408]: "4"
+                - text: have this problem
+                - generic [ref=e409]: ·
+                - generic [ref=e410]: "2"
+                - text: can build this
+              - generic [ref=e411]:
+                - button "View problem" [ref=e412] [cursor=pointer]:
+                  - text: View
+                  - img [ref=e413]
+                - generic [ref=e415]:
+                  - button "I have this problem" [ref=e416] [cursor=pointer]:
+                    - img [ref=e417]
+                    - generic [ref=e419]: Have it
+                  - button "I can build this" [ref=e420] [cursor=pointer]:
+                    - img [ref=e421]
+                    - generic [ref=e425]: Can build
+        - generic [ref=e427]:
+          - heading "Foundra connects three roles" [level=2] [ref=e428]
+          - paragraph [ref=e429]: Start with real problems. Build with the people who have them.
+          - generic [ref=e430]:
+            - generic [ref=e431]:
+              - img [ref=e433]
+              - heading "I have this problem" [level=3] [ref=e435]
+              - paragraph [ref=e436]: People who live with the problem.
+            - generic [ref=e437]:
+              - img [ref=e439]
+              - heading "I can build this" [level=3] [ref=e443]
+              - paragraph [ref=e444]: People who can build a solution.
+            - generic [ref=e445]:
+              - img [ref=e447]
+              - heading "I know this market" [level=3] [ref=e450]
+              - paragraph [ref=e451]: People who know the market.
+        - generic [ref=e452]:
+          - generic [ref=e453]:
+            - text: How Foundra works
+            - heading "Foundra doesn't invent ideas. It reveals real pain." [level=2] [ref=e454]
+            - paragraph [ref=e455]: We continuously read real complaints, extract the pattern, cluster it, and score it. Only problems with proof get published.
+          - generic [ref=e456]:
+            - generic [ref=e457]:
+              - generic [ref=e458]:
+                - img [ref=e460]
+                - generic [ref=e467]: "01"
+              - heading "Sources" [level=3] [ref=e468]
+              - paragraph [ref=e469]: Reddit, 1–3★ reviews, Upwork & Fiverr posts, forums, social.
+            - generic [ref=e470]:
+              - generic [ref=e471]:
+                - img [ref=e473]
+                - generic [ref=e478]: "02"
+              - heading "Extract" [level=3] [ref=e479]
+              - paragraph [ref=e480]: Who has it, what's painful, how often, today's workaround.
+            - generic [ref=e481]:
+              - generic [ref=e482]:
+                - img [ref=e484]
+                - generic [ref=e488]: "03"
+              - heading "Cluster" [level=3] [ref=e489]
+              - paragraph [ref=e490]: Group similar complaints. 5+ becomes a publish candidate.
+            - generic [ref=e491]:
+              - generic [ref=e492]:
+                - img [ref=e494]
+                - generic [ref=e497]: "04"
+              - heading "Score" [level=3] [ref=e498]
+              - paragraph [ref=e499]: Repetition, clarity, workaround, payment signs, urgency.
+            - generic [ref=e500]:
+              - generic [ref=e501]:
+                - img [ref=e503]
+                - generic [ref=e507]: "05"
+              - heading "Structure" [level=3] [ref=e508]
+              - paragraph [ref=e509]: Clean problem with proof, signal, and people counts.
+            - generic [ref=e510]:
+              - generic [ref=e511]:
+                - img [ref=e513]
+                - generic [ref=e516]: "06"
+              - heading "Publish" [level=3] [ref=e517]
+              - paragraph [ref=e518]: Only strong, proven problems reach today's three.
+        - generic [ref=e520]:
+          - generic [ref=e521]:
+            - generic [ref=e522]:
+              - heading "In the pipeline" [level=2] [ref=e523]
+              - paragraph [ref=e524]: Candidates we're still gathering proof on. They publish only when the cluster crosses the threshold. Quality over quantity.
+            - generic [ref=e525]: Not published yet
+          - generic [ref=e526]:
+            - generic [ref=e527]:
+              - generic [ref=e528]:
+                - paragraph [ref=e529]: Wedding vendors lose deposits in chat threads
+                - paragraph [ref=e530]: Weddings · 4 clusters · 12 signals · 5+ complaints → publish candidate
+              - generic [ref=e531]:
+                - img [ref=e532]
+                - text: Needs review
+            - generic [ref=e536]:
+              - generic [ref=e537]:
+                - paragraph [ref=e538]: Dental labs track cases on whiteboards
+                - paragraph [ref=e539]: Dental · 3 clusters · 8 signals · 5+ complaints → publish candidate
+              - generic [ref=e540]:
+                - img [ref=e541]
+                - text: Scoring
+            - generic [ref=e544]:
+              - generic [ref=e545]:
+                - paragraph [ref=e546]: Daycares update parents through paper slips
+                - paragraph [ref=e547]: Childcare · 2 clusters · 5 signals · 5+ complaints → publish candidate
+              - generic [ref=e548]:
+                - img [ref=e549]
+                - text: Clustering
+            - generic [ref=e553]:
+              - generic [ref=e554]:
+                - paragraph [ref=e555]: Auto shops quote repairs from memory
+                - paragraph [ref=e556]: Automotive · 1 clusters · 3 signals · 3 complaints → weak signal
+              - generic [ref=e557]:
+                - img [ref=e558]
+                - text: Clustering
+        - generic [ref=e563]:
+          - generic [ref=e565]: 3 problems.
+          - generic [ref=e568]: 3 actions.
+          - generic [ref=e571]: 1 room.
+          - generic [ref=e574]: 1 brief.
+    - contentinfo [ref=e575]:
+      - generic [ref=e576]:
+        - generic [ref=e577]:
+          - generic [ref=e581]: Foundra
+          - paragraph [ref=e582]: Real problems worth building.
+        - generic [ref=e583]:
+          - button "Submit" [ref=e584] [cursor=pointer]
+          - button "Privacy" [ref=e585] [cursor=pointer]
+          - button "Contact" [ref=e586] [cursor=pointer]
+  - region "Notifications alt+T"
