@@ -26,7 +26,7 @@ export function RouterProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // Legacy shim: the app used hash routing (#/problems/x) before launch,
-    // so previously shared links still resolve to clean URLs — both on
+    // so previously shared links still resolve to clean URLs - both on
     // first load and when a hash link is followed within the open app.
     const applyHashShim = () => {
       const hash = window.location.hash;

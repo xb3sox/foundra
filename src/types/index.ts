@@ -27,7 +27,8 @@ export type SourcePlatform =
   | "Upwork"
   | "Fiverr"
   | "Forum"
-  | "Social";
+  | "Social"
+  | "Report";
 
 export interface ProofItem {
   source: ProofSourceType;
@@ -36,6 +37,7 @@ export interface ProofItem {
   platform: SourcePlatform;
   origin: string; // e.g. "r/freelance", "G2 review", "Upwork job post"
   date: string; // e.g. "3 days ago"
+  url?: string; // live public source, when verifiable
 }
 
 export interface SourceBreakdown {

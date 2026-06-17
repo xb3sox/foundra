@@ -4,6 +4,7 @@ import { RouterProvider, matchRoute, useRouter } from "./lib/router";
 import { getProblem } from "./data/problems";
 import { StoreProvider } from "./lib/store";
 import { Toaster } from "./components/ui/sonner";
+import { TooltipProvider } from "./components/ui/tooltip";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { Header } from "./components/layout/Header";
 import { Footer } from "./components/layout/Footer";
@@ -27,17 +28,17 @@ function NotFound() {
   );
 }
 
-const DEFAULT_TITLE = "Foundra — Real problems worth building.";
+const DEFAULT_TITLE = "Foundra · Real problems worth building.";
 
 function routeTitle(route: ReturnType<typeof matchRoute>): string {
   if (route.name === "problem" || route.name === "room") {
     const problem = getProblem(route.params.id);
-    if (!problem) return "Not found — Foundra";
+    if (!problem) return "Not found · Foundra";
     return route.name === "room"
-      ? `Room: ${problem.title} — Foundra`
-      : `${problem.title} — Foundra`;
+      ? `Room: ${problem.title} · Foundra`
+      : `${problem.title} · Foundra`;
   }
-  if (route.name === "notfound") return "Not found — Foundra";
+  if (route.name === "notfound") return "Not found · Foundra";
   return DEFAULT_TITLE;
 }
 
@@ -46,7 +47,9 @@ function Routes() {
   const route = matchRoute(path);
 
   useEffect(() => {
+    // route is derived synchronously from path, so [path] is the correct dep.
     document.title = routeTitle(route);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [path]);
 
   return (
@@ -72,16 +75,18 @@ export default function App() {
     <MotionConfig reducedMotion="user">
       <RouterProvider>
         <StoreProvider>
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1">
-              <ErrorBoundary>
-                <Routes />
-              </ErrorBoundary>
-            </main>
-            <Footer />
-          </div>
-          <Toaster />
+          <TooltipProvider>
+            <div className="flex min-h-screen flex-col">
+              <Header />
+              <main className="flex-1">
+                <ErrorBoundary>
+                  <Routes />
+                </ErrorBoundary>
+              </main>
+              <Footer />
+            </div>
+            <Toaster />
+          </TooltipProvider>
         </StoreProvider>
       </RouterProvider>
     </MotionConfig>

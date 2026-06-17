@@ -70,7 +70,7 @@ export function RoomTriggers({
       {(counts.feel >= 5 && counts.build >= 2 && counts.know >= 1) && (
         <div className="mt-3 flex items-center gap-2 rounded-2xl border border-accent/40 bg-accent-soft px-4 py-3 text-[13px] font-medium text-accent-ink">
           <Sparkles className="h-4 w-4" />
-          All thresholds met — this Problem Room is active. Time to talk to
+          All thresholds met. This Problem Room is active: time to talk to
           people and start the first solution.
         </div>
       )}

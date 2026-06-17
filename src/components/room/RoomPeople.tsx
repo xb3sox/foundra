@@ -1,7 +1,9 @@
 import { Check, UserPlus, CalendarClock } from "lucide-react";
 import { toast } from "sonner";
 import { useStore } from "../../lib/store";
-import { getRoleIcon } from "../../lib/role-icons";
+import { initials } from "../../lib/initials";
+import { Card } from "../ui/card";
+import { Avatar, AvatarFallback } from "../ui/avatar";
 import type { Problem } from "../../types";
 
 export function RoomPeople({ problem }: { problem: Problem }) {
@@ -26,11 +28,10 @@ export function RoomPeople({ problem }: { problem: Problem }) {
   };
 
   return (
-    <div className="rounded-2xl border border-line bg-surface p-5 shadow-card">
+    <Card className="p-5">
       <h2 className="text-[15px] font-semibold tracking-tight">People</h2>
       <div className="mt-4 space-y-3">
         {problem.people.map((person) => {
-          const Icon = getRoleIcon(person.role);
           const isConnected = connected.includes(person.name);
           return (
             <div
@@ -38,9 +39,11 @@ export function RoomPeople({ problem }: { problem: Problem }) {
               className="rounded-xl border border-line p-3"
             >
               <div className="flex items-center gap-2">
-                <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent-soft text-accent-ink">
-                  <Icon className="h-3.5 w-3.5" />
-                </span>
+                <Avatar className="h-7 w-7">
+                  <AvatarFallback className="text-[10.5px]">
+                    {initials(person.name)}
+                  </AvatarFallback>
+                </Avatar>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-[13.5px] font-semibold">
                     {person.name}
@@ -58,6 +61,7 @@ export function RoomPeople({ problem }: { problem: Problem }) {
               </div>
               {isConnected ? (
                 <button
+                  type="button"
                   onClick={() => handleScheduleCall(person.name)}
                   className="mt-2.5 flex w-full cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 items-center justify-center gap-1.5 rounded-lg bg-ink py-2 text-[12.5px] font-medium text-white transition-colors hover:bg-black"
                 >
@@ -66,6 +70,7 @@ export function RoomPeople({ problem }: { problem: Problem }) {
                 </button>
               ) : (
                 <button
+                  type="button"
                   onClick={() => handleRequestIntro(person.name)}
                   className="mt-2.5 flex w-full cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 items-center justify-center gap-1.5 rounded-lg border border-line py-2 text-[12.5px] font-medium text-ink-soft transition-colors hover:border-ink/30 hover:text-ink"
                 >
@@ -77,6 +82,6 @@ export function RoomPeople({ problem }: { problem: Problem }) {
           );
         })}
       </div>
-    </div>
+    </Card>
   );
 }

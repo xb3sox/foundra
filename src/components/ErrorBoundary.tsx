@@ -27,8 +27,8 @@ export class ErrorBoundary extends Component<
             Something went wrong
           </h1>
           <p className="mt-3 text-ink-soft">
-            An unexpected error broke this page. Reloading usually fixes it —
-            your saved signals are safe.
+            An unexpected error broke this page. Reloading usually fixes it,
+            and your saved signals are safe.
           </p>
           <Button className="mt-6" onClick={() => window.location.reload()}>
             Reload page

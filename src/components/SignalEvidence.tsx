@@ -8,9 +8,11 @@ import {
   Briefcase,
   Hash,
   AtSign,
+  FileText,
 } from "lucide-react";
 import type { PipelineMeta, ProofStrength, SourcePlatform } from "../types";
 import { cn } from "../utils/cn";
+import { Card } from "./ui/card";
 
 const platformIcon: Record<SourcePlatform, typeof Star> = {
   Reddit: MessageCircle,
@@ -19,6 +21,7 @@ const platformIcon: Record<SourcePlatform, typeof Star> = {
   Fiverr: Briefcase,
   Forum: Hash,
   Social: AtSign,
+  Report: FileText,
 };
 
 const confidenceStyle: Record<ProofStrength, string> = {
@@ -28,8 +31,8 @@ const confidenceStyle: Record<ProofStrength, string> = {
 };
 
 /**
- * Trust block. Makes the AI pipeline legible: how many real signals,
- * which sources, how many clusters were merged, and extraction confidence.
+ * Trust block. Makes the sourcing legible: how many public signals,
+ * which sources, how many clusters were merged, and confidence.
  * "No problem without proof."
  */
 export function SignalEvidence({
@@ -43,13 +46,13 @@ export function SignalEvidence({
     return (
       <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-2.5 py-1 text-[11.5px] font-medium text-ink-soft">
         <Radar className="h-3.5 w-3.5 text-accent" />
-        Based on {pipeline.signalCount} real signals
+        Based on {pipeline.signalCount} public signals
       </span>
     );
   }
 
   return (
-    <div className="rounded-2xl border border-line bg-surface p-5 shadow-card sm:p-6">
+    <Card className="p-5 sm:p-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-center gap-2.5">
           <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-soft text-accent-ink">
@@ -57,10 +60,11 @@ export function SignalEvidence({
           </span>
           <div>
             <p className="text-[15px] font-semibold tracking-tight">
-              Based on {pipeline.signalCount} real signals
+              Based on {pipeline.signalCount} public signals
             </p>
             <p className="text-[12.5px] text-ink-muted">
-              Updated {pipeline.lastUpdated.toLowerCase()} · no invented data
+              Updated {pipeline.lastUpdated.toLowerCase()} · sourced from public
+              complaints
             </p>
           </div>
         </div>
@@ -105,6 +109,6 @@ export function SignalEvidence({
           );
         })}
       </div>
-    </div>
+    </Card>
   );
 }

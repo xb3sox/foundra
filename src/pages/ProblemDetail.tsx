@@ -11,25 +11,19 @@ import { PeopleSection } from "../components/problem/PeopleSection";
 import { CommitmentActions } from "../components/CommitmentActions";
 import { SignalEvidence } from "../components/SignalEvidence";
 import { CommitmentModal } from "../components/modals/CommitmentModal";
+import { Card } from "../components/ui/card";
 import type { CommitmentType } from "../types";
 
 function Section({
-  n,
   title,
   children,
 }: {
-  n: number;
   title: string;
   children: React.ReactNode;
 }) {
   return (
     <section className="border-t border-line/70 pt-10">
-      <div className="mb-4 flex items-center gap-3">
-        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-black/[0.05] text-[12px] font-semibold tabular-nums text-ink-soft">
-          {n}
-        </span>
-        <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
-      </div>
+      <h2 className="mb-4 text-xl font-semibold tracking-tight">{title}</h2>
       {children}
     </section>
   );
@@ -46,6 +40,7 @@ export function ProblemDetail({ id }: { id: string }) {
       <div className="mx-auto max-w-3xl px-5 py-24 text-center sm:px-8">
         <h1 className="text-2xl font-semibold">Problem not found</h1>
         <button
+          type="button"
           onClick={() => navigate("/")}
           className="mt-4 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 font-medium text-accent-ink"
         >
@@ -60,11 +55,12 @@ export function ProblemDetail({ id }: { id: string }) {
   return (
     <div className="mx-auto max-w-3xl px-5 py-10 sm:px-8">
       <button
+        type="button"
         onClick={() => navigate("/")}
         className="inline-flex cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 items-center gap-1.5 text-[13px] font-medium text-ink-muted transition-colors hover:text-ink"
       >
         <ArrowLeft className="h-4 w-4" />
-        Today's problems
+        Back to problems
       </button>
 
       {/* Top */}
@@ -108,71 +104,72 @@ export function ProblemDetail({ id }: { id: string }) {
       </motion.div>
 
       <div className="mt-12 space-y-10">
-        {/* 1 Problem */}
-        <Section n={1} title="The problem">
+        {/* The problem (workaround + why-tools-fail folded in) */}
+        <Section title="The problem">
           <p className="text-[15px] leading-relaxed text-ink-soft">
             {problem.problemDetail}
           </p>
-        </Section>
-
-        {/* 2 Who has it */}
-        <Section n={2} title="Who has it">
-          <div className="rounded-2xl border border-line bg-surface p-5 shadow-card">
-            <div className="flex items-center gap-2 text-[13px] font-medium text-ink-muted">
-              <Users className="h-4 w-4" />
-              Who has it
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            <div className="rounded-xl border border-line bg-bg/40 p-4">
+              <div className="text-[12px] font-medium uppercase tracking-wide text-ink-muted">
+                Today's workaround
+              </div>
+              <p className="mt-1.5 text-[13.5px] leading-relaxed text-ink-soft">
+                {problem.whatTheyDoToday}
+              </p>
             </div>
-            <p className="mt-2 text-[15px] font-medium text-ink">
-              {problem.whoFeels}
-            </p>
+            <div className="rounded-xl border border-line bg-bg/40 p-4">
+              <div className="text-[12px] font-medium uppercase tracking-wide text-ink-muted">
+                Why tools fail
+              </div>
+              <p className="mt-1.5 text-[13.5px] leading-relaxed text-ink-soft">
+                {problem.whyToolsFail}
+              </p>
+            </div>
           </div>
         </Section>
 
-        {/* 3 Proof */}
-        <Section n={3} title="Proof">
+        {/* Proof */}
+        <Section title="Proof">
           <ProofSection problem={problem} />
         </Section>
 
-        {/* 4 Today's workaround */}
-        <Section n={4} title="Today's workaround">
-          <p className="text-[15px] leading-relaxed text-ink-soft">
-            {problem.whatTheyDoToday}
-          </p>
+        {/* Who has it */}
+        <Section title="Who has it">
+          <Card className="flex items-center gap-3 p-5">
+            <Users className="h-5 w-5 shrink-0 text-ink-muted" />
+            <p className="text-[15px] font-medium text-ink">
+              {problem.whoFeels}
+            </p>
+          </Card>
         </Section>
 
-        {/* 5 Why tools fail */}
-        <Section n={5} title="Why tools fail">
-          <p className="text-[15px] leading-relaxed text-ink-soft">
-            {problem.whyToolsFail}
-          </p>
-        </Section>
-
-        {/* 6 First solution */}
-        <Section n={6} title="First solution">
+        {/* First solution */}
+        <Section title="First solution">
           <FirstVersionSection fv={fv} />
         </Section>
 
-        {/* 7 People interested */}
-        <Section n={7} title="People interested">
-          <PeopleSection problem={problem} counts={counts} />
-        </Section>
-
-        {/* 8 Next step */}
-        <section className="rounded-3xl border border-line bg-surface p-7 shadow-card">
-          <div className="flex items-center gap-3">
-            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent-soft text-[12px] font-semibold tabular-nums text-accent-ink">
-              8
-            </span>
-            <h2 className="text-xl font-semibold tracking-tight">Next step</h2>
-          </div>
-          <p className="mt-2 text-[15px] text-ink-soft">
-            Pick your action, then join the Problem Room.
-          </p>
+        {/* People + take your position */}
+        <section id="commit" className="border-t border-line/70 pt-10">
+          <h2 className="text-xl font-semibold tracking-tight">
+            People on this problem
+          </h2>
           <div className="mt-5">
-            <CommitmentActions
-              problem={problem}
-              onCommit={(t) => setActive(t)}
-            />
+            <PeopleSection problem={problem} counts={counts} />
+          </div>
+          <div className="mt-8 border-t border-line/70 pt-6">
+            <h3 className="text-[16px] font-semibold tracking-tight">
+              Take your position
+            </h3>
+            <p className="mt-1 text-[14px] text-ink-soft">
+              Tell the room how you fit, then step into it.
+            </p>
+            <div className="mt-4">
+              <CommitmentActions
+                problem={problem}
+                onCommit={(t) => setActive(t)}
+              />
+            </div>
           </div>
         </section>
       </div>

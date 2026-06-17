@@ -1,23 +1,29 @@
 import { SignalBadge } from "../ui/SignalBadge";
 import { ProofCard } from "../cards/ProofCard";
 import { ScoreBreakdown } from "../cards/ScoreBreakdown";
+import { Card } from "../ui/card";
 import type { Problem } from "../../types";
 
 export function ProofSection({ problem }: { problem: Problem }) {
   return (
     <>
       <p className="mb-4 text-[13px] text-ink-muted">
-        Real snippets pulled from public sources. Each shows where it came
-        from and how strong it is. No invented data.
+        Public complaints behind this problem. Each shows where it came from
+        and how strong it is. The linked ones are live, so you can open the
+        source and read it yourself.
       </p>
       <div className="grid gap-3 sm:grid-cols-2">
         {problem.proof.map((p, i) => (
-          <ProofCard key={i} proof={p} index={i} />
+          <ProofCard
+            key={`${p.platform}-${p.origin}-${p.date}`}
+            proof={p}
+            index={i}
+          />
         ))}
       </div>
 
       {/* Signal */}
-      <div className="mt-5 rounded-2xl border border-line bg-surface p-6 shadow-card">
+      <Card className="mt-5 p-6">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
           <div className="flex items-center gap-2">
             <span className="text-[12px] font-medium uppercase tracking-wide text-ink-muted">
@@ -37,7 +43,7 @@ export function ProofSection({ problem }: { problem: Problem }) {
         <div className="mt-6">
           <ScoreBreakdown dimensions={problem.scoreBreakdown} />
         </div>
-      </div>
+      </Card>
     </>
   );
 }

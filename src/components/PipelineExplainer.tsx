@@ -1,43 +1,21 @@
 import { motion } from "framer-motion";
-import {
-  Radar,
-  ScanText,
-  Layers,
-  Gauge,
-  LayoutTemplate,
-  Send,
-} from "lucide-react";
+import { Radar, Layers, Gauge } from "lucide-react";
 
 const steps = [
   {
     icon: Radar,
-    title: "Sources",
-    body: "Reddit, 1–3★ reviews, Upwork & Fiverr posts, forums, social.",
-  },
-  {
-    icon: ScanText,
-    title: "Extract",
-    body: "Who has it, what's painful, how often, today's workaround.",
+    title: "Listen",
+    body: "We track where people already complain: forums, 1–3★ reviews, Upwork & Fiverr posts.",
   },
   {
     icon: Layers,
     title: "Cluster",
-    body: "Group similar complaints. 5+ becomes a publish candidate.",
+    body: "Group the same pain from many places. Repeated complaints become a candidate.",
   },
   {
     icon: Gauge,
     title: "Score",
-    body: "Repetition, clarity, workaround, payment signs, urgency.",
-  },
-  {
-    icon: LayoutTemplate,
-    title: "Structure",
-    body: "Clean problem with proof, signal, and people counts.",
-  },
-  {
-    icon: Send,
-    title: "Publish",
-    body: "Only strong, proven problems reach today's three.",
+    body: "Rank by repetition, clarity, workarounds, signs people pay, and urgency.",
   },
 ];
 
@@ -49,15 +27,15 @@ export function PipelineExplainer() {
           How Foundra works
         </span>
         <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-[28px]">
-          Foundra doesn't invent ideas. It reveals real pain.
+          We start from real complaints, not guesses.
         </h2>
         <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">
-          We continuously read real complaints, extract the pattern, cluster
-          it, and score it. Only problems with proof get published.
+          We collect where people already vent, group the same pain together,
+          and score it. The strongest problems link straight to the source.
         </p>
       </div>
 
-      <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid gap-3 sm:grid-cols-3">
         {steps.map((s, i) => {
           const Icon = s.icon;
           return (

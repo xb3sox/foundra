@@ -2,11 +2,12 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Heart, Hammer, Compass, ShieldCheck } from "lucide-react";
 import { Button } from "../components/ui/button";
+import { Card } from "../components/ui/card";
 import { ProblemBoard } from "../components/board/ProblemBoard";
 import { scrollToSection } from "../lib/scroll";
 import { CommitmentModal } from "../components/modals/CommitmentModal";
 import { PipelineExplainer } from "../components/PipelineExplainer";
-import { PipelineQueue } from "../components/PipelineQueue";
+import { HeroReceipts } from "../components/HeroReceipts";
 import type { CommitmentType, Problem } from "../types";
 
 const roles = [
@@ -37,6 +38,7 @@ export function Home() {
     <div>
       {/* Hero */}
       <section className="mx-auto max-w-6xl px-5 pb-4 pt-16 sm:px-8 sm:pt-24">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
@@ -45,18 +47,19 @@ export function Home() {
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 text-[12.5px] font-medium text-ink-soft">
             <ShieldCheck className="h-3.5 w-3.5 text-accent" />
-            Discovered from real signals. Never invented.
+            Real complaints. Receipts attached.
           </div>
           <h1 className="mt-6 text-[40px] font-semibold leading-[1.05] tracking-tight text-ink text-balance sm:text-[58px]">
-            Find problems worth building.
+            Real problems. Real proof.
           </h1>
           <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-ink-soft sm:text-[19px]">
-            Real problems. Clear proof. People ready to help.
+            Pain people already complain about. With the receipts, the score,
+            and a room to validate it.
           </p>
           <p className="mt-3 max-w-xl text-[14px] text-ink-muted">
-            Foundra reads real complaints, reviews, and job posts — then
-            clusters and scores the pain. AI reveals patterns. It never makes
-            them up.
+            We collect where people already vent (forums, reviews, job posts),
+            cluster the same pain, and score it. The strongest problems link
+            straight to the source.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Button size="lg" onClick={() => scrollToSection("today")}>
@@ -72,6 +75,8 @@ export function Home() {
             </Button>
           </div>
         </motion.div>
+        <HeroReceipts />
+        </div>
       </section>
 
       {/* Problem board: today's three + the rest, with search and filters */}
@@ -79,7 +84,7 @@ export function Home() {
 
       {/* Three roles */}
       <section className="mx-auto mt-20 max-w-6xl px-5 sm:px-8">
-        <div className="rounded-3xl border border-line bg-surface p-8 shadow-card sm:p-12">
+        <Card className="rounded-3xl p-8 sm:p-12">
           <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">
             Foundra connects three roles
           </h2>
@@ -104,19 +109,16 @@ export function Home() {
               );
             })}
           </div>
-        </div>
+        </Card>
       </section>
 
       {/* How it works */}
       <PipelineExplainer />
 
-      {/* Pipeline queue */}
-      <PipelineQueue />
-
       {/* Final principle */}
       <section className="mx-auto mt-20 max-w-6xl px-5 sm:px-8">
         <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center text-[15px] font-medium text-ink-soft">
-          {["3 problems.", "3 actions.", "1 room.", "1 brief."].map((t, i) => (
+          {["3 problems.", "3 positions.", "1 room to validate."].map((t, i) => (
             <span key={t} className="inline-flex items-center gap-3">
               {i > 0 && <span className="h-1 w-1 rounded-full bg-accent" />}
               <span className="text-ink">{t}</span>

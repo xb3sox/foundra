@@ -1,4 +1,5 @@
 import { Lightbulb, Users, XOctagon, Megaphone, Tag } from "lucide-react";
+import { Card } from "../ui/card";
 import type { Problem } from "../../types";
 
 export function FirstVersionSection({ fv }: { fv: Problem["firstVersion"] }) {
@@ -25,16 +26,12 @@ function FvCard({
   wide?: boolean;
 }) {
   return (
-    <div
-      className={`rounded-2xl border border-line bg-surface p-5 shadow-card ${
-        wide ? "sm:col-span-2" : ""
-      }`}
-    >
+    <Card className={`p-5 ${wide ? "sm:col-span-2" : ""}`}>
       <div className="flex items-center gap-2 text-[12.5px] font-medium text-ink-muted">
         <Icon className="h-4 w-4" />
         {label}
       </div>
       <p className="mt-2 text-[14px] leading-relaxed text-ink">{value}</p>
-    </div>
+    </Card>
   );
 }
