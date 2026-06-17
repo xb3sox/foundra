@@ -49,6 +49,7 @@ function Routes() {
   useEffect(() => {
     // route is derived synchronously from path, so [path] is the correct dep.
     document.title = routeTitle(route);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [path]);
 
   return (
