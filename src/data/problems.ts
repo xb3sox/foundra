@@ -4,7 +4,7 @@ const baseChecklist = () => [
   { id: "c1", label: "5 people confirmed the pain", done: true },
   { id: "c2", label: "3 explained their workaround", done: true },
   { id: "c3", label: "2 said they would pay", done: false },
-  { id: "c4", label: "First Brief drafted", done: false },
+  { id: "c4", label: "First solution sketched", done: false },
   { id: "c5", label: "First interview scheduled", done: false },
 ];
 
@@ -12,7 +12,7 @@ const baseActivity = () => [
   { id: "a1", text: "Sara added a problem signal", time: "2h ago" },
   { id: "a2", text: "Omar joined as builder", time: "5h ago" },
   { id: "a3", text: "Lina added market context", time: "Yesterday" },
-  { id: "a4", text: "First Brief generated", time: "2 days ago" },
+  { id: "a4", text: "First solution drafted", time: "2 days ago" },
 ];
 
 export const problems: Problem[] = [
@@ -37,12 +37,22 @@ export const problems: Problem[] = [
       "Designers send mockups and moodboards to clients, then receive feedback in five different places. A WhatsApp voice note here, a marked-up PDF there, a screenshot with a red circle, an email thread, and a comment on a shared drive. Pulling it all together before the next revision takes hours and mistakes slip through.",
     proof: [
       {
+        source: "Expert note",
+        platform: "Report",
+        origin: "Programa · industry guide",
+        date: "2025",
+        text: "Remember that sofa your client loved — the one buried somewhere in email thread #47? Or was it a text? Maybe WhatsApp?",
+        strength: "Strong",
+        url: "https://programa.design/features/interior-design-approvals",
+      },
+      {
         source: "Forum complaint",
         platform: "Reddit",
         origin: "r/interiordesign",
         date: "3 days ago",
         text: "I spend my Friday afternoons just collecting feedback from six chats before I can start working again.",
         strength: "Strong",
+        url: "https://www.reddit.com/r/InteriorDesign/",
       },
       {
         source: "Forum complaint",
@@ -51,6 +61,7 @@ export const problems: Problem[] = [
         date: "1 week ago",
         text: "Clients refuse to use 'a tool'. They just send voice notes. I lose track of what was approved.",
         strength: "Strong",
+        url: "https://www.reddit.com/r/freelance/",
       },
       {
         source: "Review",
@@ -135,18 +146,20 @@ export const problems: Problem[] = [
       {
         source: "Forum complaint",
         platform: "Reddit",
-        origin: "r/dentistry",
+        origin: "r/Dentistry",
         date: "4 days ago",
         text: "Every empty chair is money gone. We tried texting manually but the receptionist can't keep up.",
         strength: "Strong",
+        url: "https://www.reddit.com/r/Dentistry/",
       },
       {
         source: "Review",
         platform: "Product reviews",
-        origin: "Capterra · 1★ booking app",
+        origin: "Capterra · appointment reminders",
         date: "1 week ago",
         text: "Charges per SMS and the reminders look spammy to patients. Cancelled after a month.",
         strength: "Medium",
+        url: "https://www.capterra.com/p/154255/Appointment-Reminder/reviews/",
       },
       {
         source: "Forum complaint",
@@ -215,11 +228,20 @@ export const problems: Problem[] = [
       "Clear workaround",
       "Crowded but fragmented market",
     ],
-    counts: { feel: 8, build: 2, know: 1 },
+    counts: { feel: 8, build: 1, know: 1 },
     whoFeels: "Solo freelancers and 2–3 person creative shops.",
     problemDetail:
       "Sending the invoice is easy. Getting paid is the hard part. Freelancers track due dates in a spreadsheet, forget to chase, then send an anxious 'just following up' email weeks late. Cash flow suffers and the relationship gets tense.",
     proof: [
+      {
+        source: "Expert note",
+        platform: "Report",
+        origin: "QuickBooks · 2025 Late Payments Report",
+        date: "2025",
+        text: "56% of small businesses are owed money from unpaid invoices — averaging $17.5K each.",
+        strength: "Strong",
+        url: "https://quickbooks.intuit.com/r/small-business-data/small-business-late-payments-report-2025/",
+      },
       {
         source: "Forum complaint",
         platform: "Reddit",
@@ -227,6 +249,7 @@ export const problems: Problem[] = [
         date: "2 days ago",
         text: "I hate chasing payments more than the actual work. I always forget who owes me.",
         strength: "Strong",
+        url: "https://www.reddit.com/r/freelance/",
       },
       {
         source: "Review",
@@ -243,6 +266,7 @@ export const problems: Problem[] = [
         date: "5 days ago",
         text: "Lost a month of cash flow because three clients quietly went past due and I didn't notice.",
         strength: "Strong",
+        url: "https://www.reddit.com/r/smallbusiness/",
       },
     ],
     whatTheyDoToday:
@@ -803,14 +827,14 @@ export const problems: Problem[] = [
       { id: "c1", label: "5 people confirmed the pain", done: true },
       { id: "c2", label: "3 explained their workaround", done: true },
       { id: "c3", label: "2 said they would pay", done: true },
-      { id: "c4", label: "First Brief drafted", done: true },
+      { id: "c4", label: "First solution sketched", done: true },
       { id: "c5", label: "First interview scheduled", done: false },
     ],
     activity: [
       { id: "a1", text: "Mona shared her 40-tab tracking spreadsheet", time: "1h ago" },
       { id: "a2", text: "Idris joined as builder", time: "4h ago" },
       { id: "a3", text: "Salma added firm-size pricing context", time: "Yesterday" },
-      { id: "a4", text: "First Brief generated", time: "2 days ago" },
+      { id: "a4", text: "First solution drafted", time: "2 days ago" },
     ],
     pipeline: {
       signalCount: 41,
@@ -910,7 +934,7 @@ export const problems: Problem[] = [
       { id: "c1", label: "5 people confirmed the pain", done: true },
       { id: "c2", label: "3 explained their workaround", done: true },
       { id: "c3", label: "2 said they would pay", done: false },
-      { id: "c4", label: "First Brief drafted", done: false },
+      { id: "c4", label: "First solution sketched", done: false },
       { id: "c5", label: "First interview scheduled", done: false },
     ],
     activity: [
@@ -1009,7 +1033,7 @@ export const problems: Problem[] = [
       { id: "c1", label: "5 people confirmed the pain", done: false },
       { id: "c2", label: "3 explained their workaround", done: true },
       { id: "c3", label: "2 said they would pay", done: false },
-      { id: "c4", label: "First Brief drafted", done: false },
+      { id: "c4", label: "First solution sketched", done: false },
       { id: "c5", label: "First interview scheduled", done: false },
     ],
     activity: [
@@ -1038,20 +1062,4 @@ export const todaysProblems = problems.slice(0, 3);
 export function getProblem(id: string): Problem | undefined {
   return problems.find((p) => p.id === id);
 }
-
-// Simulated "next in pipeline" — candidates not yet published (below threshold)
-export interface PipelineCandidate {
-  title: string;
-  industry: string;
-  clusters: number;
-  signalCount: number;
-  status: "Clustering" | "Scoring" | "Needs review";
-}
-
-export const pipelineCandidates: PipelineCandidate[] = [
-  { title: "Wedding vendors lose deposits in chat threads", industry: "Weddings", clusters: 4, signalCount: 12, status: "Needs review" },
-  { title: "Dental labs track cases on whiteboards", industry: "Dental", clusters: 3, signalCount: 8, status: "Scoring" },
-  { title: "Daycares update parents through paper slips", industry: "Childcare", clusters: 2, signalCount: 5, status: "Clustering" },
-  { title: "Auto shops quote repairs from memory", industry: "Automotive", clusters: 1, signalCount: 3, status: "Clustering" },
-];
 

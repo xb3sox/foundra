@@ -6,9 +6,21 @@ import {
   Briefcase,
   Workflow,
   FileText,
+  ArrowUpRight,
 } from "lucide-react";
 import type { ProofItem, ProofSourceType, ProofStrength } from "../../types";
 import { cn } from "../../utils/cn";
+
+/** Only allow https links to render as a source — guards against
+    javascript:/data: schemes if the data ever becomes dynamic. */
+function toSafeHref(url: string | undefined): string | undefined {
+  if (!url) return undefined;
+  try {
+    return new URL(url).protocol === "https:" ? url : undefined;
+  } catch {
+    return undefined;
+  }
+}
 
 const icons: Record<ProofSourceType, typeof Star> = {
   Interview: MessageSquare,
@@ -27,6 +39,7 @@ const strengthStyle: Record<ProofStrength, string> = {
 
 export function ProofCard({ proof, index }: { proof: ProofItem; index: number }) {
   const Icon = icons[proof.source];
+  const href = toSafeHref(proof.url);
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -58,6 +71,17 @@ export function ProofCard({ proof, index }: { proof: ProofItem; index: number })
         <span>{proof.origin}</span>
         <span className="text-line">·</span>
         <span>{proof.date}</span>
+        {href && (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-auto inline-flex items-center gap-0.5 rounded font-medium text-accent-ink transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+          >
+            View source
+            <ArrowUpRight className="h-3 w-3" />
+          </a>
+        )}
       </div>
     </motion.div>
   );

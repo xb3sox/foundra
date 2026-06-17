@@ -7,8 +7,9 @@ export function ProofSection({ problem }: { problem: Problem }) {
   return (
     <>
       <p className="mb-4 text-[13px] text-ink-muted">
-        Real snippets pulled from public sources. Each shows where it came
-        from and how strong it is. No invented data.
+        Public complaints behind this problem. Each shows where it came from
+        and how strong it is — and the linked ones are live, so you can open
+        the source and read it yourself.
       </p>
       <div className="grid gap-3 sm:grid-cols-2">
         {problem.proof.map((p, i) => (

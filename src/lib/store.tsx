@@ -10,7 +10,6 @@ import type { CommitmentType } from "../types";
 interface RoomState {
   checklist: Record<string, boolean>;
   activity: { id: string; text: string; time: string }[];
-  briefCreated: boolean;
   connected: string[]; // names of people the user marked connected
 }
 
@@ -42,7 +41,6 @@ interface StoreContextValue {
     base: Record<string, boolean>
   ) => void;
   addActivity: (problemId: string, text: string) => void;
-  setBriefCreated: (problemId: string) => void;
   markConnected: (problemId: string, name: string) => void;
   getRoom: (problemId: string) => RoomState | undefined;
 }
@@ -105,7 +103,6 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       const room = s.rooms[problemId] ?? {
         checklist: { ...base },
         activity: [],
-        briefCreated: false,
         connected: [],
       };
       const current = room.checklist[itemId] ?? base[itemId] ?? false;
@@ -127,7 +124,6 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       const room = s.rooms[problemId] ?? {
         checklist: {},
         activity: [],
-        briefCreated: false,
         connected: [],
       };
       return {
@@ -146,27 +142,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  const setBriefCreated = (problemId: string) => {
-    setState((s) => {
-      const room = s.rooms[problemId] ?? {
-        checklist: {},
-        activity: [],
-        briefCreated: false,
-        connected: [],
-      };
-      return {
-        ...s,
-        rooms: { ...s.rooms, [problemId]: { ...room, briefCreated: true } },
-      };
-    });
-  };
-
   const markConnected = (problemId: string, name: string) => {
     setState((s) => {
       const room = s.rooms[problemId] ?? {
         checklist: {},
         activity: [],
-        briefCreated: false,
         connected: [],
       };
       if (room.connected.includes(name)) return s;
@@ -190,7 +170,6 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         setEmail,
         toggleChecklist,
         addActivity,
-        setBriefCreated,
         markConnected,
         getRoom,
       }}
