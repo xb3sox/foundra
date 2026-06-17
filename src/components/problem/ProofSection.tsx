@@ -14,7 +14,11 @@ export function ProofSection({ problem }: { problem: Problem }) {
       </p>
       <div className="grid gap-3 sm:grid-cols-2">
         {problem.proof.map((p, i) => (
-          <ProofCard key={i} proof={p} index={i} />
+          <ProofCard
+            key={`${p.platform}-${p.origin}-${p.date}`}
+            proof={p}
+            index={i}
+          />
         ))}
       </div>
 

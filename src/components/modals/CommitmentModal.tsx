@@ -25,7 +25,7 @@ export function CommitmentModal({
   open: boolean;
   onClose: () => void;
 }) {
-  const { addCommitment, setEmail, addActivity } = useStore();
+  const { addCommitment, setEmail, addActivity, state } = useStore();
   const { navigate } = useRouter();
   const [email, setEmailValue] = useState("");
 
@@ -40,15 +40,23 @@ export function CommitmentModal({
 
   // One tap = the position is taken. Optional email gets saved with it.
   const register = () => {
+    // Only log activity the first time this position is taken, so re-opening
+    // an already-added position doesn't duplicate the room feed.
+    const isNew = !(state.commitments[problem.id] ?? []).includes(type);
     addCommitment(problem.id, type);
-    const verb =
-      type === "I have this problem"
-        ? "added a problem signal"
-        : type === "I can build this"
-        ? "joined as a builder"
-        : "added market context";
-    addActivity(problem.id, `You ${verb}`);
-    if (email.trim()) setEmail(email.trim());
+    if (isNew) {
+      const verb =
+        type === "I have this problem"
+          ? "added a problem signal"
+          : type === "I can build this"
+          ? "joined as a builder"
+          : "added market context";
+      addActivity(problem.id, `You ${verb}`);
+    }
+    const trimmed = email.trim();
+    if (trimmed && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+      setEmail(trimmed);
+    }
   };
 
   const enterRoom = () => {

@@ -18,10 +18,15 @@ export function CommitmentActions({
 
   const item = (type: CommitmentType, label: string, Icon: typeof Heart) => {
     const isTaken = taken.includes(type);
+    // Already-taken positions jump straight to the room instead of re-opening
+    // the commit modal (which would re-log the same activity).
     return (
       <Button
+        type="button"
         variant={isTaken ? "subtle" : "secondary"}
-        onClick={() => onCommit(type)}
+        onClick={() =>
+          isTaken ? navigate(`/rooms/${problem.id}`) : onCommit(type)
+        }
       >
         <Icon className="h-4 w-4" />
         {isTaken ? "Added" : label}

@@ -33,6 +33,7 @@ export function Room({ id }: { id: string }) {
       <div className="mx-auto max-w-3xl px-5 py-24 text-center">
         <h1 className="text-2xl font-semibold">Room not found</h1>
         <button
+          type="button"
           onClick={() => navigate("/")}
           className="mt-4 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 font-medium text-accent-ink"
         >
@@ -63,6 +64,7 @@ export function Room({ id }: { id: string }) {
   return (
     <div className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
       <button
+        type="button"
         onClick={() => navigate(`/problems/${problem.id}`)}
         className="inline-flex cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 items-center gap-1.5 text-[13px] font-medium text-ink-muted transition-colors hover:text-ink"
       >

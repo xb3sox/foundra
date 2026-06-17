@@ -47,6 +47,7 @@ function Routes() {
   const route = matchRoute(path);
 
   useEffect(() => {
+    // route is derived synchronously from path, so [path] is the correct dep.
     document.title = routeTitle(route);
   }, [path]);
 
@@ -71,9 +72,9 @@ function Routes() {
 export default function App() {
   return (
     <MotionConfig reducedMotion="user">
-      <TooltipProvider>
-        <RouterProvider>
-          <StoreProvider>
+      <RouterProvider>
+        <StoreProvider>
+          <TooltipProvider>
             <div className="flex min-h-screen flex-col">
               <Header />
               <main className="flex-1">
@@ -84,9 +85,9 @@ export default function App() {
               <Footer />
             </div>
             <Toaster />
-          </StoreProvider>
-        </RouterProvider>
-      </TooltipProvider>
+          </TooltipProvider>
+        </StoreProvider>
+      </RouterProvider>
     </MotionConfig>
   );
 }

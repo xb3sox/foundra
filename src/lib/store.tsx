@@ -50,7 +50,14 @@ const StoreContext = createContext<StoreContextValue | null>(null);
 function load(): FoundraState {
   try {
     const raw = localStorage.getItem(KEY);
-    if (raw) return { ...defaultState, ...JSON.parse(raw) };
+    if (raw) {
+      const parsed: unknown = JSON.parse(raw);
+      // Guard against a tampered or stale-shape payload: only merge a plain
+      // object so the typed defaults always back-fill missing/wrong keys.
+      if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+        return { ...defaultState, ...(parsed as Partial<FoundraState>) };
+      }
+    }
   } catch {
     /* ignore */
   }
