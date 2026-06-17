@@ -27,14 +27,12 @@ export function Header() {
           <Logo />
         </button>
         <nav className="flex items-center gap-2 sm:gap-3">
-          <button
+          <Button
+            size="sm"
+            variant="secondary"
             onClick={() => navigate("/")}
-            className="hidden cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 rounded-lg px-3 py-2 text-sm font-medium text-ink-soft transition-colors hover:text-ink sm:inline-block"
           >
-            Problems
-          </button>
-          <Button size="sm" onClick={() => navigate("/")}>
-            Explore problems
+            Browse problems
           </Button>
         </nav>
       </div>

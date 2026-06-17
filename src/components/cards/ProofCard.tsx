@@ -12,7 +12,7 @@ import type { ProofItem, ProofSourceType, ProofStrength } from "../../types";
 import { cn } from "../../utils/cn";
 import { Badge } from "../ui/badge";
 
-/** Only allow https links to render as a source — guards against
+/** Only allow https links to render as a source - guards against
     javascript:/data: schemes if the data ever becomes dynamic. */
 function toSafeHref(url: string | undefined): string | undefined {
   if (!url) return undefined;

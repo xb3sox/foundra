@@ -33,7 +33,7 @@ export function ProblemCard({
       whileHover={{ y: -4 }}
       className="group flex h-full flex-col rounded-2xl border border-line bg-surface p-5 shadow-card transition-shadow hover:shadow-lift sm:p-6"
     >
-      {/* META ROW — ONE LINE: industry + signal badge + signal count.
+      {/* META ROW - ONE LINE: industry + signal badge + signal count.
           The #1 cause of crowding was too many top-of-card chrome lines. */}
       <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-[12px]">
         <span className="font-medium uppercase tracking-wide text-ink-muted">
@@ -46,7 +46,7 @@ export function ProblemCard({
         </span>
       </div>
 
-      {/* TITLE + PAIN — kept spacious; the primary read. */}
+      {/* TITLE + PAIN - kept spacious; the primary read. */}
       <button
         onClick={() => navigate(`/problems/${problem.id}`)}
         className="mt-4 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 text-left"
@@ -59,7 +59,7 @@ export function ProblemCard({
         {problem.pain}
       </p>
 
-      {/* COUNTS LINE — ONE ROW, tight.
+      {/* COUNTS LINE - ONE ROW, tight.
           Per spec, cards show only: "12 have this problem · 4 can build this".
           "know this market" lives on the detail page. */}
       <div className="mt-4 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[12.5px] font-medium text-ink-muted tabular-nums">
@@ -68,12 +68,12 @@ export function ProblemCard({
         <span className="text-ink-soft">{counts.build}</span> can build this
       </div>
 
-      {/* ACTION BAR — the Linear/Vercel pattern:
+      {/* ACTION BAR - the Linear/Vercel pattern:
           - Primary action on the left (View)
           - Two short-label commitment chips (icon + "Have it" / "Can build")
           - Full commitment sentences revealed on hover/focus via aria-label + title
         Icon + short label keeps it compact on every breakpoint while
-        remaining discoverable — icon-only would be silent on mobile. */}
+        remaining discoverable - icon-only would be silent on mobile. */}
       {/* `mt-auto` pins the action bar to the bottom of every card,
           so all three cards in a row line up perfectly regardless of how
           much text is above them. */}
@@ -134,7 +134,7 @@ function CommitChip({
       }
     >
       <Icon className="h-3.5 w-3.5 shrink-0" />
-      {/* Short visible label on every breakpoint — never silent.
+      {/* Short visible label on every breakpoint - never silent.
           `title` reveals the full sentence on hover or focus. */}
       <span className="whitespace-nowrap">{shortLabel}</span>
     </button>

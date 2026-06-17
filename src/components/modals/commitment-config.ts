@@ -7,7 +7,7 @@ export interface CommitmentConfig {
   icon: typeof Heart;
 }
 
-/** Short, human label for a position — shared by the commit modal and the
+/** Short, human label for a position - shared by the commit modal and the
     room header so "you're here as …" stays consistent. */
 export function positionLabel(type: CommitmentType): string {
   if (type === "I have this problem") return "someone who has this problem";

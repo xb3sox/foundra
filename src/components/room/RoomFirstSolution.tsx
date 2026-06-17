@@ -2,7 +2,7 @@ import { Lightbulb, Users, Sparkles, XOctagon, Megaphone, Tag } from "lucide-rea
 import { Card } from "../ui/card";
 import type { Problem } from "../../types";
 
-/** Read-only "first solution to test" — the same firstVersion data the
+/** Read-only "first solution to test" - the same firstVersion data the
     problem page shows, surfaced in the room as what the team is building.
     No generation step: the plan is already here. */
 export function RoomFirstSolution({ problem }: { problem: Problem }) {

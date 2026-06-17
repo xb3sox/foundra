@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/80",
-        // Foundra variants — match the original hand-rolled Button skins.
+        // Foundra variants - match the original hand-rolled Button skins.
         primary: "border-ink bg-ink text-white hover:bg-black",
         subtle:
           "border-transparent bg-accent-soft text-accent-ink hover:bg-[#daeee4]",
@@ -29,7 +29,7 @@ const buttonVariants = cva(
           "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
         xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
         sm: "h-9 gap-1.5 rounded-[10px] px-3.5 text-[13px] [&_svg:not([class*='size-'])]:size-3.5",
-        // Foundra sizes — match the original hand-rolled Button dimensions.
+        // Foundra sizes - match the original hand-rolled Button dimensions.
         md: "h-11 gap-2 rounded-xl px-5 text-sm",
         lg: "h-12 gap-2 rounded-xl px-6 text-[15px]",
         icon: "size-8",
