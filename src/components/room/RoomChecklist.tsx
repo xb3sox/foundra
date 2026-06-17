@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { useStore } from "../../lib/store";
+import { Card } from "../ui/card";
 import type { Problem } from "../../types";
 
 export function RoomChecklist({ problem }: { problem: Problem }) {
@@ -17,7 +18,7 @@ export function RoomChecklist({ problem }: { problem: Problem }) {
   const doneCount = checklist.filter((c) => c.done).length;
 
   return (
-    <div className="rounded-2xl border border-line bg-surface p-6 shadow-card">
+    <Card className="p-6">
       <div className="flex items-center justify-between">
         <h2 className="text-[17px] font-semibold tracking-tight">
           To prove
@@ -77,6 +78,6 @@ export function RoomChecklist({ problem }: { problem: Problem }) {
           </li>
         ))}
       </ul>
-    </div>
+    </Card>
   );
 }

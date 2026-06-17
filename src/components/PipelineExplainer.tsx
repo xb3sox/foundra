@@ -27,7 +27,7 @@ export function PipelineExplainer() {
           How Foundra works
         </span>
         <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-[28px]">
-          We start from real complaints — not guesses.
+          We start from real complaints, not guesses.
         </h2>
         <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">
           We collect where people already vent, group the same pain together,

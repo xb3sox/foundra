@@ -11,25 +11,19 @@ import { PeopleSection } from "../components/problem/PeopleSection";
 import { CommitmentActions } from "../components/CommitmentActions";
 import { SignalEvidence } from "../components/SignalEvidence";
 import { CommitmentModal } from "../components/modals/CommitmentModal";
+import { Card } from "../components/ui/card";
 import type { CommitmentType } from "../types";
 
 function Section({
-  n,
   title,
   children,
 }: {
-  n: number;
   title: string;
   children: React.ReactNode;
 }) {
   return (
     <section className="border-t border-line/70 pt-10">
-      <div className="mb-4 flex items-center gap-3">
-        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-black/[0.05] text-[12px] font-semibold tabular-nums text-ink-soft">
-          {n}
-        </span>
-        <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
-      </div>
+      <h2 className="mb-4 text-xl font-semibold tracking-tight">{title}</h2>
       {children}
     </section>
   );
@@ -108,8 +102,8 @@ export function ProblemDetail({ id }: { id: string }) {
       </motion.div>
 
       <div className="mt-12 space-y-10">
-        {/* 1 The problem — workaround + why-tools-fail folded in */}
-        <Section n={1} title="The problem">
+        {/* The problem (workaround + why-tools-fail folded in) */}
+        <Section title="The problem">
           <p className="text-[15px] leading-relaxed text-ink-soft">
             {problem.problemDetail}
           </p>
@@ -133,51 +127,40 @@ export function ProblemDetail({ id }: { id: string }) {
           </div>
         </Section>
 
-        {/* 2 Proof */}
-        <Section n={2} title="Proof">
+        {/* Proof */}
+        <Section title="Proof">
           <ProofSection problem={problem} />
         </Section>
 
-        {/* 3 Who has it */}
-        <Section n={3} title="Who has it">
-          <div className="rounded-2xl border border-line bg-surface p-5 shadow-card">
-            <div className="flex items-center gap-2 text-[13px] font-medium text-ink-muted">
-              <Users className="h-4 w-4" />
-              Who has it
-            </div>
-            <p className="mt-2 text-[15px] font-medium text-ink">
+        {/* Who has it */}
+        <Section title="Who has it">
+          <Card className="flex items-center gap-3 p-5">
+            <Users className="h-5 w-5 shrink-0 text-ink-muted" />
+            <p className="text-[15px] font-medium text-ink">
               {problem.whoFeels}
             </p>
-          </div>
+          </Card>
         </Section>
 
-        {/* 4 First solution */}
-        <Section n={4} title="First solution">
+        {/* First solution */}
+        <Section title="First solution">
           <FirstVersionSection fv={fv} />
         </Section>
 
-        {/* 5 People + take your position */}
-        <section
-          id="commit"
-          className="rounded-3xl border border-line bg-surface p-7 shadow-card"
-        >
-          <div className="flex items-center gap-3">
-            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent-soft text-[12px] font-semibold tabular-nums text-accent-ink">
-              5
-            </span>
-            <h2 className="text-xl font-semibold tracking-tight">
-              People on this problem
-            </h2>
-          </div>
+        {/* People + take your position */}
+        <section id="commit" className="border-t border-line/70 pt-10">
+          <h2 className="text-xl font-semibold tracking-tight">
+            People on this problem
+          </h2>
           <div className="mt-5">
             <PeopleSection problem={problem} counts={counts} />
           </div>
-          <div className="mt-6 border-t border-line/70 pt-6">
+          <div className="mt-8 border-t border-line/70 pt-6">
             <h3 className="text-[16px] font-semibold tracking-tight">
               Take your position
             </h3>
             <p className="mt-1 text-[14px] text-ink-soft">
-              Tell the room how you fit — then step into it.
+              Tell the room how you fit, then step into it.
             </p>
             <div className="mt-4">
               <CommitmentActions

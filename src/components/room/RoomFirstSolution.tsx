@@ -1,4 +1,5 @@
 import { Lightbulb, Users, Sparkles, XOctagon, Megaphone, Tag } from "lucide-react";
+import { Card } from "../ui/card";
 import type { Problem } from "../../types";
 
 /** Read-only "first solution to test" — the same firstVersion data the
@@ -7,7 +8,7 @@ import type { Problem } from "../../types";
 export function RoomFirstSolution({ problem }: { problem: Problem }) {
   const fv = problem.firstVersion;
   return (
-    <div className="rounded-2xl border border-line bg-surface p-6 shadow-card">
+    <Card className="p-6">
       <h2 className="text-[17px] font-semibold tracking-tight">
         First solution to test
       </h2>
@@ -22,7 +23,7 @@ export function RoomFirstSolution({ problem }: { problem: Problem }) {
         <Tile icon={Megaphone} label="How to find first users" value={fv.findUsers} />
         <Tile icon={Tag} label="Pricing guess" value={fv.pricing} wide />
       </div>
-    </div>
+    </Card>
   );
 }
 

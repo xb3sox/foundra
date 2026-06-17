@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import type { PipelineMeta, ProofStrength, SourcePlatform } from "../types";
 import { cn } from "../utils/cn";
+import { Card } from "./ui/card";
 
 const platformIcon: Record<SourcePlatform, typeof Star> = {
   Reddit: MessageCircle,
@@ -51,7 +52,7 @@ export function SignalEvidence({
   }
 
   return (
-    <div className="rounded-2xl border border-line bg-surface p-5 shadow-card sm:p-6">
+    <Card className="p-5 sm:p-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-center gap-2.5">
           <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-soft text-accent-ink">
@@ -108,6 +109,6 @@ export function SignalEvidence({
           );
         })}
       </div>
-    </div>
+    </Card>
   );
 }

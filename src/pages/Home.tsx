@@ -2,10 +2,12 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Heart, Hammer, Compass, ShieldCheck } from "lucide-react";
 import { Button } from "../components/ui/button";
+import { Card } from "../components/ui/card";
 import { ProblemBoard } from "../components/board/ProblemBoard";
 import { scrollToSection } from "../lib/scroll";
 import { CommitmentModal } from "../components/modals/CommitmentModal";
 import { PipelineExplainer } from "../components/PipelineExplainer";
+import { HeroReceipts } from "../components/HeroReceipts";
 import type { CommitmentType, Problem } from "../types";
 
 const roles = [
@@ -36,6 +38,7 @@ export function Home() {
     <div>
       {/* Hero */}
       <section className="mx-auto max-w-6xl px-5 pb-4 pt-16 sm:px-8 sm:pt-24">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
@@ -50,11 +53,11 @@ export function Home() {
             Real problems. Real proof.
           </h1>
           <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-ink-soft sm:text-[19px]">
-            Pain people already complain about — with the receipts, the score,
+            Pain people already complain about. With the receipts, the score,
             and a room to validate it.
           </p>
           <p className="mt-3 max-w-xl text-[14px] text-ink-muted">
-            We collect where people already vent — forums, reviews, job posts —
+            We collect where people already vent (forums, reviews, job posts),
             cluster the same pain, and score it. The strongest problems link
             straight to the source.
           </p>
@@ -72,6 +75,8 @@ export function Home() {
             </Button>
           </div>
         </motion.div>
+        <HeroReceipts />
+        </div>
       </section>
 
       {/* Problem board: today's three + the rest, with search and filters */}
@@ -79,7 +84,7 @@ export function Home() {
 
       {/* Three roles */}
       <section className="mx-auto mt-20 max-w-6xl px-5 sm:px-8">
-        <div className="rounded-3xl border border-line bg-surface p-8 shadow-card sm:p-12">
+        <Card className="rounded-3xl p-8 sm:p-12">
           <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">
             Foundra connects three roles
           </h2>
@@ -104,7 +109,7 @@ export function Home() {
               );
             })}
           </div>
-        </div>
+        </Card>
       </section>
 
       {/* How it works */}

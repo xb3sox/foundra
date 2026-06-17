@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import type { ProofItem, ProofSourceType, ProofStrength } from "../../types";
 import { cn } from "../../utils/cn";
+import { Badge } from "../ui/badge";
 
 /** Only allow https links to render as a source — guards against
     javascript:/data: schemes if the data ever becomes dynamic. */
@@ -53,14 +54,9 @@ export function ProofCard({ proof, index }: { proof: ProofItem; index: number })
           <Icon className="h-4 w-4 text-ink-muted" />
           {proof.source}
         </span>
-        <span
-          className={cn(
-            "rounded-full px-2 py-0.5 text-[11px] font-semibold",
-            strengthStyle[proof.strength]
-          )}
-        >
+        <Badge className={cn("border-transparent", strengthStyle[proof.strength])}>
           {proof.strength}
-        </span>
+        </Badge>
       </div>
       <p className="mt-3 text-[14px] leading-relaxed text-ink">
         “{proof.text}”

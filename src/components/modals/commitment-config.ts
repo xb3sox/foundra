@@ -20,7 +20,7 @@ export function buildConfig(type: CommitmentType): CommitmentConfig {
     return {
       title: "You have this problem.",
       blurb:
-        "You'll join the room as someone who lives with this pain — the demand signal every builder is looking for.",
+        "You'll join the room as someone who lives with this pain: the demand signal every builder is looking for.",
       icon: Heart,
     };
   }
@@ -28,14 +28,14 @@ export function buildConfig(type: CommitmentType): CommitmentConfig {
     return {
       title: "You can build this.",
       blurb:
-        "You'll join the room as a builder — ready to turn the proof into a first solution worth testing.",
+        "You'll join the room as a builder, ready to turn the proof into a first solution worth testing.",
       icon: Hammer,
     };
   }
   return {
     title: "You know this market.",
     blurb:
-      "You'll join the room as a market expert — the context that keeps builders from the wrong first solution.",
+      "You'll join the room as a market expert: the context that keeps builders from the wrong first solution.",
     icon: Compass,
   };
 }

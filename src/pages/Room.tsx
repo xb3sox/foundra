@@ -11,6 +11,8 @@ import { RoomChecklist } from "../components/room/RoomChecklist";
 import { RoomFirstSolution } from "../components/room/RoomFirstSolution";
 import { RoomPeople } from "../components/room/RoomPeople";
 import { Button } from "../components/ui/button";
+import { Card } from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
 import { positionLabel } from "../components/modals/commitment-config";
 import type { RoomStatus } from "../types";
 
@@ -78,11 +80,9 @@ export function Room({ id }: { id: string }) {
           <span className="text-[12px] font-medium uppercase tracking-wide text-ink-muted">
             Problem Room
           </span>
-          <span
-            className={`rounded-full px-2.5 py-1 text-[12px] font-semibold ${statusStyle[problem.roomStatus]}`}
-          >
+          <Badge className={`border-transparent ${statusStyle[problem.roomStatus]}`}>
             {problem.roomStatus}
-          </span>
+          </Badge>
         </div>
         <h1 className="mt-3 text-[26px] font-semibold leading-tight tracking-tight text-balance sm:text-[32px]">
           {problem.title}
@@ -145,7 +145,7 @@ export function Room({ id }: { id: string }) {
           <RoomPeople problem={problem} />
 
           {/* Activity log */}
-          <div className="rounded-2xl border border-line bg-surface p-5 shadow-card">
+          <Card className="p-5">
             <h2 className="text-[15px] font-semibold tracking-tight">
               Recent activity
             </h2>
@@ -162,7 +162,7 @@ export function Room({ id }: { id: string }) {
                 </li>
               ))}
             </ul>
-          </div>
+          </Card>
         </aside>
       </div>
     </div>
