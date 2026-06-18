@@ -44,8 +44,7 @@ export function ProofCard({ proof, index }: { proof: ProofItem; index: number })
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
       className="rounded-2xl border border-line bg-surface p-5 shadow-card"
     >

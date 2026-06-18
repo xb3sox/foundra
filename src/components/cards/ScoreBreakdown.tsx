@@ -47,8 +47,7 @@ export function ScoreBreakdown({
             <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-black/[0.06]">
               <motion.div
                 initial={{ width: 0 }}
-                whileInView={{ width: `${d.value}%` }}
-                viewport={{ once: true }}
+                animate={{ width: `${d.value}%` }}
                 transition={{ delay: i * 0.05, duration: 0.7, ease: "easeOut" }}
                 className="h-full rounded-full bg-accent"
               />

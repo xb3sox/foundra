@@ -84,14 +84,14 @@ export function Home() {
 
       {/* Three roles */}
       <section className="mx-auto mt-20 max-w-6xl px-5 sm:px-8">
-        <Card className="rounded-3xl p-8 sm:p-12">
+        <Card className="rounded-3xl p-7 sm:p-9">
           <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">
             Foundra connects three roles
           </h2>
           <p className="mt-1.5 max-w-lg text-[15px] text-ink-soft">
             Start with real problems. Build with the people who have them.
           </p>
-          <div className="mt-8 grid gap-5 sm:grid-cols-3">
+          <div className="mt-7 grid gap-5 sm:grid-cols-3">
             {roles.map((r) => {
               const Icon = r.icon;
               return (

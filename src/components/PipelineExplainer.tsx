@@ -42,8 +42,7 @@ export function PipelineExplainer() {
             <motion.div
               key={s.title}
               initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.06, duration: 0.4 }}
               className="relative rounded-2xl border border-line bg-surface p-5 shadow-card"
             >

@@ -96,8 +96,7 @@ export function SignalEvidence({
               <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-black/[0.06]">
                 <motion.div
                   initial={{ width: 0 }}
-                  whileInView={{ width: `${(s.count / max) * 100}%` }}
-                  viewport={{ once: true }}
+                  animate={{ width: `${(s.count / max) * 100}%` }}
                   transition={{ delay: i * 0.06, duration: 0.6, ease: "easeOut" }}
                   className="h-full rounded-full bg-accent"
                 />
