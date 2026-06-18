@@ -26,7 +26,7 @@ function FvCard({
   wide?: boolean;
 }) {
   return (
-    <Card className={`p-5 ${wide ? "sm:col-span-2" : ""}`}>
+    <Card className={`h-full p-5 ${wide ? "sm:col-span-2" : ""}`}>
       <div className="flex items-center gap-2 text-[12.5px] font-medium text-ink-muted">
         <Icon className="h-4 w-4" />
         {label}

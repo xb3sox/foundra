@@ -46,7 +46,7 @@ export function ProofCard({ proof, index }: { proof: ProofItem; index: number })
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
-      className="rounded-2xl border border-line bg-surface p-5 shadow-card"
+      className="flex h-full flex-col rounded-2xl border border-line bg-surface p-5 shadow-card"
     >
       <div className="flex items-center justify-between">
         <span className="inline-flex items-center gap-2 text-[13px] font-medium text-ink-soft">
@@ -57,21 +57,23 @@ export function ProofCard({ proof, index }: { proof: ProofItem; index: number })
           {proof.strength}
         </Badge>
       </div>
-      <p className="mt-3 text-[14px] leading-relaxed text-ink">
+      <p className="mt-3 text-[14px] leading-relaxed text-ink line-clamp-4">
         “{proof.text}”
       </p>
-      <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-line/70 pt-3 text-[11.5px] text-ink-muted">
-        <span className="font-medium text-ink-soft">{proof.platform}</span>
-        <span className="text-line">·</span>
-        <span>{proof.origin}</span>
-        <span className="text-line">·</span>
-        <span>{proof.date}</span>
+      <div className="mt-auto flex items-center gap-x-2 border-t border-line/70 pt-3 text-[11.5px] text-ink-muted">
+        <span className="shrink-0 font-medium text-ink-soft">
+          {proof.platform}
+        </span>
+        <span className="shrink-0 text-line">·</span>
+        <span className="min-w-0 truncate">{proof.origin}</span>
+        <span className="shrink-0 text-line">·</span>
+        <span className="shrink-0">{proof.date}</span>
         {href && (
           <a
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-auto inline-flex items-center gap-0.5 rounded font-medium text-accent-ink transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+            className="ml-auto inline-flex shrink-0 items-center gap-0.5 rounded font-medium text-accent-ink transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
           >
             View source
             <ArrowUpRight className="h-3 w-3" />

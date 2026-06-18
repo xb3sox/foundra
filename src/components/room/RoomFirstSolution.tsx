@@ -40,7 +40,7 @@ function Tile({
 }) {
   return (
     <div
-      className={`rounded-xl border border-line bg-bg/40 p-4 ${
+      className={`h-full rounded-xl border border-line bg-bg/40 p-4 ${
         wide ? "sm:col-span-2" : ""
       }`}
     >

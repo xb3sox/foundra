@@ -36,7 +36,7 @@ export function ProblemCard({
       {/* META ROW - ONE LINE: industry + signal badge + signal count.
           The #1 cause of crowding was too many top-of-card chrome lines. */}
       <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-[12px]">
-        <span className="font-medium uppercase tracking-wide text-ink-muted">
+        <span className="min-w-0 truncate font-medium uppercase tracking-wide text-ink-muted">
           {problem.industry}
         </span>
         <SignalBadge signal={problem.signal} />
@@ -51,11 +51,11 @@ export function ProblemCard({
         onClick={() => navigate(`/problems/${problem.id}`)}
         className="mt-4 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 text-left"
       >
-        <h3 className="text-[18px] font-semibold leading-snug tracking-tight text-ink text-balance sm:text-[19px]">
+        <h3 className="text-[18px] font-semibold leading-snug tracking-tight text-ink text-balance line-clamp-2 sm:text-[19px]">
           {problem.title}
         </h3>
       </button>
-      <p className="mt-1.5 text-[14px] leading-relaxed text-ink-soft">
+      <p className="mt-1.5 text-[14px] leading-relaxed text-ink-soft line-clamp-2">
         {problem.pain}
       </p>
 

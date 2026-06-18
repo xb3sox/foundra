@@ -53,7 +53,7 @@ export function RoomPeople({ problem }: { problem: Problem }) {
                   </p>
                 </div>
                 {isConnected && (
-                  <span className="inline-flex items-center gap-1 rounded-full bg-accent-soft px-2 py-0.5 text-[10.5px] font-semibold text-accent-ink">
+                  <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-accent-soft px-2 py-0.5 text-[10.5px] font-semibold text-accent-ink">
                     <Check className="h-3 w-3" strokeWidth={3} />
                     Connected
                   </span>

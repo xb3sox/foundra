@@ -44,7 +44,7 @@ export function PipelineExplainer() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.06, duration: 0.4 }}
-              className="relative rounded-2xl border border-line bg-surface p-5 shadow-card"
+              className="relative flex h-full flex-col rounded-2xl border border-line bg-surface p-5 shadow-card"
             >
               <div className="flex items-center justify-between">
                 <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-soft text-accent-ink">

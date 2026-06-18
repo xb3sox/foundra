@@ -24,7 +24,7 @@ export function PeopleSection({
               <AvatarFallback>{initials(person.name)}</AvatarFallback>
             </Avatar>
             <div className="min-w-0">
-              <p className="text-[14px] font-semibold text-ink">
+              <p className="truncate text-[14px] font-semibold text-ink">
                 {person.name}
               </p>
               <p className="truncate text-[13px] text-ink-soft">
