@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/utils/cn"
 
 // Foundra surface primitive. Owns radius + border + base shadow in one place
 // so the warm-cream card look stays consistent and tunable from here.
