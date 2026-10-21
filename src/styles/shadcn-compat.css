@@ -1,0 +1,29 @@
+/* shadcn/tailwind.css subset — only the pieces Foundra actually uses.
+   Replaces the `shadcn` CLI package as a runtime dependency. */
+
+/* Custom variants used by ui/dialog.tsx and ui/toggle-group.tsx */
+@custom-variant data-open {
+  &:where([data-state="open"]),
+  &:where([data-open]:not([data-open="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-closed {
+  &:where([data-state="closed"]),
+  &:where([data-closed]:not([data-closed="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-horizontal {
+  &:where([data-orientation="horizontal"]) {
+    @slot;
+  }
+}
+
+@custom-variant data-vertical {
+  &:where([data-orientation="vertical"]) {
+    @slot;
+  }
+}
