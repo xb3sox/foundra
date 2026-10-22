@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 
-// Mirrors real flagship proof (see data/problems.ts) so the hero shows the
+// Mirrors real flagship proof (see data/problems/) so the hero shows the
 // product's actual asset: receipts you can open and read.
 const receipts = [
   {
