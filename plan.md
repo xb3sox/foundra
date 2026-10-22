@@ -14,9 +14,9 @@ Acceptance: artifacts committed; commands in AGENTS.md match package.json script
 Acceptance: CI green on main; `npm audit --omit=dev` = 0; all local gates pass. ✅ verified.
 
 ## Phase 2 — Optional (needs approval)
-- P2a Split `src/data/problems.ts` (1,065 lines) into per-problem modules — low risk, DX only
-- P2b Footer contact/privacy copy decision (spec Q1) — product judgment, approval gate
-- P2c Bundle-size: framer-motion dominates chunk; lazy-load detail routes if it matters post-launch
+- P2a DONE (a65ea66): problems.ts split into src/data/problems/<id>.ts + barrel index.ts (imports unchanged: `../data/problems`)
+- P2b DONE (a65ea66): footer now real mailto + honest "Signals stay on your device." line; fake Privacy/Contact toast dialogs removed
+- P2c Bundle-size — CLOSED, no change. Measured (Oct 23): single 589 KB / 184 KB gzip JS chunk. Lazy-loading cannot help because motion components render on every route incl. home; tree-shaking already applied by Vite. Revisit only if LCP/FCP degrades in real-user monitoring.
 
 ## Rejected / no change
 - Router/state/backend/analytics libraries; UI redesign; dark-mode activation (keep dormant shadcn scaffold); forcing dev-only audit fixes (esbuild/vite advisories affect dev server only; upgrade when upstream releases, never `--force`).
