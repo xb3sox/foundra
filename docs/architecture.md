@@ -20,7 +20,7 @@ index.html → src/main.tsx
         /room/:id    → Validation room (progress steps)
       StoreProvider → localStorage (positions + room progress ONLY)
 ```
-- Product content is authored statically in `src/data/problems.ts` (single source of problem data).
+- Product content is authored statically in `src/data/problems/` (single source of problem data).
 - User state persists only in `localStorage` via `src/lib/store.tsx`. Nothing is sent anywhere.
 - Pure logic kept out of components and unit-tested: `filter-problems.ts`, `router.tsx`, `store.tsx`.
 
@@ -31,7 +31,7 @@ index.html → src/main.tsx
 | `src/lib/router.tsx` | History-API routing (navigate, matchRoute) |
 | `src/lib/store.tsx` | Positions/room-progress context, localStorage-backed |
 | `src/lib/filter-problems.ts` | Board search/filter logic |
-| `src/data/problems.ts` | Curated dataset |
+| `src/data/problems/` | Curated dataset |
 | `src/components/{board,cards,room,problem,modals,layout,forms}` | Feature UI |
 | `src/components/ui/` | Low-level primitives; `cn()` ONLY in `src/utils/cn.ts` |
 | `src/components/ErrorBoundary.tsx` | Top-level crash containment |
@@ -43,6 +43,6 @@ index.html → src/main.tsx
 - **Dark-mode CSS** kept as standard scaffold, not activated pending product decision.
 
 ## Extension points
-- New problem: edit `src/data/problems.ts` (no component changes).
+- New problem: edit `src/data/problems/` (no component changes).
 - New page: add case to `matchRoute` + component under `src/components/`, wire in `App.tsx` Routes.
 - CI gates mirror local commands exactly (`.github/workflows/ci.yml`).

@@ -20,7 +20,7 @@ If npm crashes with "edgesOut" on tree rebuild (known npm 10.8.2 issue), use `--
 ## Architecture map
 See `docs/architecture.md` for boundaries, data flow, and decisions.
 - `src/App.tsx` — route switch (custom router in `src/lib/router.tsx`, hash-free paths)
-- `src/data/problems.ts` — hand-curated dataset (single source of problem content)
+- `src/data/problems/` — hand-curated dataset (single source of problem content)
 - `src/lib/store.tsx` — positions + room progress, localStorage-backed React context
 - `src/lib/filter-problems.ts` — board search/filter logic (unit-tested)
 - `src/components/board|cards|room|problem|modals|layout` — feature UI
