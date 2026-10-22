@@ -1,5 +1,3 @@
-import { toast } from "sonner";
-
 export function Footer() {
   return (
     <footer className="mt-24 border-t border-line/70">
@@ -18,26 +16,15 @@ export function Footer() {
           </p>
         </div>
         <div className="flex items-center gap-6 text-sm">
-          <button
-            onClick={() =>
-              toast("Privacy", {
-                description: "We keep your signals to ourselves.",
-              })
-            }
-            className="cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 text-ink-soft transition-colors hover:text-ink"
+          <a
+            href="mailto:hello@foundra.app"
+            className="text-ink-soft transition-colors hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
           >
-            Privacy
-          </button>
-          <button
-            onClick={() =>
-              toast("Contact", {
-                description: "Reach the team at hello@foundra.app",
-              })
-            }
-            className="cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 text-ink-soft transition-colors hover:text-ink"
-          >
-            Contact
-          </button>
+            hello@foundra.app
+          </a>
+          <span className="text-ink-soft/70">
+            Signals stay on your device.
+          </span>
         </div>
       </div>
     </footer>
