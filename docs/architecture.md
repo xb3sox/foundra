@@ -43,6 +43,6 @@ index.html → src/main.tsx
 - **Dark-mode CSS** kept as standard scaffold, not activated pending product decision.
 
 ## Extension points
-- New problem: edit `src/data/problems/` (no component changes).
+- New problem: add `src/data/problems/<id>.ts`, register in `index.ts` (no component changes).
 - New page: add case to `matchRoute` + component under `src/components/`, wire in `App.tsx` Routes.
 - CI gates mirror local commands exactly (`.github/workflows/ci.yml`).
