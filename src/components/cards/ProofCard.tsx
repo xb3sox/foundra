@@ -10,18 +10,8 @@ import {
 } from "lucide-react";
 import type { ProofItem, ProofSourceType, ProofStrength } from "../../types";
 import { cn } from "../../utils/cn";
+import { toSafeHref } from "../../lib/utils";
 import { Badge } from "../ui/badge";
-
-/** Only allow https links to render as a source - guards against
-    javascript:/data: schemes if the data ever becomes dynamic. */
-function toSafeHref(url: string | undefined): string | undefined {
-  if (!url) return undefined;
-  try {
-    return new URL(url).protocol === "https:" ? url : undefined;
-  } catch {
-    return undefined;
-  }
-}
 
 const icons: Record<ProofSourceType, typeof Star> = {
   Interview: MessageSquare,
