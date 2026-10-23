@@ -32,28 +32,34 @@ export function signalsFrom(problems: Problem[]): SignalLabel[] {
 
 /**
  * Dimensions AND together; values within a dimension OR.
- * The query is a case-insensitive substring match over title, pain,
- * and industry.
+ * The query is a case-insensitive substring match over title, pain, and industry.
+ * Optimized for live-filtering over problem sets:
+ * - Pre-allocates Sets for industry/signal filtering to enable O(1) lookups instead of O(M) Array.includes.
+ * - Avoids string template heap allocations (`${p.title} ${p.pain} ${p.industry}`) on every iteration step.
  */
 export function filterProblems(
   problems: Problem[],
   filter: BoardFilter
 ): Problem[] {
   const query = filter.query.trim().toLowerCase();
+  const industrySet =
+    filter.industries.length > 0 ? new Set(filter.industries) : null;
+  const signalSet =
+    filter.signals.length > 0 ? new Set(filter.signals) : null;
+
   return problems.filter((p) => {
     if (
       query &&
-      !`${p.title} ${p.pain} ${p.industry}`.toLowerCase().includes(query)
+      !p.title.toLowerCase().includes(query) &&
+      !p.pain.toLowerCase().includes(query) &&
+      !p.industry.toLowerCase().includes(query)
     ) {
       return false;
     }
-    if (
-      filter.industries.length > 0 &&
-      !filter.industries.includes(p.industry)
-    ) {
+    if (industrySet && !industrySet.has(p.industry)) {
       return false;
     }
-    if (filter.signals.length > 0 && !filter.signals.includes(p.signal)) {
+    if (signalSet && !signalSet.has(p.signal)) {
       return false;
     }
     return true;
