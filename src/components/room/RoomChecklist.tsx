@@ -27,10 +27,21 @@ export function RoomChecklist({ problem }: { problem: Problem }) {
           {doneCount}/{checklist.length}
         </span>
       </div>
-      <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-black/[0.06]">
+      <div
+        role="progressbar"
+        aria-label="Progress to proof"
+        aria-valuenow={doneCount}
+        aria-valuemin={0}
+        aria-valuemax={checklist.length}
+        className="mt-2 h-1.5 overflow-hidden rounded-full bg-black/[0.06]"
+      >
         <motion.div
           className="h-full rounded-full bg-accent"
-          animate={{ width: `${(doneCount / checklist.length) * 100}%` }}
+          animate={{
+            width: `${
+              checklist.length > 0 ? (doneCount / checklist.length) * 100 : 0
+            }%`,
+          }}
           transition={{ type: "spring", stiffness: 200, damping: 26 }}
         />
       </div>
@@ -38,6 +49,10 @@ export function RoomChecklist({ problem }: { problem: Problem }) {
         {checklist.map((c) => (
           <li key={c.id}>
             <button
+              type="button"
+              role="checkbox"
+              aria-checked={c.done}
+              aria-label={c.label}
               onClick={() =>
                 toggleChecklist(problem.id, c.id, baseChecklistMap)
               }
