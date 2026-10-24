@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
+import { toSafeHref } from "../utils/url";
 
 // Mirrors real flagship proof (see data/problems.ts) so the hero shows the
 // product's actual asset: receipts you can open and read.
@@ -54,15 +55,17 @@ export function HeroReceipts() {
               </p>
               <div className="mt-2.5 flex items-center gap-1.5 border-t border-line/70 pt-2.5 text-[11px] text-ink-muted">
                 <span>{r.origin}</span>
-                <a
-                  href={r.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ml-auto inline-flex items-center gap-0.5 rounded font-medium text-accent-ink transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
-                >
-                  View source
-                  <ArrowUpRight className="h-3 w-3" />
-                </a>
+                {toSafeHref(r.url) && (
+                  <a
+                    href={toSafeHref(r.url)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ml-auto inline-flex items-center gap-0.5 rounded font-medium text-accent-ink transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                  >
+                    View source
+                    <ArrowUpRight className="h-3 w-3" />
+                  </a>
+                )}
               </div>
             </Card>
           </div>
