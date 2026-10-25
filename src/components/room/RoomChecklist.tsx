@@ -38,6 +38,9 @@ export function RoomChecklist({ problem }: { problem: Problem }) {
         {checklist.map((c) => (
           <li key={c.id}>
             <button
+              type="button"
+              role="checkbox"
+              aria-checked={c.done}
               onClick={() =>
                 toggleChecklist(problem.id, c.id, baseChecklistMap)
               }
