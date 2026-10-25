@@ -1,5 +1,10 @@
 # Foundra delivery backlog and minimal GitHub board
 
+> Current dependency status: the later [security remediation verification](SECURITY_REMEDIATION.md)
+> reports a clean install and zero known audit findings. Counts and dependency
+> blockers below describe the earlier baseline, not the current lockfile.
+> Human review and other readiness gates remain open.
+
 ## Publication status — 2026-10-25
 
 **Blocked, not created.** Read-only issue enumeration found no standalone issues;

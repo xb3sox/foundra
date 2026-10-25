@@ -1,5 +1,10 @@
 # Repository preparation audit — 2026-10-25
 
+> Current dependency status: the later [security remediation verification](SECURITY_REMEDIATION.md)
+> reports a clean install and zero known audit findings. Counts and dependency
+> blockers below describe the earlier baseline, not the current lockfile.
+> Human review and other readiness gates remain open.
+
 ## Goal and constraints
 README defines a curated problem-discovery/validation frontend for founders.
 11 problems; localStorage persistence; no accounts, scraping, submissions,

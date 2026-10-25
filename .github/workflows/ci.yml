@@ -38,5 +38,5 @@ jobs:
         with:
           node-version: 22
       - run: npm ci --ignore-scripts --no-fund
-      # Intentionally fails on existing high/critical advisories. No allowlist.
+      # Fail on high/critical advisories, including newly disclosed ones. No allowlist.
       - run: npm audit --audit-level=high

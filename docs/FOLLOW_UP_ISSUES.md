@@ -1,5 +1,10 @@
 # Follow-up issue drafts
 
+> Current dependency status: the later [security remediation verification](SECURITY_REMEDIATION.md)
+> reports a clean install and zero known audit findings. Counts and dependency
+> blockers below describe the earlier baseline, not the current lockfile.
+> Human review and other readiness gates remain open.
+
 GitHub createIssue failed with “Resource not accessible by integration” for all
 four drafts on 2026-10-25. No issue was created. Check for duplicates before
 publishing these when issue-write access is available.

@@ -16,7 +16,8 @@ npm run build:single
 npm audit --audit-level=high
 ```
 
-The dependency audit currently fails on existing findings; report them honestly.
+The dependency audit passed with zero known findings after the 2026-10-25
+remediation; advisory data changes, so rerun it for every proposed change.
 Do not disable that check. Inspect lifecycle scripts before enabling any.
 Check open PRs for overlap; prefer small changes with focused regression tests.
 Keep generated output, local state, secrets, and node_modules out of Git.

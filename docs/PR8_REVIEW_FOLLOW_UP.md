@@ -1,5 +1,10 @@
 # PR #8 review follow-up — 2026-10-25
 
+> Current dependency status: the later [security remediation verification](SECURITY_REMEDIATION.md)
+> reports a clean install and zero known audit findings. Counts and dependency
+> blockers below describe the earlier baseline, not the current lockfile.
+> Human review and other readiness gates remain open.
+
 ## Corrections
 - Restrict push CI to main; pull_request still validates feature branches. This
   removes the duplicate push/PR execution for the Arena branch, without reducing
