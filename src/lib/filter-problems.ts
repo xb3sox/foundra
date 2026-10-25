@@ -40,21 +40,27 @@ export function filterProblems(
   filter: BoardFilter
 ): Problem[] {
   const query = filter.query.trim().toLowerCase();
+  // Pre-create Sets for fast O(1) lookups and early filtering
+  const industrySet =
+    filter.industries.length > 0 ? new Set(filter.industries) : null;
+  const signalSet =
+    filter.signals.length > 0 ? new Set(filter.signals) : null;
+
   return problems.filter((p) => {
-    if (
-      query &&
-      !`${p.title} ${p.pain} ${p.industry}`.toLowerCase().includes(query)
-    ) {
+    // Fast O(1) early returns for industry and signal filters
+    if (industrySet && !industrySet.has(p.industry)) {
       return false;
     }
-    if (
-      filter.industries.length > 0 &&
-      !filter.industries.includes(p.industry)
-    ) {
+    if (signalSet && !signalSet.has(p.signal)) {
       return false;
     }
-    if (filter.signals.length > 0 && !filter.signals.includes(p.signal)) {
-      return false;
+    // Search query check with short-circuiting to avoid redundant string work/allocations
+    if (query) {
+      return (
+        p.title.toLowerCase().includes(query) ||
+        p.pain.toLowerCase().includes(query) ||
+        p.industry.toLowerCase().includes(query)
+      );
     }
     return true;
   });

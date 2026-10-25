@@ -1,0 +1,3 @@
+## 2025-02-20 - Early-exit set lookup and short-circuit search in filterProblems
+**Learning:** Combining string fields via template literals (`${title} ${pain} ${industry}`) for search queries creates unnecessary string heap allocations on every keystroke. Checking O(1) Set filters (industry/signal) first allows early returns without string work, and short-circuiting field checks avoids lowercasing and searching remaining fields when title matches.
+**Action:** Order filter predicates from cheapest exact Set matches to string searches, and use short-circuiting field comparisons instead of concatenating strings.
