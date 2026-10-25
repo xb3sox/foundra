@@ -48,3 +48,10 @@ https://foundra-vert.vercel.app
 ## Stack
 
 React 19, TypeScript, Vite 7, Tailwind CSS 4, shadcn/ui (Radix), Framer Motion, sonner, custom history-API router
+
+## Engineering and operations
+
+See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md),
+[operations and rollback](docs/OPERATIONS.md), and the
+[repository preparation audit](docs/REPOSITORY_AUDIT.md).
+Reviewed project-local agent skills and their provenance are in `.agents/`.
