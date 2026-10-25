@@ -75,6 +75,10 @@ of dependency and lockfile changes. Existing label: bug.
 
 ### F02 — [High] Validate nested persisted state without losing valid progress
 
+Implementation candidate now in PR #8; see [storage recovery](STORAGE_RECOVERY.md).
+Local checks pass. Human policy/data review and browser verification are pending;
+this item is not Done.
+
 load() currently checks only the top-level object and trusts nested values.
 
 Acceptance:

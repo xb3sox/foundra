@@ -7,32 +7,16 @@ import {
 } from "react";
 import type { CommitmentType } from "../types";
 
-interface RoomState {
-  checklist: Record<string, boolean>;
-  activity: { id: string; text: string; time: string }[];
-  connected: string[]; // names of people the user marked connected
-}
-
-interface FoundraState {
-  // problemId -> set of commitment types the current user took
-  commitments: Record<string, CommitmentType[]>;
-  // extra signal counts added by the user, problemId -> {feel,build,know}
-  extraCounts: Record<string, { feel: number; build: number; know: number }>;
-  email: string | null;
-  rooms: Record<string, RoomState>;
-}
-
-const KEY = "foundra-state-v1";
-
-const defaultState: FoundraState = {
-  commitments: {},
-  extraCounts: {},
-  email: null,
-  rooms: {},
-};
+import {
+  loadPersistedState,
+  STORAGE_KEY,
+  type FoundraState,
+  type RoomState,
+} from "./persisted-state";
 
 interface StoreContextValue {
   state: FoundraState;
+  sessionOnly: boolean;
   addCommitment: (problemId: string, type: CommitmentType) => void;
   setEmail: (email: string) => void;
   toggleChecklist: (
@@ -47,33 +31,20 @@ interface StoreContextValue {
 
 const StoreContext = createContext<StoreContextValue | null>(null);
 
-function load(): FoundraState {
-  try {
-    const raw = localStorage.getItem(KEY);
-    if (raw) {
-      const parsed: unknown = JSON.parse(raw);
-      // Guard against a tampered or stale-shape payload: only merge a plain
-      // object so the typed defaults always back-fill missing/wrong keys.
-      if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
-        return { ...defaultState, ...(parsed as Partial<FoundraState>) };
-      }
-    }
-  } catch {
-    /* ignore */
-  }
-  return defaultState;
-}
-
 export function StoreProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<FoundraState>(load);
+  const [loaded] = useState(loadPersistedState);
+  const [state, setState] = useState<FoundraState>(loaded.state);
+  const [writeFailed, setWriteFailed] = useState(false);
 
   useEffect(() => {
+    if (loaded.sessionOnly) return;
     try {
-      localStorage.setItem(KEY, JSON.stringify(state));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      setWriteFailed(false);
     } catch {
-      /* ignore */
+      setWriteFailed(true);
     }
-  }, [state]);
+  }, [state, loaded.sessionOnly]);
 
   const addCommitment = (problemId: string, type: CommitmentType) => {
     setState((s) => {
@@ -173,6 +144,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     <StoreContext.Provider
       value={{
         state,
+        sessionOnly: loaded.sessionOnly || writeFailed,
         addCommitment,
         setEmail,
         toggleChecklist,

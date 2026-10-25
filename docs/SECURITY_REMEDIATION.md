@@ -58,8 +58,9 @@ F01 in GITHUB_DELIVERY_PLAN.md is **implemented locally and awaiting remote CI a
 human security review**, not closed. No GitHub issue was published: the previously
 verified integration permissions block issue/project writes and project discovery.
 
-F02–F10 remain open. In particular nested storage hydration still needs regression
-tests, an approved partial-recovery policy and human data review. No storage
+F02–F10 remain open. A later [storage recovery patch](STORAGE_RECOVERY.md)
+adds hydration validation and regression tests; its session-only recovery policy
+still needs human data review and browser verification. No storage
 migration or deletion was slipped into dependency updates. Existing URL and
 accessibility PRs remain untouched; owner must select overlapping implementations.
 No independent review, production approval or readiness claim is provided here.

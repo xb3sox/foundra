@@ -3,6 +3,7 @@ import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import { RouterProvider, matchRoute, useRouter } from "./lib/router";
 import { getProblem } from "./data/problems";
 import { StoreProvider } from "./lib/store";
+import { StorageNotice } from "./components/StorageNotice";
 import { Toaster } from "./components/ui/sonner";
 import { TooltipProvider } from "./components/ui/tooltip";
 import { ErrorBoundary } from "./components/ErrorBoundary";
@@ -78,6 +79,7 @@ export default function App() {
           <TooltipProvider>
             <div className="flex min-h-screen flex-col">
               <Header />
+              <StorageNotice />
               <main className="flex-1">
                 <ErrorBoundary>
                   <Routes />

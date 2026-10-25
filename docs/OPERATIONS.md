@@ -3,7 +3,8 @@
 ## Current architecture
 Static React/Vite SPA; curated source data; browser-local commitments, room state,
 and email under `foundra-state-v1`. No backend, database, authentication, or
-server-side recovery exists. Browser data is not synced or backed up by Git.
+server-side recovery exists. See [storage recovery](STORAGE_RECOVERY.md) for
+validated loading, session-only recovery, and failed-save warnings. Browser data is not synced or backed up by Git.
 Do not introduce Supabase or other infrastructure without an approved need.
 
 ## Pre-merge gate
