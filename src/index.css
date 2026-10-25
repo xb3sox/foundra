@@ -1,4 +1,6 @@
-@import "tailwindcss";
+/* Scan application files only; agent instructions and docs are not UI sources. */
+@import "tailwindcss" source(".");
+@source "../index.html";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 

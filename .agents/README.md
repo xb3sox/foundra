@@ -11,6 +11,20 @@ Shared Addy reference documents preserve relative links from installed skills.
 No upstream installer, executable script, proxy, plugin, or hook was installed.
 No global agent settings were changed. Other skills are not installed.
 
+## Supported use and limitations
+
+Use the installed `caveman` instructions for concise responses. `ultracave`,
+`megacave`, `/caveman ultra`, and `/caveman wenyan` are not supported by this
+installation. Do not follow those upstream aliases without separately reviewing
+and installing their target skills. The vendored upstream README describes a
+larger distribution, not the capabilities installed here.
+
+There is no plugin-backed configuration, `.caveman.json` processing, environment
+variable handling, mode tracking, or cross-session persistence. Any style choice
+is conversational only. Slash-command discovery depends on the host agent; this
+installation does not register commands. Read SKILL.md directly if the host does
+not discover `.agents/skills/`. Upstream files remain unchanged for provenance.
+
 Use these instructions when relevant, subject to repository scope and human
 approval requirements. They do not grant permission to deploy, change access,
 spend money, bypass checks, or merge. Review source diffs and licenses before
