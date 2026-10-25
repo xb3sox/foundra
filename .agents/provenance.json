@@ -1,0 +1,26 @@
+[
+  {
+    "repository": "https://github.com/addyosmani/agent-skills",
+    "commit": "aeac41d4d005999432bb7312f7ff06383a91d59d",
+    "skills": [
+      "planning-and-task-breakdown",
+      "ci-cd-and-automation",
+      "security-and-hardening",
+      "code-review-and-quality"
+    ]
+  },
+  {
+    "repository": "https://github.com/DietrichGebert/ponytail",
+    "commit": "09c434ab73ca43761c5d8b0c5d341926c2fba710",
+    "skills": [
+      "ponytail"
+    ]
+  },
+  {
+    "repository": "https://github.com/JuliusBrussee/caveman",
+    "commit": "1f951fb4ad40ba63302c6e7f987147e034d599d9",
+    "skills": [
+      "caveman"
+    ]
+  }
+]
