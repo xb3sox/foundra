@@ -17,7 +17,9 @@ not current proof: its lint and storage-validation claims are stale.
 No existing application work or remote settings were overwritten.
 
 ## Capability matrix
-“Configured” below means staged in this branch, not remotely activated.
+“Configured” below means present in this branch; default-branch activation is
+not claimed. The branch was pushed and CI queued; no completed remote result
+is claimed. Dependabot updates require merge to the default branch.
 
 | Capability | Status | Evidence / decision |
 | --- | --- | --- |
@@ -83,3 +85,10 @@ bounded update PRs after merge. Human review remains required.
 Remediate dependency findings first, review hydration next, verify access and
 production controls with the owner. Do not claim production readiness. Do not
 merge or deploy until a human reviews and applicable gates pass.
+
+## Publication evidence
+Preparation commit 50f11ba pushed only to arena/bb322caa-foundra.
+PR: https://github.com/xb3sox/foundra/pull/8 (not merged).
+First CI run queued: https://github.com/xb3sox/foundra/actions/runs/40151559149.
+GitHub may trigger existing integrations on a branch push; no deployment command
+was issued, and remote deployment status is inaccessible to this integration.
