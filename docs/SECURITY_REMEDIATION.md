@@ -70,3 +70,13 @@ Use a reviewed revert of individual dependency commits with their matching
 lockfile, then rerun clean install and every check. A rollback to vulnerable
 versions reopens security findings and must not be described as secure. No
 production deployment or remote settings mutation was issued for these changes.
+
+## Remote verification and runner maintenance
+
+CI run https://github.com/xb3sox/foundra/actions/runs/40161299321 passed both
+quality and dependencies at commit 0585302. It identified deprecated Node 20
+Action runtimes and a moving ubuntu-latest image. The workflow was updated to
+SHA-pinned checkout/setup-node v5 (upstream action.yml confirms node24) and
+ubuntu-24.04. App/test Node remains 22; the Action runtime is separate. No extra
+token privileges were added; checkout credential persistence remains disabled.
+The runtime/runner update requires its own subsequent remote verification.
