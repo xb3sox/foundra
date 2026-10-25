@@ -41,3 +41,10 @@ Acceptance:
 - Measure bundle performance before changes; coordinate PRs #3/#6.
 - Owner verifies a private code backup/restore procedure and records evidence.
 No new backend, analytics or paid service required. Human reviews scope/data changes.
+
+## Refined publication plan
+
+The four historical drafts above are superseded for publication by
+[GITHUB_DELIVERY_PLAN.md](GITHUB_DELIVERY_PLAN.md), which splits combined work
+into ten scoped issues with dependencies and defines one minimal board.
+Publish that set only after rechecking duplicates and restoring GitHub access.
