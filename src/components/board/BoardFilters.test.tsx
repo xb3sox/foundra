@@ -13,7 +13,7 @@ describe("BoardFilters component", () => {
         value={filter}
         onChange={handleChange}
         industries={["Fintech"]}
-        signals={["Verified pain"]}
+        signals={["Strong signal"]}
       />
     );
 
@@ -32,7 +32,7 @@ describe("BoardFilters component", () => {
         value={EMPTY_FILTER}
         onChange={handleChange}
         industries={["Fintech"]}
-        signals={["Verified pain"]}
+        signals={["Strong signal"]}
       />
     );
 
