@@ -1,5 +1,11 @@
 # Repository preparation audit — 2026-10-25
 
+> **Historical snapshot — 2026-10-25.** The current authoritative state and
+> workflow are in [GITHUB_DELIVERY_PLAN.md](GITHUB_DELIVERY_PLAN.md). Claims
+> below about a private repository, old Arena branch names, open PRs #2–#8,
+> blocked issue creation, or a ruleset plan limitation are no longer current.
+> Verified open gaps are tracked in GitHub issues #19–#23.
+
 > Current dependency status: the later [security remediation verification](SECURITY_REMEDIATION.md)
 > reports a clean install and zero known audit findings. Counts and dependency
 > blockers below describe the earlier baseline, not the current lockfile.

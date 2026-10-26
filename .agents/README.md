@@ -25,6 +25,12 @@ is conversational only. Slash-command discovery depends on the host agent; this
 installation does not register commands. Read SKILL.md directly if the host does
 not discover `.agents/skills/`. Upstream files remain unchanged for provenance.
 
+The root `AGENTS.md` is the authoritative repository context, and
+`.github/copilot-instructions.md` is a concise compatibility pointer for GitHub
+Copilot. This directory supplements them with task-specific skills; it does not
+replace or override them. If instructions conflict, resolve the conflict in
+`AGENTS.md` with human review.
+
 Use these instructions when relevant, subject to repository scope and human
 approval requirements. They do not grant permission to deploy, change access,
 spend money, bypass checks, or merge. Review source diffs and licenses before

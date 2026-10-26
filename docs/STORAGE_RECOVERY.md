@@ -1,5 +1,11 @@
 # Browser-state validation and recovery
 
+> **Historical implementation and validation record.** The storage policy below
+> remains the implemented behavior. On 2026-10-26 the full suite had 58 passing
+> tests; browser verification and the human data-policy decision remain tracked
+> in issues #20 and #21. Current workflow:
+> [GITHUB_DELIVERY_PLAN.md](GITHUB_DELIVERY_PLAN.md).
+
 ## Policy
 
 `foundra-state-v1` remains the only storage key. No migration, extra backup copy,

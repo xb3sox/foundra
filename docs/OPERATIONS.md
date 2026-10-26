@@ -1,5 +1,9 @@
 # Deployment, recovery, and cost controls
 
+> Current delivery workflow and capability decisions live in
+> [GITHUB_DELIVERY_PLAN.md](GITHUB_DELIVERY_PLAN.md). This document covers
+> deployment, recovery, privacy, and cost boundaries.
+
 ## Current architecture
 Static React/Vite SPA; curated source data; browser-local commitments, room state,
 and email under `foundra-state-v1`. No backend, database, authentication, or
@@ -44,5 +48,7 @@ procedure; no external backup destination is authorized by this preparation.
 CI has timeouts, cancellation of superseded runs, and read-only token access.
 Dependency PR counts are bounded. No deployments, schedules in CI, uploaded
 artifacts, paid services, or self-hosted runners are added. Dependabot runs weekly.
-Owner must confirm Actions and Vercel quotas/spend limits and alerts. Repository
-rulesets currently report a plan limitation; do not buy a plan or change visibility.
+Owner must confirm Actions and Vercel quotas/spend limits and alerts. The
+2026-10-26 audit found no active repository ruleset; requiring PR review and CI
+checks on `main` is an explicit owner action tracked in issue #19. Do not buy a
+plan, add bypass privileges, or change visibility without separate approval.

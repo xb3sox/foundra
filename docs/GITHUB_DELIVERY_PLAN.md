@@ -1,227 +1,239 @@
-# Foundra delivery backlog and minimal GitHub board
+# Foundra product operating model
 
-> Current dependency status: the later [security remediation verification](SECURITY_REMEDIATION.md)
-> reports a clean install and zero known audit findings. Counts and dependency
-> blockers below describe the earlier baseline, not the current lockfile.
-> Human review and other readiness gates remain open.
+> This is the current authoritative delivery workflow. The filename is retained
+> for existing links. Other documents in `docs/` that describe PR #2–#8 or
+> 2026-10-25 dependency counts are historical snapshots, not current status.
 
-## Publication status — 2026-10-25
+## 1. Product and lifecycle
 
-**Blocked, not created.** Read-only issue enumeration found no standalone issues;
-PRs #2–#8 already exist. A REST create-issue request returned HTTP 403,
-`Resource not accessible by integration`. The user-project GraphQL query returned
-four inaccessible project nodes; the repository has no linked project. Existing
-user projects therefore cannot be deduplicated safely. No project creation,
-project visibility change, permission change, or issue creation succeeded.
+Foundra is a single-player curated React/TypeScript frontend for founders. It
+uses browser-local state only. There is no backend, account system, messaging,
+live matching, automated sourcing, or analytics. Do not turn roadmap ideas into
+implicit current capabilities. See `README.md` for the product boundary.
 
-The connected GitHub integration needs repository Issues read/write and user
-Projects read/write access (or equivalent supported authorization). An ADMIN
-viewerPermission response does not establish those integration capabilities.
-Do not request credentials in chat. Update/reconnect GitHub through Arena.
+Use this lifecycle, adapted to a one-repository product:
 
-This document refines the four drafts in FOLLOW_UP_ISSUES.md into actionable,
-non-overlapping work items. Those earlier drafts are retained as audit history;
-publish the items below, not both sets. Recheck existing resources before writes.
+```text
+Customer problem or engineering risk
+  → concise opportunity / work item
+  → agent-ready issue (Ready)
+  → human or AI implementation
+  → small pull request
+  → deterministic CI
+  → independent human review and merge
+  → deployment smoke check
+  → separately recorded release / outcome evidence
+```
 
-## Product boundary
+No customer adoption, satisfaction, revenue, or production reliability metrics
+are currently collected. Do not invent them. Until a measurement system exists,
+record only observed evidence and verified outcomes.
 
-Foundra remains a single-player, curated React frontend with browser-local state.
-Accounts, matching, messaging, scraping, analytics and backend infrastructure are
-not approved scope. No deadline, budget or formal compliance target is documented.
-Do not create speculative product-roadmap issues for those capabilities.
+## 2. GitHub capability decision
 
-## Minimal board specification
+Verified on 2026-10-26 with the authenticated GitHub integration:
 
-- Owner: xb3sox. Proposed name: **Foundra — Delivery**.
-- Reuse an existing Foundra project if one exists. Otherwise create exactly one.
-- Keep non-public: verify access before linking this private repository or adding
-  private issue content. Do not change existing visibility without approval.
-- Link only xb3sox/foundra. Use the default Title, Assignees and Status fields.
-- One board view, grouped by **Todo / In Progress / Done**.
-- Use title prefixes for priority; no custom fields, sprint dates, milestones,
-  extra views, automations, organization-wide resources or new label taxonomy.
-- Priorities: Critical, High, Medium, Low; advisory severity is not exploitability.
-- Put approval/dependency blockers in issue bodies; avoid a fourth status column.
-- Keep at most one engineering item In Progress. Waiting work stays Todo with
-  the blocker named. Do not assign humans without their agreement.
-- Initially all new items are Todo. Existing PR #8 may be added In Progress;
-  do not add every overlapping PR as a separate delivery item.
-- Done means acceptance evidence and human-reviewed resolution, not a draft PR.
-- Keep issue dependencies as real issue links after IDs exist. Never invent IDs.
+- GitHub Projects v2 exists with table, board, roadmap, fields, workflows,
+  templates, and insights, but this integration cannot list all user projects
+  or run `createProjectV2`: both return `Resource not accessible by integration`.
+  A project-title search found no existing Foundra project, and the repository
+  has no linked project. **No duplicate or half-configured project was created.**
+- GitHub Issues are enabled. Native issue types `Task`, `Bug`, and `Feature`
+  are available. Sub-issues and issue dependencies are available for real
+  hierarchies or blockers, but no artificial hierarchy is needed today.
+- The integration can create issues and labels, but cannot attach labels or
+  issue types to existing issues. Issue forms apply both automatically for
+  future issues created through GitHub's UI. GitHub activates those forms only
+  after they reach the default branch.
+- There is no GraphQL mutation for creating the newer issue-list saved views.
+  Version-controlled search-query links therefore act as the fallback views.
+- Organization-level issue fields and project templates do not apply: this is
+  a user-owned repository with one product.
+- Milestones, iterations, estimates, start/target dates, and roadmap layouts
+  are intentionally unused: no dated release, iteration cadence, or deadline
+  requirement is documented. Add one only when a real commitment exists.
+- Built-in project workflows and Insights are unavailable in this fallback.
+  Deterministic CI and repository activity views are used instead. Project
+  Insights must not be represented as customer-outcome measurement.
 
-## Execution order
+If GitHub is later reconnected with the required user-Projects permission,
+replace the query links with exactly **one** private project named
+`Foundra — Delivery`, link `xb3sox/foundra`, use its default Status field plus
+one Priority field, and keep two views: Backlog and Delivery. Do not create a
+second board or copy unrelated user projects.
 
-Publish all ten scoped issues after access is restored. Start security advisory
-triage and owner-control verification; review URL work already in #4/#7. Then
-storage validation, privacy/recovery, accessibility, browser validation, backup
-verification, and measured performance. Close readiness acceptance last.
-Independent streams can proceed, but production remains gated on human review.
+## 3. Issues-only board
 
-## Issue-ready work items
+Use one status label and one priority label per issue. A human sets priority
+from the issue's evidence and rationale; it is not derived from issue type.
 
-### F01 — [Critical] Triage and remediate dependency audit findings
+| Purpose | Native mechanism |
+| --- | --- |
+| Classification | issue type `Task`, `Bug`, or `Feature` |
+| Flow state | exactly one `status: *` label |
+| Priority | exactly one `priority: P0`–`priority: P3` label |
+| Topic | existing `bug`, `documentation`, `dependencies`, etc. only when useful |
+| Human authority | existing `help wanted` label when an owner decision is required |
+| Blocked work | native issue dependencies, not a `Blocked` status |
+| Decomposition | native sub-issues only when work genuinely has parent/child scope |
+| Dated goals | native milestones only when a real dated goal exists |
 
-Existing baseline: 23 findings, including one Critical and 14 High. Do not treat
-the advisory count as proof of application exploitability.
+Status transitions:
 
-Acceptance:
-- [ ] Refresh audit; classify advisory reachability for runtime and build tools.
-- [ ] Isolate compatible remediation; review shadcn CLI placement, upstream notes
-  and lockfile changes; no force updates or suppressed gate.
-- [ ] Pass typecheck, zero-warning lint, tests, both builds and high-level audit.
+```text
+status: backlog → status: ready → status: in-progress
+  → status: in-review → status: done (then close)
+```
 
-Dependencies: none. Blocks F10. Human security review. Rollback: reviewed revert
-of dependency and lockfile changes. Existing label: bug.
+- **Backlog:** captured, but not sufficiently understood or approved.
+- **Ready:** objective, scope, testable acceptance criteria, constraints, and
+  verification are present; important dependencies and approvals are named.
+- **In Progress:** one person/agent is actively implementing the issue.
+- **In Review:** a focused PR is open and CI has run.
+- **Done:** acceptance criteria, checks, independent review, and documentation
+  are complete. Close the issue. Record deployment and customer-outcome
+  verification separately if they happen later.
 
-### F02 — [High] Validate nested persisted state without losing valid progress
+### Fallback views
 
-Implementation candidate now in PR #8; see [storage recovery](STORAGE_RECOVERY.md).
-Local checks pass. Human policy/data review and browser verification are pending;
-this item is not Done.
+These links are standard issue/PR searches, not custom dashboards. Save them in
+the GitHub Issues UI if desired.
 
-load() currently checks only the top-level object and trusts nested values.
+- [Triage — open issues with no label](https://github.com/xb3sox/foundra/issues?q=is%3Aissue+is%3Aopen+no%3Alabel)
+- [Backlog](https://github.com/xb3sox/foundra/issues?q=is%3Aissue+is%3Aopen+label%3A%22status%3A+backlog%22)
+- [Ready / agent queue](https://github.com/xb3sox/foundra/issues?q=is%3Aissue+is%3Aopen+label%3A%22status%3A+ready%22)
+- [In Progress](https://github.com/xb3sox/foundra/issues?q=is%3Aissue+is%3Aopen+label%3A%22status%3A+in-progress%22)
+- [In Review issues](https://github.com/xb3sox/foundra/issues?q=is%3Aissue+is%3Aopen+label%3A%22status%3A+in-review%22)
+- [Open PRs awaiting review](https://github.com/xb3sox/foundra/pulls?q=is%3Apr+is%3Aopen)
+- [Done / closed issues](https://github.com/xb3sox/foundra/issues?q=is%3Aissue+is%3Aclosed)
+- [Repository Pulse](https://github.com/xb3sox/foundra/pulse) and [CI history](https://github.com/xb3sox/foundra/actions/workflows/ci.yml)
 
-Acceptance:
-- [ ] Failing regression tests cover null/wrong maps, invalid commitments/counts,
-  malformed rooms, corrupt JSON and valid partial/legacy data.
-- [ ] Validate the storage boundary with a documented partial recovery policy;
-  do not silently discard valid progress or introduce a breaking migration.
-- [ ] Verify reload persistence, error paths and all quality checks.
+Pulse and CI history show work activity and validation, not customer value or
+production reliability. No project charts, burndowns, or velocity claims are
+implied.
 
-Dependencies: coordinate recovery behavior with F05. Human data/security review.
-Rollback: reviewed compatible code revert; do not claim it restores browser data.
-Existing label: bug.
+## 4. Issue contract and quality gates
 
-### F03 — [High] Resolve overlapping external-link security PRs
+Use the two issue forms in `.github/ISSUE_TEMPLATE/`. They default to
+`status: backlog` and set native issue types. A maintainer applies the matching
+priority label during triage and moves the issue to `status: ready` only when
+the Definition of Ready is met.
 
-Existing PRs #4 and #7 address the same trust boundary. Do not implement a third
-competing fix or automatically close either author's work.
+**Definition of Ready:** the problem and outcome are clear, scope is
+actionable, acceptance criteria are observable, constraints and approvals are
+named, and important dependencies are identified.
 
-Acceptance:
-- [ ] Compare current diffs and tests; establish affected callers and schemes.
-- [ ] Human selects or requests a consolidated solution; cover allowed HTTPS,
-  rejected unsafe schemes and malformed input through focused regression tests.
-- [ ] All applicable checks pass; document which PR supersedes which and why.
+**Definition of Done:** those acceptance criteria are satisfied; typecheck,
+zero-warning lint, tests, both builds, and the high-level dependency audit
+pass; required human review is complete; security/privacy implications are
+reviewed; relevant docs are updated; and rollout or rollback evidence is
+recorded. Deployment and outcome verification are separate checkboxes when
+they occur after merge.
 
-Dependencies: none; reuse #4/#7. Human security review; no self-merge.
-Rollback: reviewed revert with unsafe input remaining disabled where needed.
-Existing label: bug.
+Required local commands are in `AGENTS.md` and `CONTRIBUTING.md`. CI runs the
+same gates as `quality` and `dependencies`. A green CI run is necessary, never
+sufficient to self-merge.
 
-### F04 — [High] Verify review, security and deployment protections
+## 5. AI-native workflow
 
-GitHub API access is incomplete; Preview/Production environments have no reported
-protection rules. This does not establish Vercel-side policy.
+`AGENTS.md` is the canonical cross-agent repository context.
+`.github/copilot-instructions.md` is a concise compatibility pointer for
+GitHub Copilot Chat. `.agents/` contains reviewed, instruction-only skills with
+source provenance; they are not executable hooks, registered custom agents, or
+extra permissions.
 
-Acceptance:
-- [ ] Owner records available plan controls, branch review/check enforcement,
-  security/secret scanning, Actions permissions/runners and CODEOWNERS nominees.
-- [ ] Verify Vercel production branch, preview exposure, approvals, quotas/spend
-  alerts; document compensating manual controls where features are unavailable.
-- [ ] Obtain explicit approval before permissions, billing, visibility or
-  production changes; verify approved changes afterward.
+An AI agent may investigate the repository, refine an issue, detect
+duplicates, propose a plan, implement a Ready issue, add tests/docs, investigate
+CI failures, and prepare a PR. Use deterministic CI for validation. No
+scheduled agentic workflow, custom reviewer agent, or AI write automation is
+currently justified for this repository's scale.
 
-Dependencies: owner access. Blocks F10. No upgrades, deployment or new services
-preauthorized. Rollback plan must accompany each proposed settings change.
-Existing labels: documentation, help wanted.
+Humans retain authority over ambiguous product decisions, dataset schema or
+branding changes, dependency changes, security settings, protected-branch
+policy, secrets, paid capabilities, production deployment, releases, and
+merges. AI output is never automatically correct and must not bypass
+independent review or CI.
 
-### F05 — [Medium] Define local email privacy and state recovery behavior
+## 6. Delivery and security controls
 
-Email and validation progress live in browser storage, without server recovery.
+Current repository-native controls:
 
-Acceptance:
-- [ ] Confirm necessity and user-facing purpose of email collection and define
-  retention/deletion expectations without inventing compliance claims.
-- [ ] Specify minimal, understandable deletion/recovery behavior and irreversible
-  consequences; preserve valid state when recovering malformed entries.
-- [ ] Implement only approved behavior with tests and accurate user-facing copy;
-  no analytics, backend or external data transfer added.
+- SHA-pinned `actions/checkout` and `actions/setup-node`, Node 22,
+  `ubuntu-24.04`, read-only workflow token, timeouts, and concurrency
+  cancellation.
+- Typecheck, zero-warning lint, unit tests, both production builds, and
+  `npm audit --audit-level=high`.
+- Weekly bounded Dependabot version updates for npm and GitHub Actions.
+- Security headers and SPA rewrites in `vercel.json`.
+- Structured issue/PR templates and human-review expectations.
 
-Dependencies: owner product decision; coordinate F02. Human data/privacy review.
-Rollback: revert UI/code through review; deletion is not reversible.
-Existing label: enhancement.
+At audit time, no active repository ruleset or branch rule was visible, private
+vulnerability reporting was disabled, and the integration was forbidden from
+enabling security settings. The following therefore require explicit owner
+approval and are tracked in issue #19:
 
-### F06 — [Medium] Complete keyboard and accessibility validation
+1. Enforce PR review and `quality` / `dependencies` checks on `main`.
+2. Enable private vulnerability reporting, Dependabot alerts, and Dependabot
+   security updates.
+3. Verify secret scanning and push protection for this public repository.
+4. Verify Vercel production-branch and preview exposure settings.
 
-Existing PRs #2/#5 address search and room-checklist accessibility.
+Do not weaken a security control, create bypass privileges, buy a plan, or
+change repository visibility without that approval.
 
-Acceptance:
-- [ ] Review/reuse those PRs, covering search clear, labels, checklist state,
-  dialog focus, keyboard operation and visible focus across core pages.
-- [ ] Record browser/manual evidence and focused automated regression checks;
-  fix verified defects without an unrelated redesign.
-- [ ] Check narrow viewports and contrast; record remaining limitations honestly.
+## 7. Current seed issues and one-time owner action
 
-Dependencies: coordinate existing #2/#5; no duplicate implementation.
-Human UI review. Rollback: reviewed revert retaining accessible behavior.
-Existing label: bug.
+Five genuine open gaps were published as issues #19–#23. The integration could
+create their bodies but could not apply their metadata. Future UI-created
+issues receive metadata from the forms automatically. For these five, the owner
+should apply the following once through the issue sidebar or a properly scoped
+token:
 
-### F07 — [Medium] Validate end-to-end flows and deployment smoke checks
+| Issue | Type | Status | Priority | Extra |
+| --- | --- | --- | --- | --- |
+| [#19](https://github.com/xb3sox/foundra/issues/19) | Task | `status: backlog` | `priority: P1` | `help wanted` |
+| [#20](https://github.com/xb3sox/foundra/issues/20) | Task | `status: ready` | `priority: P1` | — |
+| [#21](https://github.com/xb3sox/foundra/issues/21) | Task | `status: backlog` | `priority: P2` | `help wanted` |
+| [#22](https://github.com/xb3sox/foundra/issues/22) | Task | `status: backlog` | `priority: P2` | `help wanted` |
+| [#23](https://github.com/xb3sox/foundra/issues/23) | Task | `status: ready` | `priority: P3` | — |
 
-Acceptance:
-- [ ] Test board filters, detail, commitments, room checklist, reload persistence,
-  unknown routes and browser history using clean and persisted states.
-- [ ] On an authorized preview, verify direct deep links, assets and configured
-  security/cache headers; record browser/version and outcome.
-- [ ] Capture repeatable steps or a small justified test suite; no production
-  mutations, sensitive localStorage dumps or new paid service.
+Use the Triage view above to find any unlabeled issue. Do not create duplicate
+issues to work around missing metadata.
 
-Dependencies: F02, F03, F06 for final signoff. Blocks F10.
-Human authorization for external environments; fix failures before acceptance.
-Existing label: enhancement.
+## 8. Meaningful metrics
 
-### F08 — [Medium] Verify source backup and rollback recovery
+Observe only what GitHub and the product actually record:
 
-Acceptance:
-- [ ] Owner approves a private backup destination and retention/access policy;
-  distinguish code/data seeds from unsynced browser progress.
-- [ ] Perform an authorized source restore drill and record evidence without
-  exposing secrets or copying user browser data.
-- [ ] Verify known-good deployment identifiers and rollback steps through an
-  authorized exercise or explicitly document an untested production procedure.
+- Engineering: PR lead time and CI/change-failure evidence from PRs, Actions,
+  and deployment history.
+- Quality: escaped defects and browser/accessibility smoke evidence linked to
+  issues.
+- AI: completed assigned issues, validation success, human rework, and cost
+  only when those are actually measured.
+- Product: adoption, task success, and feedback only after an approved,
+  privacy-conscious measurement method exists.
 
-Dependencies: F04 owner access. No external transfer authorized by issue creation.
-No paid storage or production rollback without approval.
-Existing labels: documentation, help wanted.
+No vanity dashboards, velocity targets, or maturity scores are part of this
+operating model.
 
-### F09 — [Low] Measure bundle and filtering performance before optimization
+## 9. Capability coverage summary
 
-Existing >500 kB bundle warning; overlapping filter PRs #3/#6.
+| Area | Decision |
+| --- | --- |
+| Issues, issue types, labels, dependencies, sub-issues | Available; use native forms and metadata. |
+| Projects, views, custom fields, workflows, Insights | Available on GitHub but blocked for this integration; intentionally unused. Issues fallback implemented. |
+| Milestones, iterations, estimates, dates, roadmap | Available but intentionally deferred until a dated commitment exists. |
+| Cross-repository coordination | Not applicable to this one-repository product. |
+| GitHub Actions and Dependabot | Used for deterministic quality/dependency gates. |
+| Agentic workflows and custom agents | Available but rejected for now: no demonstrated recurring value; human-controlled agents plus CI are simpler. |
+| Insights/reporting | Repository Pulse/CI used as activity evidence; no customer-outcome claim. |
+| Governance/security | In-repo controls implemented; remote branch/security settings await owner approval (#19). |
 
-Acceptance:
-- [ ] Record repeatable baseline size and representative board interaction metrics.
-- [ ] Compare #3/#6 and choose only measured, readable improvements; do not create
-  a third competing implementation or add speculative infrastructure.
-- [ ] Prove behavior parity and document before/after results; close with evidence
-  if no optimization is warranted.
+## 10. Reference documentation
 
-Dependencies: critical correctness work takes priority. Human chooses overlapping
-PRs. Rollback: reviewed revert. Existing label: enhancement.
-
-### F10 — [High] Complete independent release-readiness acceptance
-
-This is a final gate, not a duplicate CI implementation task. PR #8 already adds
-quality gates, bounded Dependabot updates and operational guidance.
-
-Acceptance:
-- [ ] Independent human reviews security/data changes and PR #8; no agent approval
-  or merge substitutes for human review. Verify one PR CI run after trigger fix.
-- [ ] F01–F08 have verified evidence or explicit owner-approved dispositions;
-  confirm quality, audit, browser and deployment checks apply and pass.
-- [ ] Owner records go/no-go, known-good rollback target and authorized release
-  scope. Do not deploy or label production-ready when gates remain unresolved.
-
-Dependencies: F01–F08; F09 nonblocking unless measurements establish a defect.
-Existing labels: documentation, help wanted. No automatic merge/deployment.
-
-## Publication checklist
-
-- [ ] Restore integration access and list all existing owner/repo projects.
-- [ ] Recheck issues including closed issues and existing PR overlap.
-- [ ] Reuse or create the one non-public project with the minimal fields/view.
-- [ ] Create only missing F01–F10 issues; replace dependency codes with real links.
-- [ ] Add issues to Todo; optionally add PR #8 In Progress; no false Done claims.
-- [ ] Read back each issue, item, status, project visibility and repository link.
-- [ ] Record real URLs and IDs here; report any unsupported board configuration.
-
-No publication checkbox is currently complete; no GitHub issue/project URL is
-claimed. Do not retry writes indefinitely while authorization is denied.
+- [About Projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects)
+- [Best practices for Projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/best-practices-for-projects)
+- [Issue forms syntax](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms)
+- [Issue types, sub-issues, and dependencies](https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/about-issues)
+- [Copilot custom-instruction support](https://docs.github.com/en/copilot/reference/custom-instructions-support)
+- [Available rules for rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets)

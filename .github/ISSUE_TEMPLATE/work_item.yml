@@ -1,0 +1,111 @@
+name: Work item
+description: Customer problem, engineering risk, or scoped improvement ready for triage.
+title: "[Work item]: "
+labels: ["status: backlog"]
+type: task
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for product or engineering work. Foundra is a static,
+        single-player demo: do not assume accounts, messaging, matching, live
+        scraping, analytics, or a backend exist. Change the issue type to
+        `Feature` after creation when the work is a new product capability.
+
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: What outcome must be achieved?
+      placeholder: Enable a maintainer to verify...
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What customer problem, risk, or evidence makes this valuable?
+      placeholder: Link observed evidence, a customer report, CI failure, or verified gap.
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and exclusions
+      description: What may change, and what is deliberately out of scope?
+      value: |
+        In scope:
+        -
+
+        Out of scope:
+        -
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority proposal
+      description: Explain the value/risk below. A maintainer applies the matching label.
+      options:
+        - P0 - critical security, reliability, or data-loss risk
+        - P1 - high-value risk reduction or delivery control
+        - P2 - medium product or engineering improvement
+        - P3 - low-risk cleanup or measurement
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Observable, testable conditions that define success.
+      value: |
+        - [ ]
+        - [ ]
+    validations:
+      required: true
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints
+      description: Architecture, security, privacy, compatibility, performance, or approval constraints.
+      placeholder: Preserve browser-local state; no paid service, new runtime dependency, or production mutation.
+    validations:
+      required: false
+
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification and rollback
+      description: How will completion and reversibility be proven?
+      value: |
+        - [ ] Required checks and focused tests pass
+        - [ ] Browser/accessibility evidence recorded where relevant
+        - [ ] Documentation reflects the change
+        - [ ] Rollback path or no-op decision recorded
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies and approvals
+      description: Link blocking issues/PRs and name any required human decision.
+      placeholder: None known. Human approval is required for...
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: ready
+    attributes:
+      label: Definition of Ready
+      description: Confirm before submission.
+      options:
+        - label: I searched existing issues and open PRs.
+          required: true
+        - label: The acceptance criteria are observable and testable.
+          required: true
