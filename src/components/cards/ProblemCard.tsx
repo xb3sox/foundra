@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -11,7 +12,12 @@ import { useRouter } from "../../lib/router";
 import { useLiveCounts, useStore } from "../../lib/store";
 import { SignalBadge } from "../ui/SignalBadge";
 
-export function ProblemCard({
+/**
+ * Performance Optimization:
+ * Wrap ProblemCard with React.memo to prevent unnecessary re-renders of cards
+ * when parent state (such as filter inputs) updates or non-interactive state changes.
+ */
+export const ProblemCard = memo(function ProblemCard({
   problem,
   index,
   onCommit,
@@ -106,7 +112,7 @@ export function ProblemCard({
       </div>
     </motion.article>
   );
-}
+});
 
 function CommitChip({
   icon: Icon,
