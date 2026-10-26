@@ -1,5 +1,10 @@
 # Dependency security remediation — 2026-10-25
 
+> **Historical remediation evidence — 2026-10-25.** The dependency changes are
+> merged and the current high-level audit is clean. Current remote security
+> settings still require owner action in issue #19; see
+> [GITHUB_DELIVERY_PLAN.md](GITHUB_DELIVERY_PLAN.md) for current status.
+
 ## Findings and fixes
 
 The pre-remediation lockfile had 23 audit findings: 1 Critical, 14 High,
@@ -54,9 +59,12 @@ still needed. A clean dependency scan is not proof of application security.
 
 ## Backlog disposition and remaining risks
 
-F01 in GITHUB_DELIVERY_PLAN.md is **implemented locally and awaiting remote CI and
-human security review**, not closed. No GitHub issue was published: the previously
-verified integration permissions block issue/project writes and project discovery.
+F01 in the historical delivery plan was **implemented locally and awaiting
+remote CI and human security review** at that time, not closed. No GitHub issue
+was published then: the integration permissions available on 2026-10-25 blocked
+issue and project writes and full project discovery. Current issue creation and
+metadata capabilities are documented in
+[GITHUB_DELIVERY_PLAN.md](GITHUB_DELIVERY_PLAN.md).
 
 F02–F10 remain open. A later [storage recovery patch](STORAGE_RECOVERY.md)
 adds hydration validation and regression tests; its session-only recovery policy

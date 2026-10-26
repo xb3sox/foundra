@@ -1,13 +1,18 @@
 # Follow-up issue drafts
 
+> **Historical drafts — do not publish.** Superseded by
+> [GITHUB_DELIVERY_PLAN.md](GITHUB_DELIVERY_PLAN.md) and GitHub issues #19–#23.
+> Issue creation is now available, but issue metadata writes for this integration
+> are not. Publishing both sets would create duplicates.
+
 > Current dependency status: the later [security remediation verification](SECURITY_REMEDIATION.md)
 > reports a clean install and zero known audit findings. Counts and dependency
 > blockers below describe the earlier baseline, not the current lockfile.
 > Human review and other readiness gates remain open.
 
 GitHub createIssue failed with “Resource not accessible by integration” for all
-four drafts on 2026-10-25. No issue was created. Check for duplicates before
-publishing these when issue-write access is available.
+four drafts on 2026-10-25. No issue was created. These drafts are retained as
+audit history only; publishing them would duplicate the current issues #19–#23.
 
 ## Critical — Triage and remediate dependency audit findings
 Existing audit: 23 findings (1 critical, 14 high, 7 moderate, 1 low).

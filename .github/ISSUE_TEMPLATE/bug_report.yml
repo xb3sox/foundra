@@ -1,0 +1,113 @@
+name: Bug report
+description: Reproducible product or engineering defect with testable acceptance criteria.
+title: "[Bug]: "
+labels: ["status: backlog"]
+type: bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping verify Foundra. Do not include secrets, real customer
+        data, or a raw `localStorage` dump; saved state may contain an email.
+        Search existing issues and open PRs before submitting.
+
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: What must be fixed, in one or two sentences?
+      placeholder: Restore the expected behavior for...
+    validations:
+      required: true
+
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+      description: State the observable difference. Link reproducible evidence where available.
+      placeholder: |
+        Expected:
+        Actual:
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Include browser/version, route, clean/persisted state, and sanitized steps.
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority proposal
+      description: Explain the customer or engineering impact below. A maintainer applies the matching label.
+      options:
+        - P0 - critical security, reliability, or data-loss risk
+        - P1 - high-value risk reduction or urgent defect
+        - P2 - medium product or engineering improvement
+        - P3 - low-risk cleanup or measurement
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Context and impact
+      description: Why does this matter to founders using the board or validation room?
+      placeholder: Affected users, affected flow, frequency, and evidence.
+    validations:
+      required: true
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints
+      description: Architecture, privacy, security, compatibility, or performance constraints.
+      placeholder: Preserve valid localStorage progress; no backend or external data transfer.
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Observable conditions that define success.
+      value: |
+        - [ ] Expected behavior is restored
+        - [ ] A focused regression test fails before and passes after the fix
+        - [ ] Existing behavior and accessibility are preserved
+    validations:
+      required: true
+
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification
+      description: Commands, browser checks, and evidence required before Done.
+      value: |
+        - [ ] `npm run typecheck`
+        - [ ] `npm run lint -- --max-warnings=0`
+        - [ ] `npm test`
+        - [ ] `npm run build` and `npm run build:single`
+        - [ ] `npm audit --audit-level=high`
+        - [ ] Browser/accessibility check where relevant
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: ready
+    attributes:
+      label: Definition of Ready
+      description: Confirm before submission.
+      options:
+        - label: I searched existing issues and open PRs.
+          required: true
+        - label: I removed secrets and private browser-state data.
+          required: true

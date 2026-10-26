@@ -1,5 +1,9 @@
 # PR #8 review follow-up — 2026-10-25
 
+> **Historical snapshot — 2026-10-25.** PR #8 is closed and merged. See
+> [GITHUB_DELIVERY_PLAN.md](GITHUB_DELIVERY_PLAN.md) for the current operating
+> model and GitHub issues #19–#23 for verified open work.
+
 > Current dependency status: the later [security remediation verification](SECURITY_REMEDIATION.md)
 > reports a clean install and zero known audit findings. Counts and dependency
 > blockers below describe the earlier baseline, not the current lockfile.

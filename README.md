@@ -51,7 +51,11 @@ React 19, TypeScript, Vite 7, Tailwind CSS 4, shadcn/ui (Radix), Framer Motion, 
 
 ## Engineering and operations
 
-See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md),
-[operations and rollback](docs/OPERATIONS.md), and the
-[repository preparation audit](docs/REPOSITORY_AUDIT.md).
+Start with the [product operating model](docs/GITHUB_DELIVERY_PLAN.md) for the
+GitHub-native issue workflow, agent-ready templates, quality gates, and AI
+authority boundaries. Also see [CONTRIBUTING.md](CONTRIBUTING.md),
+[SECURITY.md](SECURITY.md), [AGENTS.md](AGENTS.md), and
+[operations and rollback](docs/OPERATIONS.md).
 Reviewed project-local agent skills and their provenance are in `.agents/`.
+Historical audit and remediation notes in `docs/` are snapshots, not current
+status.
