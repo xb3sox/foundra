@@ -54,7 +54,11 @@ export function CommitmentModal({
       addActivity(problem.id, `You ${verb}`);
     }
     const trimmed = email.trim();
-    if (trimmed && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+    if (
+      trimmed.length > 0 &&
+      trimmed.length <= 254 &&
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)
+    ) {
       setEmail(trimmed);
     }
   };
@@ -98,6 +102,7 @@ export function CommitmentModal({
           <FieldLabel>Email (optional)</FieldLabel>
           <TextInput
             type="email"
+            maxLength={254}
             placeholder="you@email.com"
             value={email}
             onChange={(e) => setEmailValue(e.target.value)}
