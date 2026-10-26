@@ -7,9 +7,10 @@ commitment exists yet.
 Do not post secrets, exploit payloads containing personal data, or sensitive
 security details in public issues. Check whether GitHub private vulnerability
 reporting is available under the repository's Security tab. It was disabled at
-the 2026-10-26 audit and is tracked for owner action in issue #19; if it is
-still unavailable, contact the repository owner through an established private
-channel before sharing details. No response-time SLA is currently promised.
+the 2026-10-26 audit and is tracked for owner action in issue #19; enabling it
+requires an admin-capable GitHub connection or the GitHub UI. If it is still
+unavailable, contact the repository owner through an established private channel
+before sharing details. No response-time SLA is currently promised.
 
 Contributors must review dependencies, validate storage and URL trust boundaries,
 keep credentials out of source and browser bundles, and obtain human review for

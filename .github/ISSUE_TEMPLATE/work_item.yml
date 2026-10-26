@@ -2,15 +2,15 @@ name: Work item
 description: Customer problem, engineering risk, or scoped improvement ready for triage.
 title: "[Work item]: "
 labels: ["status: backlog"]
-type: task
 body:
   - type: markdown
     attributes:
       value: |
         Use this form for product or engineering work. Foundra is a static,
         single-player demo: do not assume accounts, messaging, matching, live
-        scraping, analytics, or a backend exist. Change the issue type to
-        `Feature` after creation when the work is a new product capability.
+        scraping, analytics, or a backend exist. Use the title to make clear
+        when the work is a new product capability; native issue types are not
+        available on this user-owned repository.
 
   - type: textarea
     id: objective
