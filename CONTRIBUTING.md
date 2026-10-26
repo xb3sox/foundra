@@ -6,8 +6,9 @@ messaging, automated sourcing, analytics, or a backend already exist. Read
 documented; clarify those before expanding product scope.
 
 Read the [product operating model](docs/GITHUB_DELIVERY_PLAN.md) before opening
-an issue or starting work. Use the structured GitHub issue forms, native issue
-types, status/priority labels, and the Definition of Ready/Done. Start
+an issue or starting work. Use the structured GitHub issue forms,
+status/priority labels, and the Definition of Ready/Done. Native issue types are
+organization-level and unavailable on this user-owned repository. Start
 implementation only when an issue is Ready and important approvals are named.
 
 Use Node 22 and `npm ci --ignore-scripts --no-fund`. Run:

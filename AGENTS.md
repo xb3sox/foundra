@@ -47,9 +47,9 @@ CI (`.github/workflows/ci.yml`) runs these as `quality` + `dependencies`. A red
 
 - Start only from an issue that is understood, has testable acceptance criteria,
   and is marked `status: ready`. Clarify ambiguity before implementation.
-- Use native issue types, status/priority labels, dependencies, and sub-issues
-  as documented in `docs/GITHUB_DELIVERY_PLAN.md`; do not invent parallel
-  metadata or a second board.
+- Use the status/priority labels, dependencies, and sub-issues documented in
+  `docs/GITHUB_DELIVERY_PLAN.md`; native issue types are organization-level and
+  unavailable here. Do not invent parallel metadata or a second board.
 - **One concern per PR.** Don't bundle a dataset rewrite, dependency changes,
   and docs into one branch.
 - **Check open issues and PRs before you start.** If an open PR already fixes

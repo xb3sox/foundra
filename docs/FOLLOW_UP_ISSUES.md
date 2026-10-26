@@ -2,8 +2,9 @@
 
 > **Historical drafts — do not publish.** Superseded by
 > [GITHUB_DELIVERY_PLAN.md](GITHUB_DELIVERY_PLAN.md) and GitHub issues #19–#23.
-> Issue creation is now available, but issue metadata writes for this integration
-> are not. Publishing both sets would create duplicates.
+> Issue creation and label backfill are now handled; native issue types are not
+> available on this user-owned repository. Publishing both sets would create
+> duplicates.
 
 > Current dependency status: the later [security remediation verification](SECURITY_REMEDIATION.md)
 > reports a clean install and zero known audit findings. Counts and dependency

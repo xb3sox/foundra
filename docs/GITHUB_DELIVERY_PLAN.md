@@ -38,13 +38,16 @@ Verified on 2026-10-26 with the authenticated GitHub integration:
   or run `createProjectV2`: both return `Resource not accessible by integration`.
   A project-title search found no existing Foundra project, and the repository
   has no linked project. **No duplicate or half-configured project was created.**
-- GitHub Issues are enabled. Native issue types `Task`, `Bug`, and `Feature`
-  are available. Sub-issues and issue dependencies are available for real
-  hierarchies or blockers, but no artificial hierarchy is needed today.
-- The integration can create issues and labels, but cannot attach labels or
-  issue types to existing issues. Issue forms apply both automatically for
-  future issues created through GitHub's UI. GitHub activates those forms only
-  after they reach the default branch.
+- GitHub Issues are enabled. Native issue types are organization-level and
+  are not currently applicable to this user-owned repository; REST issue-type
+  definitions are exposed but attempts to set a type are silently dropped.
+  Sub-issues and issue dependencies remain available for real hierarchies or
+  blockers, but no artificial hierarchy is needed today.
+- The Arena integration can create issues and labels but cannot attach labels
+  to existing issues. A one-time, narrowly scoped Actions workflow applied the
+  documented labels to the seed issues. Future UI-created issues receive
+  `status: backlog` from the forms automatically; those forms are now active on
+  the default branch.
 - There is no GraphQL mutation for creating the newer issue-list saved views.
   Version-controlled search-query links therefore act as the fallback views.
 - Organization-level issue fields and project templates do not apply: this is
@@ -56,8 +59,9 @@ Verified on 2026-10-26 with the authenticated GitHub integration:
   Deterministic CI and repository activity views are used instead. Project
   Insights must not be represented as customer-outcome measurement.
 
-If GitHub is later reconnected with the required user-Projects permission,
-replace the query links with exactly **one** private project named
+If GitHub is later reconnected with user-Projects and repository
+Administration:write permissions, replace the query links with exactly **one**
+private project named
 `Foundra — Delivery`, link `xb3sox/foundra`, use its default Status field plus
 one Priority field, and keep two views: Backlog and Delivery. Do not create a
 second board or copy unrelated user projects.
@@ -65,11 +69,11 @@ second board or copy unrelated user projects.
 ## 3. Issues-only board
 
 Use one status label and one priority label per issue. A human sets priority
-from the issue's evidence and rationale; it is not derived from issue type.
+from the issue's evidence and rationale; it is not derived from the form name.
 
-| Purpose | Native mechanism |
+| Purpose | Mechanism |
 | --- | --- |
-| Classification | issue type `Task`, `Bug`, or `Feature` |
+| Classification | issue form name and title; native issue types are organization-level and unavailable here |
 | Flow state | exactly one `status: *` label |
 | Priority | exactly one `priority: P0`–`priority: P3` label |
 | Topic | existing `bug`, `documentation`, `dependencies`, etc. only when useful |
@@ -115,9 +119,10 @@ implied.
 ## 4. Issue contract and quality gates
 
 Use the two issue forms in `.github/ISSUE_TEMPLATE/`. They default to
-`status: backlog` and set native issue types. A maintainer applies the matching
-priority label during triage and moves the issue to `status: ready` only when
-the Definition of Ready is met.
+`status: backlog`; the form name/title distinguishes bug reports from work
+items because native issue types are unavailable on this user-owned repository.
+A maintainer applies the matching priority label during triage and moves the
+issue to `status: ready` only when the Definition of Ready is met.
 
 **Definition of Ready:** the problem and outcome are clear, scope is
 actionable, acceptance criteria are observable, constraints and approvals are
@@ -168,11 +173,13 @@ Current repository-native controls:
 - Structured issue/PR templates and human-review expectations.
 
 At audit time, no active repository ruleset or branch rule was visible, private
-vulnerability reporting was disabled, and the integration was forbidden from
-enabling security settings. The following therefore require explicit owner
-approval and are tracked in issue #19:
+vulnerability reporting was disabled, and the integration received HTTP 403 for
+security settings, ruleset creation, and classic branch protection. Reconnect
+GitHub in Arena with repository Administration:write permission, or perform the
+following in the GitHub UI. They are tracked in issue #19:
 
-1. Enforce PR review and `quality` / `dependencies` checks on `main`.
+1. Enforce the PR workflow and `quality` / `dependencies` checks on `main`.
+   Independent human review remains a policy until a second reviewer exists.
 2. Enable private vulnerability reporting, Dependabot alerts, and Dependabot
    security updates.
 3. Verify secret scanning and push protection for this public repository.
@@ -181,21 +188,13 @@ approval and are tracked in issue #19:
 Do not weaken a security control, create bypass privileges, buy a plan, or
 change repository visibility without that approval.
 
-## 7. Current seed issues and one-time owner action
+## 7. Current seed issues
 
-Five genuine open gaps were published as issues #19–#23. The integration could
-create their bodies but could not apply their metadata. Future UI-created
-issues receive metadata from the forms automatically. For these five, the owner
-should apply the following once through the issue sidebar or a properly scoped
-token:
-
-| Issue | Type | Status | Priority | Extra |
-| --- | --- | --- | --- | --- |
-| [#19](https://github.com/xb3sox/foundra/issues/19) | Task | `status: backlog` | `priority: P1` | `help wanted` |
-| [#20](https://github.com/xb3sox/foundra/issues/20) | Task | `status: ready` | `priority: P1` | — |
-| [#21](https://github.com/xb3sox/foundra/issues/21) | Task | `status: backlog` | `priority: P2` | `help wanted` |
-| [#22](https://github.com/xb3sox/foundra/issues/22) | Task | `status: backlog` | `priority: P2` | `help wanted` |
-| [#23](https://github.com/xb3sox/foundra/issues/23) | Task | `status: ready` | `priority: P3` | — |
+Five genuine open gaps were published as issues #19–#23. Their documented
+status/priority labels have been applied and independently verified. Native
+issue types are unavailable on this user-owned repository, so classification
+uses the issue form name/title rather than duplicate labels. Future UI-created
+issues receive `status: backlog` automatically.
 
 Use the Triage view above to find any unlabeled issue. Do not create duplicate
 issues to work around missing metadata.
@@ -220,7 +219,7 @@ operating model.
 
 | Area | Decision |
 | --- | --- |
-| Issues, issue types, labels, dependencies, sub-issues | Available; use native forms and metadata. |
+| Issues, labels, dependencies, sub-issues | Available; issue types are organization-level and intentionally unused. |
 | Projects, views, custom fields, workflows, Insights | Available on GitHub but blocked for this integration; intentionally unused. Issues fallback implemented. |
 | Milestones, iterations, estimates, dates, roadmap | Available but intentionally deferred until a dated commitment exists. |
 | Cross-repository coordination | Not applicable to this one-repository product. |
@@ -235,5 +234,6 @@ operating model.
 - [Best practices for Projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/best-practices-for-projects)
 - [Issue forms syntax](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms)
 - [Issue types, sub-issues, and dependencies](https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/about-issues)
+- [Managing issue types in an organization](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/managing-issue-types-in-an-organization)
 - [Copilot custom-instruction support](https://docs.github.com/en/copilot/reference/custom-instructions-support)
 - [Available rules for rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets)

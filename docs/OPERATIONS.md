@@ -49,6 +49,8 @@ CI has timeouts, cancellation of superseded runs, and read-only token access.
 Dependency PR counts are bounded. No deployments, schedules in CI, uploaded
 artifacts, paid services, or self-hosted runners are added. Dependabot runs weekly.
 Owner must confirm Actions and Vercel quotas/spend limits and alerts. The
-2026-10-26 audit found no active repository ruleset; requiring PR review and CI
-checks on `main` is an explicit owner action tracked in issue #19. Do not buy a
-plan, add bypass privileges, or change visibility without separate approval.
+2026-10-26 audit found no active repository ruleset; the current integration
+receives HTTP 403 for ruleset/branch-protection writes. Requiring PR workflow and
+CI checks on `main` therefore needs an admin-capable connection or GitHub UI and
+is tracked in issue #19. Do not buy a plan, add bypass privileges, or change
+visibility without separate approval.
