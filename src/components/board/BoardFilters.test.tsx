@@ -38,4 +38,22 @@ describe("BoardFilters component", () => {
 
     expect(screen.queryByRole("button", { name: "Clear search query" })).not.toBeInTheDocument();
   });
+
+  it("clears query when Escape key is pressed in search input", () => {
+    const handleChange = vi.fn();
+    const filter = { ...EMPTY_FILTER, query: "payment" };
+
+    render(
+      <BoardFilters
+        value={filter}
+        onChange={handleChange}
+        industries={["Fintech"]}
+        signals={["Strong signal"]}
+      />
+    );
+
+    const input = screen.getByRole("textbox", { name: "Search problems" });
+    fireEvent.keyDown(input, { key: "Escape" });
+    expect(handleChange).toHaveBeenCalledWith({ ...filter, query: "" });
+  });
 });

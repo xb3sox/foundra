@@ -12,12 +12,14 @@ export const chipOff =
 export function FieldLabel({
   index,
   children,
+  htmlFor,
 }: {
   index?: number;
   children: React.ReactNode;
+  htmlFor?: string;
 }) {
   return (
-    <Label className="mb-2 flex items-center gap-2 text-sm font-medium text-ink">
+    <Label htmlFor={htmlFor} className="mb-2 flex items-center gap-2 text-sm font-medium text-ink">
       {index != null && (
         <span className="flex h-5 w-5 items-center justify-center rounded-full bg-black/[0.06] text-[11px] font-semibold text-ink-soft tabular-nums">
           {index}
