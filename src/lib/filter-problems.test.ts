@@ -36,6 +36,15 @@ describe("filterProblems", () => {
     expect(results.some((p) => p.industry === "Healthcare")).toBe(true);
   });
 
+  test("query matches across field boundaries", () => {
+    const firstProblem = problems[0];
+    const titleWords = firstProblem.title.split(" ");
+    const painWords = firstProblem.pain.split(" ");
+    const boundaryQuery = `${titleWords[titleWords.length - 1]} ${painWords[0]}`;
+    const results = filterProblems(problems, filter({ query: boundaryQuery }));
+    expect(results.some((p) => p.id === firstProblem.id)).toBe(true);
+  });
+
   test("query is whitespace-trimmed", () => {
     expect(filterProblems(problems, filter({ query: "   " }))).toHaveLength(
       problems.length
