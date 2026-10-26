@@ -31,6 +31,11 @@ export function BoardFilters({
             type="text"
             value={value.query}
             onChange={(e) => onChange({ ...value, query: e.target.value })}
+            onKeyDown={(e) => {
+              if (e.key === "Escape" && value.query) {
+                onChange({ ...value, query: "" });
+              }
+            }}
             placeholder="Search problems…"
             aria-label="Search problems"
             className={cn(
