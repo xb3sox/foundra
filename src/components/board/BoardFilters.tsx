@@ -28,13 +28,26 @@ export function BoardFilters({
         <div className="relative w-full sm:w-72">
           <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-muted" />
           <TextInput
-            type="search"
+            type="text"
             value={value.query}
             onChange={(e) => onChange({ ...value, query: e.target.value })}
             placeholder="Search problems…"
             aria-label="Search problems"
-            className="rounded-full py-2 pl-10 text-[13.5px]"
+            className={cn(
+              "rounded-full py-2 pl-10 text-[13.5px]",
+              value.query && "pr-9"
+            )}
           />
+          {value.query && (
+            <button
+              type="button"
+              onClick={() => onChange({ ...value, query: "" })}
+              aria-label="Clear search query"
+              className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-ink-muted transition-colors hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 rounded-full p-0.5"
+            >
+              <X className="h-3.5 w-3.5" />
+            </button>
+          )}
         </div>
 
         <ToggleGroup
