@@ -63,6 +63,7 @@ export function RoomPeople({ problem }: { problem: Problem }) {
                 <button
                   type="button"
                   onClick={() => handleScheduleCall(person.name)}
+                  aria-label={`Schedule call with ${person.name}`}
                   className="mt-2.5 flex w-full cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 items-center justify-center gap-1.5 rounded-lg bg-ink py-2 text-[12.5px] font-medium text-white transition-colors hover:bg-black"
                 >
                   <CalendarClock className="h-3.5 w-3.5" />
@@ -72,6 +73,7 @@ export function RoomPeople({ problem }: { problem: Problem }) {
                 <button
                   type="button"
                   onClick={() => handleRequestIntro(person.name)}
+                  aria-label={`Request intro to ${person.name}`}
                   className="mt-2.5 flex w-full cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 items-center justify-center gap-1.5 rounded-lg border border-line py-2 text-[12.5px] font-medium text-ink-soft transition-colors hover:border-ink/30 hover:text-ink"
                 >
                   <UserPlus className="h-3.5 w-3.5" />

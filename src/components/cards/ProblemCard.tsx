@@ -124,7 +124,8 @@ function CommitChip({
   return (
     <button
       onClick={onClick}
-      aria-label={label}
+      aria-pressed={active}
+      aria-label={active ? `${label} (Added)` : label}
       title={label}
       className={
         "group inline-flex cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 items-center justify-center gap-1.5 rounded-[10px] border px-2.5 py-2 text-[12.5px] font-medium transition-colors " +

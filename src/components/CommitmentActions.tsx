@@ -24,6 +24,8 @@ export function CommitmentActions({
       <Button
         type="button"
         variant={isTaken ? "subtle" : "secondary"}
+        aria-pressed={isTaken}
+        aria-label={isTaken ? `${label} (Added - go to Problem Room)` : label}
         onClick={() =>
           isTaken ? navigate(`/rooms/${problem.id}`) : onCommit(type)
         }
