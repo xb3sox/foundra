@@ -7,6 +7,11 @@ describe("toSafeHref", () => {
     expect(toSafeHref(validUrl)).toBe(validUrl);
   });
 
+  test("canonicalizes and normalizes URLs with whitespace", () => {
+    expect(toSafeHref("  https://example.com/path  ")).toBe("https://example.com/path");
+    expect(toSafeHref("https://example.com")).toBe("https://example.com/");
+  });
+
   test("rejects dangerous or non-https schemes", () => {
     expect(toSafeHref("javascript:alert(1)")).toBeUndefined();
     expect(toSafeHref("data:text/html,<script>alert(1)</script>")).toBeUndefined();

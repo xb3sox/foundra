@@ -8,7 +8,8 @@ export { cn } from "@/utils/cn";
 export function toSafeHref(url: string | undefined): string | undefined {
   if (!url) return undefined;
   try {
-    return new URL(url).protocol === "https:" ? url : undefined;
+    const parsed = new URL(url);
+    return parsed.protocol === "https:" ? parsed.href : undefined;
   } catch {
     return undefined;
   }
