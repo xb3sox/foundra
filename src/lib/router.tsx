@@ -32,6 +32,7 @@ export function RouterProvider({ children }: { children: ReactNode }) {
       const hash = window.location.hash;
       if (!hash.startsWith("#/")) return;
       const clean = hash.slice(1);
+      if (!clean.startsWith("/") || clean.startsWith("//")) return;
       window.history.replaceState({}, "", clean);
       setPath(clean);
     };
@@ -50,6 +51,7 @@ export function RouterProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const navigate = (to: string) => {
+    if (!to.startsWith("/") || to.startsWith("//")) return;
     if (to === window.location.pathname) return;
     window.history.pushState({}, "", to);
     setPath(to);
