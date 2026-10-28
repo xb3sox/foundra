@@ -12,12 +12,16 @@ export const chipOff =
 export function FieldLabel({
   index,
   children,
-}: {
+  className,
+  ...props
+}: React.ComponentProps<typeof Label> & {
   index?: number;
-  children: React.ReactNode;
 }) {
   return (
-    <Label className="mb-2 flex items-center gap-2 text-sm font-medium text-ink">
+    <Label
+      className={cn("mb-2 flex items-center gap-2 text-sm font-medium text-ink", className)}
+      {...props}
+    >
       {index != null && (
         <span className="flex h-5 w-5 items-center justify-center rounded-full bg-black/[0.06] text-[11px] font-semibold text-ink-soft tabular-nums">
           {index}
