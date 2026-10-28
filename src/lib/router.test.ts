@@ -19,6 +19,8 @@ describe("matchRoute", () => {
     "/garbage",
     "/submit",
     "/submit/extra",
+    "//evil.com",
+    "//problems/client-feedback",
   ])("returns notfound for %s", (path) => {
     expect(matchRoute(path).name).toBe("notfound");
   });

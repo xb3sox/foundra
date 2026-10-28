@@ -7,6 +7,11 @@ describe("toSafeHref", () => {
     expect(toSafeHref(validUrl)).toBe(validUrl);
   });
 
+  test("trims whitespace from valid https URLs", () => {
+    const paddedUrl = "  https://example.com/path  ";
+    expect(toSafeHref(paddedUrl)).toBe("https://example.com/path");
+  });
+
   test("rejects dangerous or non-https schemes", () => {
     expect(toSafeHref("javascript:alert(1)")).toBeUndefined();
     expect(toSafeHref("data:text/html,<script>alert(1)</script>")).toBeUndefined();
