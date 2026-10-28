@@ -98,25 +98,33 @@ export function CommitmentModal({
           {config.blurb}
         </p>
 
-        <div className="mt-5">
-          <FieldLabel>Email (optional)</FieldLabel>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            enterRoom();
+          }}
+          className="mt-5"
+        >
+          <FieldLabel htmlFor="commitment-email">Email (optional)</FieldLabel>
           <TextInput
+            id="commitment-email"
             type="email"
             maxLength={254}
             placeholder="you@email.com"
             value={email}
             onChange={(e) => setEmailValue(e.target.value)}
+            aria-describedby="commitment-email-hint"
           />
-          <p className="mt-2 text-[12px] text-ink-muted">
+          <p id="commitment-email-hint" className="mt-2 text-[12px] text-ink-muted">
             So we can save your spot in the room. You can skip it.
           </p>
-        </div>
 
-        <Button size="lg" className="mt-5 w-full" onClick={enterRoom}>
-          <DoorOpen className="h-4 w-4" />
-          Enter the Problem Room
-          <ArrowRight className="h-4 w-4" />
-        </Button>
+          <Button type="submit" size="lg" className="mt-5 w-full">
+            <DoorOpen className="h-4 w-4" />
+            Enter the Problem Room
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+        </form>
         <button
           type="button"
           onClick={saveOnly}
