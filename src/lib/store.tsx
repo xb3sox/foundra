@@ -1,7 +1,9 @@
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
   type ReactNode,
 } from "react";
@@ -46,7 +48,14 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     }
   }, [state, loaded.sessionOnly]);
 
-  const addCommitment = (problemId: string, type: CommitmentType) => {
+  /**
+   * Performance Optimizations:
+   * 1. Wrap state-mutating actions in `useCallback` to maintain reference equality across renders,
+   *    preventing unnecessary re-renders in consumer components that receive these handlers.
+   * 2. Wrap `StoreContext.Provider` value in `useMemo` so context consumers only re-render when
+   *    actual state or status flags change.
+   */
+  const addCommitment = useCallback((problemId: string, type: CommitmentType) => {
     setState((s) => {
       const existing = s.commitments[problemId] ?? [];
       const has = existing.includes(type);
@@ -67,12 +76,13 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           };
       return { ...s, commitments, extraCounts };
     });
-  };
+  }, []);
 
-  const setEmail = (email: string) =>
+  const setEmail = useCallback((email: string) => {
     setState((s) => ({ ...s, email }));
+  }, []);
 
-  const toggleChecklist = (
+  const toggleChecklist = useCallback((
     problemId: string,
     itemId: string,
     base: Record<string, boolean>
@@ -95,9 +105,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         },
       };
     });
-  };
+  }, []);
 
-  const addActivity = (problemId: string, text: string) => {
+  const addActivity = useCallback((problemId: string, text: string) => {
     setState((s) => {
       const room = s.rooms[problemId] ?? {
         checklist: {},
@@ -118,9 +128,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         },
       };
     });
-  };
+  }, []);
 
-  const markConnected = (problemId: string, name: string) => {
+  const markConnected = useCallback((problemId: string, name: string) => {
     setState((s) => {
       const room = s.rooms[problemId] ?? {
         checklist: {},
@@ -136,23 +146,40 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         },
       };
     });
-  };
+  }, []);
 
-  const getRoom = (problemId: string) => state.rooms[problemId];
+  const getRoom = useCallback(
+    (problemId: string) => state.rooms[problemId],
+    [state.rooms]
+  );
+
+  const sessionOnly = loaded.sessionOnly || writeFailed;
+
+  const value = useMemo(
+    () => ({
+      state,
+      sessionOnly,
+      addCommitment,
+      setEmail,
+      toggleChecklist,
+      addActivity,
+      markConnected,
+      getRoom,
+    }),
+    [
+      state,
+      sessionOnly,
+      addCommitment,
+      setEmail,
+      toggleChecklist,
+      addActivity,
+      markConnected,
+      getRoom,
+    ]
+  );
 
   return (
-    <StoreContext.Provider
-      value={{
-        state,
-        sessionOnly: loaded.sessionOnly || writeFailed,
-        addCommitment,
-        setEmail,
-        toggleChecklist,
-        addActivity,
-        markConnected,
-        getRoom,
-      }}
-    >
+    <StoreContext.Provider value={value}>
       {children}
     </StoreContext.Provider>
   );
@@ -170,18 +197,33 @@ interface Counts {
   know: number;
 }
 
-/** Seed counts plus any signals the current user added locally.
-    Accepts undefined so pages can call it before their not-found guard
-    (hooks must run unconditionally). */
+/**
+ * Seed counts plus any signals the current user added locally.
+ * Accepts undefined so pages can call it before their not-found guard
+ * (hooks must run unconditionally).
+ *
+ * Performance Optimization:
+ * Memoizes count object calculation so components calling `useLiveCounts` receive stable
+ * object references when counts have not changed, reducing unnecessary child component re-renders.
+ */
 export function useLiveCounts(
   problem: { id: string; counts: Counts } | undefined
 ): Counts {
   const { state } = useStore();
-  if (!problem) return { feel: 0, build: 0, know: 0 };
-  const extra = state.extraCounts[problem.id] ?? { feel: 0, build: 0, know: 0 };
-  return {
-    feel: problem.counts.feel + extra.feel,
-    build: problem.counts.build + extra.build,
-    know: problem.counts.know + extra.know,
-  };
+  const problemId = problem?.id;
+  const feelSeed = problem?.counts.feel;
+  const buildSeed = problem?.counts.build;
+  const knowSeed = problem?.counts.know;
+  const extra = problemId ? state.extraCounts[problemId] : undefined;
+
+  return useMemo(() => {
+    if (!problem || feelSeed === undefined || buildSeed === undefined || knowSeed === undefined) {
+      return { feel: 0, build: 0, know: 0 };
+    }
+    return {
+      feel: feelSeed + (extra?.feel ?? 0),
+      build: buildSeed + (extra?.build ?? 0),
+      know: knowSeed + (extra?.know ?? 0),
+    };
+  }, [problem, feelSeed, buildSeed, knowSeed, extra?.feel, extra?.build, extra?.know]);
 }
