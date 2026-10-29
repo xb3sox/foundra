@@ -62,6 +62,7 @@ export function HeroReceipts() {
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`View source for ${r.source}`}
                       className="ml-auto inline-flex items-center gap-0.5 rounded font-medium text-accent-ink transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
                     >
                       View source

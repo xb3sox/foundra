@@ -63,6 +63,7 @@ export function ProofCard({ proof, index }: { proof: ProofItem; index: number })
             href={href}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`View source on ${proof.platform}`}
             className="ml-auto inline-flex shrink-0 items-center gap-0.5 rounded font-medium text-accent-ink transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
           >
             View source
