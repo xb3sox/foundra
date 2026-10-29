@@ -22,5 +22,14 @@ describe("toSafeHref", () => {
   test("returns undefined for invalid URL strings", () => {
     expect(toSafeHref("not a url")).toBeUndefined();
     expect(toSafeHref("::invalid::")).toBeUndefined();
+    expect(toSafeHref("https:alert(1)")).toBeUndefined();
+  });
+
+  test("rejects embedded credentials in URLs", () => {
+    expect(toSafeHref("https://user:pass@example.com/path")).toBeUndefined();
+  });
+
+  test("trims whitespace from otherwise valid https URLs", () => {
+    expect(toSafeHref("   https://example.com/path   ")).toBe("https://example.com/path");
   });
 });
