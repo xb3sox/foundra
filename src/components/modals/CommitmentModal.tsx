@@ -99,15 +99,17 @@ export function CommitmentModal({
         </p>
 
         <div className="mt-5">
-          <FieldLabel>Email (optional)</FieldLabel>
+          <FieldLabel htmlFor="commitment-email">Email (optional)</FieldLabel>
           <TextInput
+            id="commitment-email"
             type="email"
             maxLength={254}
             placeholder="you@email.com"
             value={email}
             onChange={(e) => setEmailValue(e.target.value)}
+            aria-describedby="commitment-email-hint"
           />
-          <p className="mt-2 text-[12px] text-ink-muted">
+          <p id="commitment-email-hint" className="mt-2 text-[12px] text-ink-muted">
             So we can save your spot in the room. You can skip it.
           </p>
         </div>
