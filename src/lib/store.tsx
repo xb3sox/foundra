@@ -1,7 +1,9 @@
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
   type ReactNode,
 } from "react";
@@ -46,7 +48,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     }
   }, [state, loaded.sessionOnly]);
 
-  const addCommitment = (problemId: string, type: CommitmentType) => {
+  const addCommitment = useCallback((problemId: string, type: CommitmentType) => {
     setState((s) => {
       const existing = s.commitments[problemId] ?? [];
       const has = existing.includes(type);
@@ -67,37 +69,40 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           };
       return { ...s, commitments, extraCounts };
     });
-  };
+  }, []);
 
-  const setEmail = (email: string) =>
-    setState((s) => ({ ...s, email }));
+  const setEmail = useCallback((email: string) =>
+    setState((s) => ({ ...s, email })), []);
 
-  const toggleChecklist = (
-    problemId: string,
-    itemId: string,
-    base: Record<string, boolean>
-  ) => {
-    setState((s) => {
-      const room = s.rooms[problemId] ?? {
-        checklist: { ...base },
-        activity: [],
-        connected: [],
-      };
-      const current = room.checklist[itemId] ?? base[itemId] ?? false;
-      return {
-        ...s,
-        rooms: {
-          ...s.rooms,
-          [problemId]: {
-            ...room,
-            checklist: { ...base, ...room.checklist, [itemId]: !current },
+  const toggleChecklist = useCallback(
+    (
+      problemId: string,
+      itemId: string,
+      base: Record<string, boolean>
+    ) => {
+      setState((s) => {
+        const room = s.rooms[problemId] ?? {
+          checklist: { ...base },
+          activity: [],
+          connected: [],
+        };
+        const current = room.checklist[itemId] ?? base[itemId] ?? false;
+        return {
+          ...s,
+          rooms: {
+            ...s.rooms,
+            [problemId]: {
+              ...room,
+              checklist: { ...base, ...room.checklist, [itemId]: !current },
+            },
           },
-        },
-      };
-    });
-  };
+        };
+      });
+    },
+    []
+  );
 
-  const addActivity = (problemId: string, text: string) => {
+  const addActivity = useCallback((problemId: string, text: string) => {
     setState((s) => {
       const room = s.rooms[problemId] ?? {
         checklist: {},
@@ -118,9 +123,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         },
       };
     });
-  };
+  }, []);
 
-  const markConnected = (problemId: string, name: string) => {
+  const markConnected = useCallback((problemId: string, name: string) => {
     setState((s) => {
       const room = s.rooms[problemId] ?? {
         checklist: {},
@@ -136,23 +141,41 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         },
       };
     });
-  };
+  }, []);
 
-  const getRoom = (problemId: string) => state.rooms[problemId];
+  const getRoom = useCallback(
+    (problemId: string) => state.rooms[problemId],
+    [state.rooms]
+  );
+
+  // Performance Optimization: Memoize StoreContext value to prevent consumer re-renders
+  // unless state or session status changes.
+  const value = useMemo(
+    () => ({
+      state,
+      sessionOnly: loaded.sessionOnly || writeFailed,
+      addCommitment,
+      setEmail,
+      toggleChecklist,
+      addActivity,
+      markConnected,
+      getRoom,
+    }),
+    [
+      state,
+      loaded.sessionOnly,
+      writeFailed,
+      addCommitment,
+      setEmail,
+      toggleChecklist,
+      addActivity,
+      markConnected,
+      getRoom,
+    ]
+  );
 
   return (
-    <StoreContext.Provider
-      value={{
-        state,
-        sessionOnly: loaded.sessionOnly || writeFailed,
-        addCommitment,
-        setEmail,
-        toggleChecklist,
-        addActivity,
-        markConnected,
-        getRoom,
-      }}
-    >
+    <StoreContext.Provider value={value}>
       {children}
     </StoreContext.Provider>
   );

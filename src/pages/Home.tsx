@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Heart, Hammer, Compass, ShieldCheck } from "lucide-react";
 import { Button } from "../components/ui/button";
@@ -33,6 +33,10 @@ export function Home() {
     problem: Problem;
     type: CommitmentType;
   } | null>(null);
+
+  const handleCommit = useCallback((problem: Problem, type: CommitmentType) => {
+    setActive({ problem, type });
+  }, []);
 
   return (
     <div>
@@ -80,7 +84,7 @@ export function Home() {
       </section>
 
       {/* Problem board: today's three + the rest, with search and filters */}
-      <ProblemBoard onCommit={(problem, type) => setActive({ problem, type })} />
+      <ProblemBoard onCommit={handleCommit} />
 
       {/* Three roles */}
       <section className="mx-auto mt-20 max-w-6xl px-5 sm:px-8">

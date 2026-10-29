@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -11,14 +12,16 @@ import { useRouter } from "../../lib/router";
 import { useLiveCounts, useStore } from "../../lib/store";
 import { SignalBadge } from "../ui/SignalBadge";
 
-export function ProblemCard({
+// Performance Optimization: Memoize ProblemCard to prevent unneeded re-renders
+// when parent board filters change or when typing in search.
+export const ProblemCard = memo(function ProblemCard({
   problem,
   index,
   onCommit,
 }: {
   problem: Problem;
   index: number;
-  onCommit: (type: CommitmentType) => void;
+  onCommit: (problem: Problem, type: CommitmentType) => void;
 }) {
   const { navigate } = useRouter();
   const { state } = useStore();
@@ -93,20 +96,20 @@ export function ProblemCard({
             label="I have this problem"
             shortLabel="Have it"
             active={taken.includes("I have this problem")}
-            onClick={() => onCommit("I have this problem")}
+            onClick={() => onCommit(problem, "I have this problem")}
           />
           <CommitChip
             icon={Hammer}
             label="I can build this"
             shortLabel="Can build"
             active={taken.includes("I can build this")}
-            onClick={() => onCommit("I can build this")}
+            onClick={() => onCommit(problem, "I can build this")}
           />
         </div>
       </div>
     </motion.article>
   );
-}
+});
 
 function CommitChip({
   icon: Icon,

@@ -68,7 +68,7 @@ export function ProblemBoard({
                   key={problem.id}
                   problem={problem}
                   index={i % 3}
-                  onCommit={(type) => onCommit(problem, type)}
+                  onCommit={onCommit}
                 />
               ))}
             </div>
@@ -100,7 +100,7 @@ export function ProblemBoard({
                 key={problem.id}
                 problem={problem}
                 index={i}
-                onCommit={(type) => onCommit(problem, type)}
+                onCommit={onCommit}
               />
             ))}
           </div>
@@ -124,7 +124,7 @@ export function ProblemBoard({
                 key={problem.id}
                 problem={problem}
                 index={i % 3}
-                onCommit={(type) => onCommit(problem, type)}
+                onCommit={onCommit}
               />
             ))}
           </div>
