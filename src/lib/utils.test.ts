@@ -23,4 +23,12 @@ describe("toSafeHref", () => {
     expect(toSafeHref("not a url")).toBeUndefined();
     expect(toSafeHref("::invalid::")).toBeUndefined();
   });
+
+  test("rejects URLs containing whitespace or control characters", () => {
+    expect(toSafeHref("https://example.com\n")).toBeUndefined();
+    expect(toSafeHref("https://example.com\r\n")).toBeUndefined();
+    expect(toSafeHref("https://example.com\t")).toBeUndefined();
+    expect(toSafeHref("https://example.com\0")).toBeUndefined();
+    expect(toSafeHref(" https://example.com")).toBeUndefined();
+  });
 });
