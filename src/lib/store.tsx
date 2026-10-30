@@ -1,7 +1,9 @@
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
   type ReactNode,
 } from "react";
@@ -46,7 +48,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     }
   }, [state, loaded.sessionOnly]);
 
-  const addCommitment = (problemId: string, type: CommitmentType) => {
+  // Performance Optimization: Wrap store action callbacks in useCallback so that
+  // child components receiving store actions don't re-render due to new function references.
+  const addCommitment = useCallback((problemId: string, type: CommitmentType) => {
     setState((s) => {
       const existing = s.commitments[problemId] ?? [];
       const has = existing.includes(type);
@@ -67,37 +71,42 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           };
       return { ...s, commitments, extraCounts };
     });
-  };
+  }, []);
 
-  const setEmail = (email: string) =>
-    setState((s) => ({ ...s, email }));
+  const setEmail = useCallback(
+    (email: string) => setState((s) => ({ ...s, email })),
+    []
+  );
 
-  const toggleChecklist = (
-    problemId: string,
-    itemId: string,
-    base: Record<string, boolean>
-  ) => {
-    setState((s) => {
-      const room = s.rooms[problemId] ?? {
-        checklist: { ...base },
-        activity: [],
-        connected: [],
-      };
-      const current = room.checklist[itemId] ?? base[itemId] ?? false;
-      return {
-        ...s,
-        rooms: {
-          ...s.rooms,
-          [problemId]: {
-            ...room,
-            checklist: { ...base, ...room.checklist, [itemId]: !current },
+  const toggleChecklist = useCallback(
+    (
+      problemId: string,
+      itemId: string,
+      base: Record<string, boolean>
+    ) => {
+      setState((s) => {
+        const room = s.rooms[problemId] ?? {
+          checklist: { ...base },
+          activity: [],
+          connected: [],
+        };
+        const current = room.checklist[itemId] ?? base[itemId] ?? false;
+        return {
+          ...s,
+          rooms: {
+            ...s.rooms,
+            [problemId]: {
+              ...room,
+              checklist: { ...base, ...room.checklist, [itemId]: !current },
+            },
           },
-        },
-      };
-    });
-  };
+        };
+      });
+    },
+    []
+  );
 
-  const addActivity = (problemId: string, text: string) => {
+  const addActivity = useCallback((problemId: string, text: string) => {
     setState((s) => {
       const room = s.rooms[problemId] ?? {
         checklist: {},
@@ -118,9 +127,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         },
       };
     });
-  };
+  }, []);
 
-  const markConnected = (problemId: string, name: string) => {
+  const markConnected = useCallback((problemId: string, name: string) => {
     setState((s) => {
       const room = s.rooms[problemId] ?? {
         checklist: {},
@@ -136,23 +145,41 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         },
       };
     });
-  };
+  }, []);
 
-  const getRoom = (problemId: string) => state.rooms[problemId];
+  const getRoom = useCallback(
+    (problemId: string) => state.rooms[problemId],
+    [state.rooms]
+  );
+
+  // Performance Optimization: Memoize the context value so subscriber components
+  // do not re-render on unrelated state/parent re-renders when state hasn't changed.
+  const sessionOnly = loaded.sessionOnly || writeFailed;
+  const value = useMemo(
+    () => ({
+      state,
+      sessionOnly,
+      addCommitment,
+      setEmail,
+      toggleChecklist,
+      addActivity,
+      markConnected,
+      getRoom,
+    }),
+    [
+      state,
+      sessionOnly,
+      addCommitment,
+      setEmail,
+      toggleChecklist,
+      addActivity,
+      markConnected,
+      getRoom,
+    ]
+  );
 
   return (
-    <StoreContext.Provider
-      value={{
-        state,
-        sessionOnly: loaded.sessionOnly || writeFailed,
-        addCommitment,
-        setEmail,
-        toggleChecklist,
-        addActivity,
-        markConnected,
-        getRoom,
-      }}
-    >
+    <StoreContext.Provider value={value}>
       {children}
     </StoreContext.Provider>
   );
@@ -177,11 +204,17 @@ export function useLiveCounts(
   problem: { id: string; counts: Counts } | undefined
 ): Counts {
   const { state } = useStore();
-  if (!problem) return { feel: 0, build: 0, know: 0 };
-  const extra = state.extraCounts[problem.id] ?? { feel: 0, build: 0, know: 0 };
-  return {
-    feel: problem.counts.feel + extra.feel,
-    build: problem.counts.build + extra.build,
-    know: problem.counts.know + extra.know,
-  };
+  const extra = problem ? state.extraCounts[problem.id] : undefined;
+
+  // Performance Optimization: Memoize counts object reference so consumers (e.g. cards)
+  // receive a stable reference when counts haven't changed, preventing downstream re-renders.
+  return useMemo(() => {
+    if (!problem) return { feel: 0, build: 0, know: 0 };
+    const e = extra ?? { feel: 0, build: 0, know: 0 };
+    return {
+      feel: problem.counts.feel + e.feel,
+      build: problem.counts.build + e.build,
+      know: problem.counts.know + e.know,
+    };
+  }, [problem, extra]);
 }
