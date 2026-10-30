@@ -1,7 +1,9 @@
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
   type ReactNode,
 } from "react";
@@ -49,15 +51,21 @@ export function RouterProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  const navigate = (to: string) => {
+  // Performance Optimization: Memoize navigate callback so consumers of useRouter()
+  // do not receive new function references on re-render.
+  const navigate = useCallback((to: string) => {
     if (to === window.location.pathname) return;
     window.history.pushState({}, "", to);
     setPath(to);
     scrollToTop();
-  };
+  }, []);
+
+  // Performance Optimization: Memoize the router context value so child components
+  // don't re-render unless path or navigate actually changes.
+  const value = useMemo(() => ({ path, navigate }), [path, navigate]);
 
   return (
-    <RouterContext.Provider value={{ path, navigate }}>
+    <RouterContext.Provider value={value}>
       {children}
     </RouterContext.Provider>
   );
