@@ -29,11 +29,10 @@ export function RouterProvider({ children }: { children: ReactNode }) {
     // so previously shared links still resolve to clean URLs - both on
     // first load and when a hash link is followed within the open app.
     const applyHashShim = () => {
-      const hash = window.location.hash;
-      if (!hash.startsWith("#/")) return;
-      const clean = hash.slice(1);
-      window.history.replaceState({}, "", clean);
-      setPath(clean);
+      const target = resolveHashShim(window.location.hash);
+      if (!target) return;
+      window.history.replaceState({}, "", target);
+      setPath(target);
     };
     applyHashShim();
 
@@ -67,6 +66,21 @@ export function useRouter() {
   const ctx = useContext(RouterContext);
   if (!ctx) throw new Error("useRouter must be used within RouterProvider");
   return ctx;
+}
+
+/**
+ * Security: Validates that legacy hash targets (#/path) represent safe,
+ * internal single-slash absolute paths before passing to history.replaceState.
+ * Rejects protocol-relative paths (//evil.com), backslashes (/\\evil.com),
+ * and control characters to prevent cross-origin history pollution or navigation errors.
+ */
+export function resolveHashShim(hash: string): string | null {
+  if (!hash.startsWith("#/")) return null;
+  const clean = hash.slice(1);
+  if (!clean.startsWith("/") || clean.startsWith("//") || clean.includes("\\")) {
+    return null;
+  }
+  return clean;
 }
 
 export function matchRoute(
