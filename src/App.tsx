@@ -78,9 +78,15 @@ export default function App() {
         <StoreProvider>
           <TooltipProvider>
             <div className="flex min-h-screen flex-col">
+              <a
+                href="#main-content"
+                className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:border focus:border-line focus:bg-ink focus:px-4 focus:py-2.5 focus:text-sm focus:font-medium focus:text-white focus:shadow-lift focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+              >
+                Skip to main content
+              </a>
               <Header />
               <StorageNotice />
-              <main className="flex-1">
+              <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
                 <ErrorBoundary>
                   <Routes />
                 </ErrorBoundary>
