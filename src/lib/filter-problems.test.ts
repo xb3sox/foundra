@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { problems } from "../data/problems";
+import { getProblem, problems } from "../data/problems";
 import {
   EMPTY_FILTER,
   filterProblems,
@@ -117,5 +117,18 @@ describe("isFilterActive", () => {
     [filter({ signals: ["Promising"] }), true],
   ] as const)("%j → %s", (f, expected) => {
     expect(isFilterActive(f)).toBe(expected);
+  });
+});
+
+describe("getProblem", () => {
+  test("returns matching problem for an existing id", () => {
+    const problem = getProblem("client-feedback");
+    expect(problem).toBeDefined();
+    expect(problem?.id).toBe("client-feedback");
+    expect(problem?.title).toBe("Designers lose hours chasing client feedback.");
+  });
+
+  test("returns undefined for a non-existent id", () => {
+    expect(getProblem("non-existent-id")).toBeUndefined();
   });
 });
