@@ -2,6 +2,7 @@ import {
   createContext,
   useContext,
   useEffect,
+  useMemo,
   useState,
   type ReactNode,
 } from "react";
@@ -140,19 +141,24 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   const getRoom = (problemId: string) => state.rooms[problemId];
 
+  // Memoize context value to avoid re-rendering consumers when parent re-renders
+  const value = useMemo(
+    () => ({
+      state,
+      sessionOnly: loaded.sessionOnly || writeFailed,
+      addCommitment,
+      setEmail,
+      toggleChecklist,
+      addActivity,
+      markConnected,
+      getRoom,
+    }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [state, loaded.sessionOnly, writeFailed]
+  );
+
   return (
-    <StoreContext.Provider
-      value={{
-        state,
-        sessionOnly: loaded.sessionOnly || writeFailed,
-        addCommitment,
-        setEmail,
-        toggleChecklist,
-        addActivity,
-        markConnected,
-        getRoom,
-      }}
-    >
+    <StoreContext.Provider value={value}>
       {children}
     </StoreContext.Provider>
   );
@@ -177,11 +183,12 @@ export function useLiveCounts(
   problem: { id: string; counts: Counts } | undefined
 ): Counts {
   const { state } = useStore();
-  if (!problem) return { feel: 0, build: 0, know: 0 };
-  const extra = state.extraCounts[problem.id] ?? { feel: 0, build: 0, know: 0 };
-  return {
-    feel: problem.counts.feel + extra.feel,
-    build: problem.counts.build + extra.build,
-    know: problem.counts.know + extra.know,
-  };
+  const problemId = problem?.id;
+  const extra = problemId ? state.extraCounts[problemId] : undefined;
+  const feel = (problem?.counts.feel ?? 0) + (extra?.feel ?? 0);
+  const build = (problem?.counts.build ?? 0) + (extra?.build ?? 0);
+  const know = (problem?.counts.know ?? 0) + (extra?.know ?? 0);
+
+  // Return referentially stable counts to prevent downstream consumer re-renders
+  return useMemo(() => ({ feel, build, know }), [feel, build, know]);
 }
