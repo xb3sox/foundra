@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { describe, expect, test, vi } from "vitest";
 import { act, render, screen } from "@testing-library/react";
-import { StoreProvider, useStore } from "./store";
+import { StoreProvider, useLiveCounts, useStore } from "./store";
 
 const KEY = "foundra-state-v1";
 
@@ -208,4 +208,22 @@ test("persistence recovers after a transient quota failure on the next edit", ()
   act(() => store.setEmail("second@example.com"));
   expect(store.sessionOnly).toBe(false);
   expect(JSON.parse(localStorage.getItem(KEY)!).email).toBe("second@example.com");
+});
+
+test("useLiveCounts preserves object identity when counts have not changed", () => {
+  let capturedCounts: { feel: number; build: number; know: number } | undefined;
+  function CountsProbe() {
+    capturedCounts = useLiveCounts({ id: "p1", counts: { feel: 5, build: 2, know: 1 } });
+    return null;
+  }
+  render(
+    <StoreProvider>
+      <Probe />
+      <CountsProbe />
+    </StoreProvider>
+  );
+  const first = capturedCounts;
+  act(() => store.setEmail("other@example.com"));
+  const second = capturedCounts;
+  expect(first).toBe(second);
 });
