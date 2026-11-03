@@ -99,8 +99,9 @@ export function CommitmentModal({
         </p>
 
         <div className="mt-5">
-          <FieldLabel>Email (optional)</FieldLabel>
+          <FieldLabel htmlFor="commitment-email">Email (optional)</FieldLabel>
           <TextInput
+            id="commitment-email"
             type="email"
             maxLength={254}
             placeholder="you@email.com"
