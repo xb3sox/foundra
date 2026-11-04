@@ -1059,7 +1059,13 @@ export const problems: Problem[] = [
 
 export const todaysProblems = problems.slice(0, 3);
 
+// Index problems by id once at module load for O(1) constant-time lookup.
+// Avoids O(N) array scans on route navigation, title evaluation, and page mounts.
+const problemsById = new Map<string, Problem>(
+  problems.map((p) => [p.id, p])
+);
+
 export function getProblem(id: string): Problem | undefined {
-  return problems.find((p) => p.id === id);
+  return problemsById.get(id);
 }
 
